@@ -1,0 +1,21 @@
+# Manuelle Betreiberabnahme vor Einsatz
+
+- [ ] Eigene Testumgebung und Wiederherstellung nachgewiesen; explizite spätere Freigabe dokumentiert.
+- [ ] Markenname, Logo-Alttext, Bild-/Schriftlizenzen und Unterstützerlink geprüft.
+- [ ] Alle drei Vorlagen und eigene Farbwerte auf Desktop, Tablet und Smartphone angesehen.
+- [ ] Zoom auf 200 % und 400 %, lange Texte, sichtbare Tastaturfokusse und Screenreader getestet.
+- [ ] Eigene Rechtstexte inhaltlich geprüft; Reihenfolge, Modal, Escape, Hintergrundklick und Links ohne JavaScript getestet.
+- [ ] Rechtstexte über normale Seiten enthalten keine unerwünschten Theme-Ressourcen.
+- [ ] E-Mail-, Telefon- und Kontaktlinks geprüft; keine automatische Kontaktaufnahme oder Datensammlung erwartet.
+- [ ] Countdown mit tatsächlicher Zeitzone geprüft; Ablauf schaltet Wartungsmodus nicht um.
+- [ ] Entwurf verändert öffentliche Ausgabe nicht; Veröffentlichung und Statusänderung benötigen getrennte Bestätigung.
+- [ ] Anonymer, Admin-, Rollen- und IP-Zugriff mit tatsächlicher Proxy-Infrastruktur geprüft.
+- [ ] Badge auf Mobilgeräten sichtbar, keine Bedienung verdeckt.
+- [ ] Vorschau ohne Anmeldung gesperrt; nach Ablauf/neuer Freigabe alter Token unbrauchbar.
+- [ ] 503, Retry-After, Robots und no-store mit frischem anonymen Request bestätigt.
+- [ ] Caches/CDN nach jeder Umschaltung geprüft; keine ausgelieferte alte Website oder Wartungsseite.
+- [ ] REST-Integrationen/Webhooks, Login, Cron, AJAX und bestehende Sicherheitsplugins geprüft.
+- [ ] Keine externen Ressourcen auf der Wartungsseite; Betreiberlinks und normale Rechtsseiten separat geprüft.
+- [ ] Rückfall auf vorherige Veröffentlichung und gezielte Deaktivierung getestet.
+- [ ] Löschoption, Aufbewahrungsbedarf und Backup-Fristen festgelegt.
+- [ ] Spätere Live-Installation ausdrücklich freigegeben; lokale Tests gelten nicht als diese Freigabe.

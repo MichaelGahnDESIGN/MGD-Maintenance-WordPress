@@ -1,0 +1,22 @@
+# Nur neue, wegwerfbare Testdaten. Keine Ports für die Datenbank veröffentlichen.
+services:
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: 'yes'
+      MARIADB_DATABASE: maintenance_test
+      MARIADB_USER: maintenance_test
+      MARIADB_PASSWORD: ${MGMS_DB_PASSWORD:?Nur lokal generierte Testkonfiguration verwenden}
+    tmpfs:
+      - /var/lib/mysql
+  wordpress:
+    image: wordpress:php8.1-apache
+    ports:
+      - '127.0.0.1:18865:80'
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: maintenance_test
+      WORDPRESS_DB_PASSWORD: ${MGMS_DB_PASSWORD:?Nur lokal generierte Testkonfiguration verwenden}
+      WORDPRESS_DB_NAME: maintenance_test
+    volumes:
+      - ../mg-maintenance-studio:/var/www/html/wp-content/plugins/mg-maintenance-studio:ro

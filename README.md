@@ -1,7 +1,7 @@
 <p align="center"><img src="mg-maintenance-studio/assets/icon-256.png" width="88" height="88" alt="MG Maintenance Studio – Plugin-Icon"></p>
 <h1 align="center">MG Maintenance Studio</h1>
 <p align="center"><strong>Eine gute Wartungsseite gehört zur Website.</strong><br>Gestalten, geschützt prüfen und bewusst veröffentlichen – direkt in WordPress.</p>
-<p align="center"><a href="https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest">Plugin herunterladen</a> · <a href="docs/wiki/Home.md">Handbuch & Wiki</a> · <a href="SECURITY.md">Sicherheit</a> · <a href="CHANGELOG.md">Changelog</a></p>
+<p align="center"><a href="https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest">Plugin herunterladen</a> · <a href="https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/wiki">Handbuch & Wiki</a> · <a href="SECURITY.md">Sicherheit</a> · <a href="CHANGELOG.md">Changelog</a></p>
 
 ![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
@@ -87,7 +87,7 @@ Der Updater prüft Quelle, Version und Paketadresse. Eine unabhängige kryptogra
 | Daten entfernen oder frühere Einstellungen wiederherstellen | [Betrieb und Wiederherstellung](docs/wiki/Betrieb-und-Wiederherstellung.md) |
 | Am Plugin arbeiten oder Tests nachvollziehen | [Entwicklung und Tests](docs/wiki/Entwicklung-und-Tests.md) |
 
-Das Handbuch liegt vollständig im Repository und bleibt damit auch ohne separates GitHub-Wiki erreichbar. Die Wiki-Quelldateien befinden sich unter `docs/wiki/`.
+Das vollständige [GitHub-Wiki](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/wiki) enthält das Handbuch mit Seitennavigation. Eine Kopie liegt weiterhin im Repository. Die Wiki-Quelldateien befinden sich unter `docs/wiki/`.
 
 ## Entwicklung
 

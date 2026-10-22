@@ -19,5 +19,29 @@ jobs:
           node --check mg-maintenance-studio/assets/admin.js
           node --check mg-maintenance-studio/assets/frontend.js
           node --check mg-maintenance-studio/assets/preview.js
+      - name: Dokumentationslinks
+        run: python3 scripts/check-docs.py
       - name: Paket und Prüfsummen
         run: python3 scripts/build-package.py
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Gitleaks 8.30.1 mit fester Prüfsumme installieren
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            --output "$RUNNER_TEMP/gitleaks.tar.gz"
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $RUNNER_TEMP/gitleaks.tar.gz" | sha256sum --check --strict
+          mkdir -p "$RUNNER_TEMP/gitleaks-bin"
+          tar -xzf "$RUNNER_TEMP/gitleaks.tar.gz" -C "$RUNNER_TEMP/gitleaks-bin" gitleaks
+          echo "$RUNNER_TEMP/gitleaks-bin" >> "$GITHUB_PATH"
+      - name: Git-Historie auf Secrets prüfen
+        run: gitleaks git . --log-opts=--all --redact --no-banner
+      - name: Quellstand auf Secrets prüfen
+        run: gitleaks dir . --redact --no-banner

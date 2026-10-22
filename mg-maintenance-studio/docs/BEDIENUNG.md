@@ -1,6 +1,6 @@
 # Installation und Bedienung
 
-## Installation ausschließlich in einer neuen lokalen Testumgebung
+## Installation zuerst in einer Testumgebung
 
 Den Ordner `mg-maintenance-studio` nach `wp-content/plugins/` einer eigens angelegten Testinstallation kopieren oder ein ZIP dieses Ordners installieren. Danach Plugin aktivieren. Die erste Aktivierung legt Standardwerte an und lässt den Wartungsmodus **ausgeschaltet**. Einstellungen finden sich unter **Einstellungen → Maintenance Studio**. Erforderlich ist die WordPress-Berechtigung `manage_options`.
 
@@ -34,7 +34,7 @@ Kontakt ist ausschließlich Anzeige/Link (E-Mail, Telefon, Webadresse). Newslett
 
 ## IPs und Benutzer
 
-Einzelne IP-Adressen oder CIDR-Netze pro Zeile. IPv4-Netze müssen /24 oder enger sein, IPv6-Netze /64 oder enger. Auch erlaubte Netze können viele Benutzer umfassen: nur die tatsächlich benötigten eintragen. Es gibt keine temporären Freigaben und kein personenbezogenes Änderungsprotokoll in Version 0.1.0.
+Einzelne IP-Adressen oder CIDR-Netze pro Zeile. IPv4-Netze müssen /24 oder enger sein, IPv6-Netze /64 oder enger. Auch erlaubte Netze können viele Benutzer umfassen: nur die tatsächlich benötigten eintragen. Es gibt keine temporären Freigaben und kein personenbezogenes Änderungsprotokoll in Version 0.3.1.
 
 Ohne Proxy-Eintrag zählt nur REMOTE_ADDR. Nur einzelne, bewusst bestätigte Proxy-IP-Adressen dürfen X-Forwarded-For vertrauenswürdig machen. Die Kette wird von rechts nach links bis zum ersten nicht vertrauten Teilnehmer ausgewertet. Der vorgelagerte Proxy muss den Header sicher bereinigen/ergänzen. IP-Freigaben ersetzen niemals eine Anmeldung.
 

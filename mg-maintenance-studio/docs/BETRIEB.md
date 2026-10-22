@@ -2,7 +2,7 @@
 
 ## Strikte lokale Grenze dieses Projekts
 
-Die Entwicklung und Tests verwenden ausschließlich eine neu angelegte WordPress-Installation, erreichbar über 127.0.0.1. Kundeninstallationen, vorhandene Datenbanken, Themes und Plugins wurden nicht verändert. Es existiert kein Git-Remote und es wurde nichts hochgeladen oder veröffentlicht. Eine lokale ZIP-Datei stellt keine Installationsfreigabe dar.
+Die Entwicklung und Tests verwenden ausschließlich eine neu angelegte WordPress-Installation, erreichbar über 127.0.0.1. Kundeninstallationen, vorhandene Datenbanken, Themes und Plugins wurden nicht verändert. Seit 0.3.1 gibt es das öffentliche Repository MichaelGahnDESIGN/MGD-Maintenance-WordPress mit einem installierbaren GitHub-Release. Die Veröffentlichung ist keine Freigabe für eine bestimmte Kundeninstallation.
 
 ## Vor späterem Live-Einsatz getrennt bestätigen
 
@@ -22,7 +22,7 @@ Im Fehlerfall Wartungsmodus im Backend bewusst deaktivieren. Bei Plugin-Deaktivi
 
 ## Deinstallation
 
-Standardmäßig bleiben Einstellungen bei WordPress-Deinstallation erhalten. Für endgültige Löschung vorher „Bei Deinstallation Plugin-Einstellungen löschen“ im Entwurf aktivieren und speichern. Dann deaktivieren und löschen. Die Löschroutine entfernt pro Website die fünf eigenen Optionswerte; bei Multisite wird die jeweilige Löschentscheidung berücksichtigt. Vorschau-Metadaten werden immer entfernt. Medien und andere Plugins bleiben erhalten.
+Standardmäßig bleiben Einstellungen bei WordPress-Deinstallation erhalten. Für endgültige Löschung vorher „Bei Deinstallation Plugin-Einstellungen löschen“ im Entwurf aktivieren und speichern. Dann deaktivieren und löschen. Die Löschroutine entfernt pro Website die sechs eigenen Optionswerte einschließlich Updatekonfiguration; bei Multisite wird die jeweilige Löschentscheidung berücksichtigt. Vorschau-Metadaten werden immer entfernt. Medien und andere Plugins bleiben erhalten.
 
 ## Cache und Infrastruktur
 

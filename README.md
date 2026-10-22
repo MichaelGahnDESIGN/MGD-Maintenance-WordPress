@@ -1,52 +1,125 @@
-# MG Maintenance Studio
+<p align="center"><img src="mg-maintenance-studio/assets/icon-256.png" width="88" height="88" alt="MG Maintenance Studio – Plugin-Icon"></p>
+<h1 align="center">MG Maintenance Studio</h1>
+<p align="center"><strong>Eine gute Wartungsseite gehört zur Website.</strong><br>Gestalten, geschützt prüfen und bewusst veröffentlichen – direkt in WordPress.</p>
+<p align="center"><a href="https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest">Plugin herunterladen</a> · <a href="docs/wiki/Home.md">Handbuch & Wiki</a> · <a href="SECURITY.md">Sicherheit</a> · <a href="CHANGELOG.md">Changelog</a></p>
 
-Eigenständiges WordPress-Plugin für einen gestaltbaren Wartungsmodus. **Version 0.3.1 – vor Kundeneinsatz auf einer Testinstallation abnehmen.** WordPress ab 6.5, PHP ab 8.1. Lizenz: GPL-2.0-or-later.
+![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
-Das Plugin wurde ausschließlich in einer neu angelegten lokalen WordPress-Testinstallation entwickelt. Kein Kundenserver wurde verbunden, kein Remote-Repository eingerichtet, nichts veröffentlicht.
+**WordPress ab 6.5 · PHP ab 8.1 · Version 0.3.1 · Deutsch · GPL-2.0-or-later**
 
-## Was enthalten ist
+MG Maintenance Studio ersetzt die öffentliche Ansicht während Wartungsarbeiten durch eine eigene, anpassbare Seite. Besucher erhalten eine verständliche Mitteilung; berechtigte Personen können weiter an der Website arbeiten. Farben, Typografie, Logo, Kontaktmöglichkeiten und Rechtstexte werden im WordPress-Backend gepflegt.
 
-- Separate Schritte für Entwurf, ausdrücklich bestätigte Veröffentlichung und ausdrücklich bestätigten Wartungsstatus.
-- Gestaltungseditor mit geschützter Live-Vorschau; drei lokale Vorlagen: Elegant Gold, Ruhiges Atelier und Minimalistisch Hell.
-- Lokale Mediathek-Bilder, Logo, Systemschriften und bereits freigegebene WOFF2-Dateien, Farben, Container, Abstände für drei Bildschirmgrößen und optionale Animation.
-- Eigene Rechtstexte mit HTML-Grundformatierung, Sortierung, Footerlinks, tastaturbedienbaren Dialogen und Ankerlinks ohne JavaScript.
-- Kontaktlinks ohne Formular oder Datenerfassung; Countdown als reiner Hinweis ohne automatische Umschaltung.
-- IPv4/IPv6/CIDR-Freigaben, explizite Proxy-Vertrauensstellung, Benutzer- und Rollenregeln, dezenter Wartungshinweis für freigegebene eingeloggte Besucher.
-- 503/Retry-After, Robots-Meta und HTTP-Header, optionale virtuelle robots.txt, keine externen Ressourcen auf der eigenständig gerenderten Wartungsseite.
-- Ein vorheriger Entwurf und veröffentlichter Stand zur Wiederherstellung; optionale Datenlöschung bei Deinstallation.
+Das Plugin kommt ohne Konto bei einem Drittanbieter, Lizenzschlüssel oder externe Schriftbibliotheken aus. GitHub-Updates sind optional und anfangs ausgeschaltet. Das öffentliche Repository heißt **MGD-Maintenance-WordPress**; der installierbare Pluginordner heißt **mg-maintenance-studio**.
 
-## Projektaufbau
+![Wartungsseite mit der Vorlage Ruhiges Atelier](docs/images/wartungsseite-atelier.png)
+*Beispiel aus der lokalen Testinstallation. Texte, Farben, Medien und Abstände lassen sich anpassen.*
 
-`mg-maintenance-studio/` ist das installierbare Plugin-Verzeichnis. `includes/` trennt Felddefinitionen, Validierung, Zugriff, IP-Auflösung, Vorschau, Admin und Ausgabe. `templates/` enthält die beiden Oberflächen; `assets/` lokales CSS/JavaScript, `presets/` die drei Vorlagen. `tests/` enthält lokale Integrations- und Browserprüfungen. `mg-maintenance-studio/docs/` enthält die deutschsprachigen Betriebs- und Sicherheitsinformationen. `.local/`, Zugangsdaten, Werkzeuge und Testartefakte sind von Git ausgeschlossen.
+## Schnellstart
 
-## Gestaltung
+1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.3.1.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
+2. In WordPress **Plugins → Installieren → Plugin hochladen** öffnen, ZIP auswählen und das Plugin aktivieren. Die erste Aktivierung schaltet den Wartungsmodus noch **nicht** ein.
+3. Unter **Einstellungen → Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
+4. **Entwurf speichern**, dann die geschützte Vorschau öffnen und die Darstellung prüfen.
+5. **Einstellungen veröffentlichen** ausdrücklich bestätigen. Anschließend den **Wartungsmodus aktivieren** separat bestätigen.
+6. Die Website ausgeloggt oder in einem privaten Browserfenster aufrufen. Bei vorgeschaltetem Cache/CDN auch dort die neue Ausgabe prüfen.
 
-Version 0.2.0 ersetzt die große Schmuckkarte durch eine ruhige Wartungsmitteilung. Das Backend orientiert sich an WordPress-Einstellungen. Die Gestaltung und lokalen ECC-Nachweise sind in [DESIGN.md](mg-maintenance-studio/docs/DESIGN.md) dokumentiert. Gespeicherte Betreiberwerte werden nicht automatisch ersetzt.
+Vor einer produktiven Installation zuerst auf einer Testwebsite prüfen und Dateien sowie Datenbank sichern. Es wurde keine bestimmte Kundenumgebung freigegeben.
 
-## Dokumentation
+## Was das Plugin mitbringt
 
-- [Installation und Bedienung](mg-maintenance-studio/docs/BEDIENUNG.md)
-- [Architektur und Sicherheit](mg-maintenance-studio/docs/ARCHITEKTUR.md)
-- [Datenschutz und Aufbewahrung](mg-maintenance-studio/docs/DATENSCHUTZ.md)
-- [Backup, Wiederherstellung und Deinstallation](mg-maintenance-studio/docs/BETRIEB.md)
-- [Testbericht und bekannte Grenzen](mg-maintenance-studio/docs/TESTBERICHT.md)
-- [Manuelle Betreiberabnahme](mg-maintenance-studio/docs/ABNAHME.md)
-- [Änderungsprotokoll](CHANGELOG.md)
+| Bereich | Möglichkeiten |
+|---|---|
+| Gestaltung | Drei Vorlagen, Farben, Logo, Hintergrundbild, Systemschriften oder vorhandene lokale WOFF2-Dateien, Ausrichtung, Container und geräteabhängige Abstände |
+| Inhalte | Marke, Überschrift, Beschreibung, Zusatzhinweise, Kontaktlinks und geplanter Rückkehrzeitpunkt |
+| Vorschau | Administratorzugang, kurzlebiger Einmal-Token und unmittelbare Vorschau vieler Text- und Designänderungen |
+| Veröffentlichung | Getrennter Entwurf, veröffentlichter Stand und Wartungsschalter; ein vorheriger Stand zur Wiederherstellung |
+| Zugänge | Separate Administrator-Ausnahme, Benutzer-/Rollenregeln, IPv4-/IPv6-Adressen und begrenzte CIDR-Netze |
+| Rechtstexte | Bis zu fünf eigene Textblöcke, Footerlinks, Dialoge oder ausdrücklich freigegebene WordPress-Seiten |
+| Suchmaschinen | HTTP 503 als Standard, Retry-After, noindex-Header und optional virtuelle robots.txt-Regeln |
+| Updates | Öffentliche GitHub-Releases im normalen WordPress-Updateablauf, eigenes Icon und Plugin-Details |
 
-## Lokale Prüfungen
+## Drei Schritte, drei unterschiedliche Wirkungen
 
-PHP-Syntax: `find mg-maintenance-studio -name '*.php' -exec php -l {} \;`
+| Aktion | Wirkung auf Besucher |
+|---|---|
+| **Entwurf speichern** | Noch keine Änderung der veröffentlichten Wartungsseite |
+| **Einstellungen veröffentlichen** | Neuer Stand wird bei bereits aktivem Wartungsmodus sofort sichtbar |
+| **Wartungsmodus aktivieren/deaktivieren** | Schaltet zwischen Wartungsansicht und normaler Website um |
 
-JavaScript-Syntax: `node --check mg-maintenance-studio/assets/admin.js` entsprechend für frontend.js und preview.js.
+Ein Countdown ist nur eine Anzeige. Er beendet den Wartungsmodus nicht automatisch. Bei Deaktivierung des Plugins endet dessen Ausgabe; der gespeicherte Wartungsstatus bleibt erhalten. Eine spätere Reaktivierung kann deshalb die zuvor eingeschaltete Wartungsseite wieder anzeigen.
 
-Composer installiert nur Entwicklungswerkzeuge. Wegen langsamer NAS-Dateioperationen kann `composer.json` in einen separaten lokalen Werkzeugordner kopiert werden. Coding Standards und PHP-Kompatibilität werden mit PHPCS ausgeführt. Der konkrete Prüfstand steht im Testbericht.
+## Gestaltung mit ruhigen Vorlagen
 
-Die Integrationstests verweigern die Ausführung ohne `MGMS_TEST=isolated-local` und erwarten die eigens erstellte Docker-Testinstallation. Sie ändern absichtlich nur deren Testdaten. Browserprüfungen verwenden `http://127.0.0.1:18865`, lesen den lokal erzeugten Zugang aus `.local/login.json` und geben ihn nicht aus. Nicht gegen eine bestehende WordPress-Installation ausführen.
+**Ruhiges Atelier** verwendet Naturtöne und eine Serifenschrift. **Elegant Gold** kombiniert einen hellen Hintergrund mit gedämpften goldenen Akzenten. **Minimalistisch Hell** setzt auf eine klare, helle Oberfläche. Alle drei beginnen ohne große Schmuckkarten oder aufdringliche Animationen.
 
-## Wichtige Grenze
+Vorlagen ändern Designwerte im Formular. Eigene Texte und Freigaben bleiben erhalten. Bilder und Schriften müssen aus der lokalen Mediathek und vom selben Ursprung wie die Website stammen. Das Plugin schaltet keine zusätzlichen Upload-Dateitypen frei.
 
-Der Wartungsmodus ist keine Firewall und kein Schutz vertraulicher Dateien. Webserver, CDN und Cache können WordPress umgehen. Anmeldung, Backend, Cron, AJAX und authentifizierte REST-Anfragen behalten ihre eigenen WordPress-Berechtigungen. Direkte Upload-URLs und XML-RPC werden nicht abgeschirmt. Für eine spätere Live-Installation sind Backup, Wiederherstellung, Testumgebung und ausdrückliche Freigabe separat zu bestätigen.
+Viele Texte, Farben und Abstände werden direkt in der geöffneten Vorschau aktualisiert. Änderungen an Medien, Kontaktlinks, Countdown und Rechtstexten benötigen Speichern und erneutes Öffnen. [Mehr zur Gestaltung →](docs/wiki/Design-und-Vorschau.md)
 
-## GitHub-Updates und Produktdarstellung
+## Updates über GitHub
 
-Version 0.3.0 ergänzt ein eigenes lokales Icon, Plugin-Details und den Reiter Updates. Das öffentliche Repository wird einmal eingerichtet; anschließend erscheinen passende Releases in den normalen WordPress-Aktualisierungen. Updatequelle: `MichaelGahnDESIGN/MGD-Maintenance-WordPress`. Die Prüfung ist zunächst ausgeschaltet. Ablauf und Grenzen: [UPDATES.md](mg-maintenance-studio/docs/UPDATES.md).
+Unter **Einstellungen → Maintenance Studio → Updates** ist `MichaelGahnDESIGN/MGD-Maintenance-WordPress` vorbelegt. **GitHub-Prüfung einschalten** und **Speichern und jetzt prüfen** wählen. Danach meldet WordPress passende neuere Releases unter **Plugins** bzw. **Dashboard → Aktualisierungen**.
+
+Es ist kein GitHub-Token nötig. Private Repositories werden nicht unterstützt. Automatische Installationen werden, falls gewünscht, separat in WordPress eingeschaltet. Die Prüfung verwendet einen Cache; ein erneutes Speichern prüft die Quelle sofort. [Updateablauf und Rückfall →](docs/wiki/Updates-und-Releases.md)
+
+## Datenschutz und Sicherheitsgrenzen
+
+Die eigenständig gerenderte Wartungsseite lädt nur lokale Ressourcen. Das Plugin betreibt kein Kontaktformular, versendet keine E-Mails, setzt keine eigenen Besucher-Cookies und enthält keine Telemetrie. Aktivierte Updateprüfungen verbinden den Server mit GitHub; dabei werden unter anderem Server-IP und Pluginversion technisch übertragen.
+
+Schreibaktionen benötigen WordPress-Berechtigungen und eine aktionsbezogene Nonce. Texte und Designwerte werden geprüft; Rechtstexte erlauben nur begrenztes HTML. Vorschau-Tokens werden als Hash gespeichert und an das angemeldete Konto sowie dessen Sitzung gebunden.
+
+**Wartung ersetzt keine Zugriffssicherung auf Serverebene.** Direkte Dateien, XML-RPC, vorgelagerte Caches und externe Dienste werden nicht abgeschirmt. Login, Backend, Cron, AJAX und authentifizierte REST-Aufrufe behalten ihre eigenen WordPress-Berechtigungen. Anonyme REST-Webhooks können während der Wartung blockiert werden.
+
+Der Updater prüft Quelle, Version und Paketadresse. Eine unabhängige kryptografische Paketsignatur wird bislang nicht geprüft. Die Sicherheit des GitHub-Kontos und der Release-Rechte bleibt deshalb wichtig.
+
+[Datenschutz →](docs/wiki/Datenschutz.md) · [Sicherheitskonzept →](docs/wiki/Sicherheit.md) · [Konkreter Prüfbericht →](docs/SECURITY-AUDIT.md)
+
+## Handbuch und Hilfe
+
+| Ich möchte … | Anleitung |
+|---|---|
+| Das Plugin installieren und erstmals einrichten | [Installation und erste Schritte](docs/wiki/Installation.md) |
+| Design, Medien oder die Vorschau verstehen | [Design und Vorschau](docs/wiki/Design-und-Vorschau.md) |
+| Zugriff für mich oder mein Team freigeben | [Zugriffe und IP-Freigaben](docs/wiki/Zugriffe.md) |
+| Impressum, Datenschutz und Kontakt einrichten | [Rechtstexte und Kontakt](docs/wiki/Rechtstexte-und-Kontakt.md) |
+| Updates installieren oder eine Version zurücknehmen | [Updates und Releases](docs/wiki/Updates-und-Releases.md) |
+| Einen Fehler eingrenzen | [Fehlerbehebung](docs/wiki/Fehlerbehebung.md) |
+| Daten entfernen oder frühere Einstellungen wiederherstellen | [Betrieb und Wiederherstellung](docs/wiki/Betrieb-und-Wiederherstellung.md) |
+| Am Plugin arbeiten oder Tests nachvollziehen | [Entwicklung und Tests](docs/wiki/Entwicklung-und-Tests.md) |
+
+Das Handbuch liegt vollständig im Repository und bleibt damit auch ohne separates GitHub-Wiki erreichbar. Die Wiki-Quelldateien befinden sich unter `docs/wiki/`.
+
+## Entwicklung
+
+```text
+mg-maintenance-studio/   Installierbares Plugin
+  includes/             Validierung, Zugriff, Vorschau, Ausgabe und Verwaltung
+  templates/            Admin- und Wartungsansicht
+  assets/               Lokales CSS, JavaScript und Icons
+  presets/              Drei Designvorlagen
+  docs/                 Mitgelieferte technische Betriebsdokumentation
+docs/wiki/              Ausführliches Handbuch
+scripts/                Paketbau und Dokumentationsprüfung
+tests/                  Isolierte Integrations-, Browser- und Sicherheitstests
+```
+
+Zur Laufzeit sind weder Composer noch Node.js erforderlich. Composer wird ausschließlich für lokale Qualitätswerkzeuge eingesetzt.
+
+```bash
+python3 scripts/check-docs.py
+find mg-maintenance-studio -name '*.php' -exec php -l {} \;
+node --check mg-maintenance-studio/assets/admin.js
+node --check mg-maintenance-studio/assets/frontend.js
+node --check mg-maintenance-studio/assets/preview.js
+python3 scripts/build-package.py
+```
+
+[Tests reproduzieren](tests/README.md). Integrationstests ausschließlich gegen die dafür angelegte wegwerfbare Installation ausführen. Sie verändern absichtlich Testdaten und sind nicht für eine vorhandene Website gedacht.
+
+## Aktueller Stand
+
+Version 0.3.1 ist öffentlich veröffentlicht. Lokale WordPress-Prüfungen, Browserprüfungen und der reale GitHub-Paketdownload sind dokumentiert. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
+
+Fehler ohne sensible Daten können über [GitHub Issues](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/issues) gemeldet werden. Für Sicherheitsprobleme gilt die [Security Policy](SECURITY.md).
+
+Entwickelt von **Michael Gahn DESIGN**. Quellcode unter [GPL-2.0-or-later](mg-maintenance-studio/LICENSE).

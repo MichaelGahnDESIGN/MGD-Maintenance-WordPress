@@ -82,3 +82,9 @@ Kein echtes GitHub-Release dieses Plugins veröffentlicht. GitHub-Antworten wurd
 in den Updatetests simuliert. Ein Ende-zu-Ende-Test einschließlich öffentlichem
 GitHub-Download bleibt nach Veröffentlichung erforderlich. Keine Kundenwebsite
 verbunden, keine Live-Installation und keine Veröffentlichung vorgenommen.
+
+## Öffentlicher Stand 0.3.1 und ergänzende Sicherheitsprüfung
+
+Release 0.3.1 ist seit 22.10.2026 öffentlich unter MichaelGahnDESIGN/MGD-Maintenance-WordPress verfügbar. Die tatsächliche öffentliche Release-Abfrage und der Paketdownload wurden aus einer lokalen WordPress-Installation geprüft. Die zuvor genannten Aussagen „nicht veröffentlicht“ beziehen sich ausschließlich auf die historischen Prüfstände.
+
+Die erneute Sicherheitsprüfung, Secret-Scans und aktuellen Testgrenzen sind im [Sicherheitsaudit](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/blob/main/docs/SECURITY-AUDIT.md) dokumentiert. Dieser Link bezieht sich auf den Quellcode im Repository; das Handbuch ist auch online über die Projekt-README erreichbar.

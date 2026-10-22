@@ -1,5 +1,14 @@
 # Änderungsprotokoll
 
+## Dokumentation und Sicherheitsprüfung – 22.10.2026
+
+- README mit Projektbild, Schnellstart, Funktionsübersicht und Handbuchnavigation neu aufgebaut.
+- Elf Handbuchseiten mit Wiki-Export, Security Policy und nachvollziehbarem Sicherheitsbericht ergänzt.
+- Historische Aussagen zur Veröffentlichung korrigiert.
+- CI um Dokumentationslinks und Secret-Scans für Historie und Quellstand erweitert.
+- Plugin-Laufzeitcode unverändert; veröffentlichtes Release bleibt 0.3.1.
+
+
 ## 0.3.1
 
 - Öffentliches Repository MGD-Maintenance-WordPress als Updatequelle vorbelegt.

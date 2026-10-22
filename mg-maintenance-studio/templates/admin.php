@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 ?>
 <div class="wrap mgms-admin">
-<header class="studio-header"><div><p class="studio-kicker">MICHAEL GAHN DESIGN · WordPress</p><h1>Maintenance Studio<span>Ein guter Eindruck. Auch in der Pause.</span></h1></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
+<header class="studio-header"><div><h1>MG Maintenance Studio</h1></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
 <?php
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Feste Meldungsauswahl ohne Zustandsänderung.
 $notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( $notices[ $notice ] ) ) :
@@ -16,8 +16,8 @@ $notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( 
 foreach ( $tabs as $i => $panel_label ) :
 	?>
 	<a href="#panel-<?php echo (int) $i; ?>"><?php echo esc_html( $panel_label ); ?></a><?php endforeach; ?></nav>
-<section class="studio-panel" id="panel-0"><h2>Alles auf einen Blick</h2><p>Öffentliche Website: <strong><?php echo $enabled ? 'Wartungsseite gemäß veröffentlichten Zugriffsregeln' : 'Normale Website'; ?></strong></p>
-<div class="overview-grid"><div><small>VERÖFFENTLICHTE VORLAGE</small><strong><?php echo esc_html( $live['preset'] ); ?></strong></div><div><small>RECHTSTEXTE</small><strong><?php echo count( array_filter( $live['legal'], static fn( $r ) => $r['enabled'] && ( $r['content'] || $r['page'] ) ) ) ? 'Eingerichtet · Inhalt selbst prüfen' : 'Noch nicht eingerichtet'; ?></strong></div><div><small>IP-FREIGABEN</small><strong><?php echo $live['ip_enabled'] ? 'Aktiv' : 'Inaktiv'; ?></strong></div><div><small>BENUTZERREGEL</small><strong><?php echo esc_html( Schema::fields()['users'][4][ $live['users'] ] ); ?> · Admin-Ausnahme <?php echo $live['admin_bypass'] ? 'an' : 'aus'; ?></strong></div></div>
+<section class="studio-panel" id="panel-0"><h2>Status der Website</h2><p>Öffentliche Website: <strong><?php echo $enabled ? 'Wartungsseite gemäß veröffentlichten Zugriffsregeln' : 'Normale Website'; ?></strong></p>
+<div class="overview-grid"><div><small>Veröffentlichte Vorlage</small><strong><?php echo esc_html( Admin::presets()[ $live['preset'] ]['name'] ?? 'Eigene Gestaltung' ); ?></strong></div><div><small>Rechtstexte</small><strong><?php echo count( array_filter( $live['legal'], static fn( $r ) => $r['enabled'] && ( $r['content'] || $r['page'] ) ) ) ? 'Eingerichtet · Inhalt selbst prüfen' : 'Noch nicht eingerichtet'; ?></strong></div><div><small>IP-Freigaben</small><strong><?php echo $live['ip_enabled'] ? 'Aktiv' : 'Inaktiv'; ?></strong></div><div><small>Benutzerzugriff</small><strong><?php echo esc_html( Schema::fields()['users'][4][ $live['users'] ] ); ?> · Admin-Ausnahme <?php echo $live['admin_bypass'] ? 'an' : 'aus'; ?></strong></div></div>
 <p class="studio-warning">Seiten-Caches und CDNs können PHP umgehen. Nach jeder Statusänderung Cache gezielt leeren und anonym prüfen. Eine Plugin-Deaktivierung beendet die Ausgabe; der gespeicherte Status bleibt für eine Reaktivierung erhalten.</p>
 <?php
 if ( '503' !== $live['status'] ) :
@@ -100,7 +100,7 @@ foreach ( $tabs as $i => $panel_label ) :
 		<ol><li>Entwurf gestalten, eigene Rechtstexte eintragen und speichern.</li><li>Geschützte Vorschau öffnen. Änderungen im Formular aktualisieren Text und Design sofort; strukturelle Änderungen nach erneutem Speichern und Neuladen prüfen.</li><li>Veröffentlichung ausdrücklich bestätigen. Damit ändern Sie den für Wartung bereitstehenden Stand.</li><li>Wartungsmodus separat in der Übersicht einschalten und anonym prüfen.</li></ol><p>Im Plugin-Verzeichnis liegt die Dokumentation mit Installation, Datenschutz, Abnahme und Rückfallanleitung. Multisite: je Website aktivieren, keine Netzwerkaktivierung. REST: anonyme Zugriffe werden während Wartung abgewiesen; angemeldete API-Nutzer, Admin, Login, Cron und AJAX behalten ihre eigenen WordPress-Berechtigungen. Statische Dateien, XML-RPC und Server-Caches werden nicht abgeschirmt. Dieses Plugin ist kein Zugriffsschutz für vertrauliche Inhalte.</p><?php endif; ?>
 </section><?php endforeach; ?>
 <div class="save-bar"><button class="button button-primary" name="intent" value="draft">Entwurf speichern</button><label><input type="checkbox" name="confirm_publish" value="1"> Ich bestätige die Veröffentlichung dieser Einstellungen. Bei aktivem Wartungsmodus wird die Änderung sofort sichtbar.</label><button class="button" name="intent" value="publish">Einstellungen veröffentlichen</button><span id="dirty-state" role="status"></span></div></form>
-<aside class="preview-panel"><h2>Ihr Entwurf, live im Blick</h2><p>Vorschau nur für Ihr Administratorkonto. Einmal gültig, zwei Minuten zum Öffnen.</p>
+<aside class="preview-panel"><h2>Vorschau</h2><p>Vorschau nur für Ihr Administratorkonto. Einmal gültig, zwei Minuten zum Öffnen.</p>
 <?php
 if ( $s['preview_enabled'] ) :
 	?>

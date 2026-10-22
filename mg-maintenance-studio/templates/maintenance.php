@@ -13,16 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title><?php echo esc_html( $s['title'] ); ?></title>
-<link rel="stylesheet" href="<?php echo esc_url( MGMS_URL . 'assets/frontend.css' ); ?>">
+<link rel="stylesheet" href="<?php echo esc_url( MGMS_URL . 'assets/frontend.css?ver=' . MGMS_VERSION ); ?>">
 <?php
 if ( $font ) :
 	?>
 	<style>@font-face{font-family:MGMSLocal;src:url(<?php echo esc_url( $font ); ?>) format('woff2');font-display:swap}.mgms h1{font-family:MGMSLocal,system-ui,sans-serif}</style><?php endif; ?>
-<script defer src="<?php echo esc_url( MGMS_URL . 'assets/frontend.js' ); ?>"></script>
+<script defer src="<?php echo esc_url( MGMS_URL . 'assets/frontend.js?ver=' . MGMS_VERSION ); ?>"></script>
 <?php
 if ( $preview ) :
 	?>
-	<script defer src="<?php echo esc_url( MGMS_URL . 'assets/preview.js' ); ?>"></script><?php endif; ?>
+	<script defer src="<?php echo esc_url( MGMS_URL . 'assets/preview.js?ver=' . MGMS_VERSION ); ?>"></script><?php endif; ?>
 </head>
 <body class="mgms <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
 <a class="skip" href="#main">Zum Inhalt</a>
@@ -35,7 +35,7 @@ if ( $preview ) :
 	?>
 	<div class="preview-label">Geschützte Vorschau · Entwurf · nicht veröffentlicht</div><?php endif; ?>
 <div class="page-shell">
-<header class="brand"><span data-live="brand"><?php echo esc_html( $s['brand'] ); ?></span><span class="brand-mark" aria-hidden="true"></span><span>MIT LIEBE IM DETAIL</span></header>
+<header class="brand"><span data-live="brand"><?php echo esc_html( $s['brand'] ); ?></span></header>
 <main id="main" tabindex="-1" class="content <?php echo 'card' === $s['container'] ? 'is-card' : ''; ?> <?php echo $s['shadow'] ? 'has-shadow' : ''; ?>">
 <?php
 if ( $logo ) :
@@ -49,9 +49,10 @@ if ( $logo ) :
 		?>
 	</a><?php endif; ?><?php endif; ?>
 <p class="eyebrow" data-live="tagline"><?php echo esc_html( $s['tagline'] ); ?></p>
-<div class="ornament" aria-hidden="true"></div>
+<div class="message-grid"><div class="message-copy">
 <h1 data-live="title"><?php echo esc_html( $s['title'] ); ?></h1>
 <p class="description" data-live="description"><?php echo esc_html( $s['description'] ); ?></p>
+</div><div class="message-details">
 <p class="notice" data-live="notice"><?php echo esc_html( $s['notice'] ); ?></p>
 <?php
 if ( $s['countdown'] ) :
@@ -72,6 +73,7 @@ if ( $s['phone'] ) :
 	<a href="<?php echo esc_url( 'tel:' . preg_replace( '/[^+0-9]/', '', $s['phone'] ) ); ?>"><?php echo esc_html( $s['phone'] ); ?></a><?php endif; ?>
 </div>
 <p data-live="newsletter"><?php echo esc_html( $s['newsletter'] ); ?></p>
+</div></div>
 </main>
 <footer class="site-footer"><nav aria-label="Rechtliche Hinweise">
 <?php

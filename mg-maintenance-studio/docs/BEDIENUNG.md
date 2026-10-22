@@ -18,7 +18,7 @@ Erst **Einstellungen veröffentlichen** übernimmt den Stand, und nur bei angekr
 
 ## Design und Vorlagen
 
-Elegant Gold verwendet dunkles Grün mit warmem Gold, Ruhiges Atelier helle Naturtöne, Minimalistisch Hell eine klare weiße Oberfläche. Presets ändern nur Designwerte im Formular, nicht Texte oder Rechte. Die Rückgängig-Funktion stellt vorherige Formularwerte wieder her; gespeicherte Änderungen werden zusätzlich als vorheriger Entwurf aufbewahrt. Vor einem umfangreichen Umbau den aktuellen Entwurf speichern.
+Elegant Gold verwendet einen warmweißen Grund mit gedämpftem Gold, Ruhiges Atelier helle Naturtöne, Minimalistisch Hell eine klare weiße Oberfläche. Die Vorlagen beginnen linksbündig ohne Schatten oder große Karten. Presets ändern nur Designwerte im Formular, nicht Texte oder Rechte. Die Rückgängig-Funktion stellt vorherige Formularwerte wieder her; gespeicherte Änderungen werden zusätzlich als vorheriger Entwurf aufbewahrt. Vor einem umfangreichen Umbau den aktuellen Entwurf speichern.
 
 Mediathek-Bilder müssen vom gleichen Ursprung wie die Website kommen. Erlaubt sind JPEG, PNG, WebP, GIF und AVIF. SVG-Uploads werden bewusst nicht zusätzlich freigeschaltet. Logos benötigen einen sinnvollen Alternativtext, sofern sie Informationen vermitteln. Die Schriftoption akzeptiert vorhandene lokale WOFF2-Anhänge, deren Dateityp WordPress bereits zulässt. Dieses Plugin erweitert keine Upload-Berechtigungen und enthält selbst keine fremden Schriften. Die Verantwortung für Bild- und Schriftlizenzen liegt beim Betreiber.
 

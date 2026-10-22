@@ -25,18 +25,22 @@ const fixture = (action) =>
       ".local/node_modules/axe-core/axe.min.js",
       "utf8",
     );
-    fs.mkdirSync("artifacts/previews", { recursive: true });
+    fs.mkdirSync("artifacts/redesign", { recursive: true });
     for (const name of [
       "elegant-gold",
       "ruhiges-atelier",
       "minimalistisch-hell",
     ]) {
       fixture(name);
-      for (const width of [1440, 390]) {
-        await page.setViewportSize({ width, height: 1000 });
+      for (const [width, height] of [
+        [1440, 900],
+        [768, 1024],
+        [390, 844],
+      ]) {
+        await page.setViewportSize({ width, height });
         await page.goto("http://127.0.0.1:18865");
         await page.screenshot({
-          path: `artifacts/previews/${name}-${width}.png`,
+          path: `artifacts/redesign/${name}-${width}.png`,
           fullPage: true,
         });
         await page.evaluate(axe);
@@ -46,7 +50,7 @@ const fixture = (action) =>
               await axe.run(document, {
                 runOnly: {
                   type: "tag",
-                  values: ["wcag2a", "wcag2aa", "wcag21aa"],
+                  values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"],
                 },
               })
             ).violations,
@@ -76,7 +80,10 @@ const fixture = (action) =>
       async () =>
         (
           await axe.run(".mgms-admin", {
-            runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa"] },
+            runOnly: {
+              type: "tag",
+              values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"],
+            },
           })
         ).violations,
     );
@@ -86,7 +93,30 @@ const fixture = (action) =>
     );
     assert.equal(violations.length, 0);
     console.log("PASS Admin-Oberfläche: axe WCAG 2.1 AA");
-    await page.screenshot({ path: "artifacts/previews/admin-desktop.png" });
+    await page.screenshot({ path: "artifacts/redesign/admin-desktop.png" });
+    await page.getByRole("tab", { name: "Übersicht", exact: true }).focus();
+    await page.keyboard.press("ArrowRight");
+    assert.equal(
+      await page
+        .getByRole("tab", { name: "Wartungsmodus", exact: true })
+        .getAttribute("aria-selected"),
+      "true",
+    );
+    for (const width of [1440, 768, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.getByRole("tab", { name: "Design", exact: true }).click();
+      await page.screenshot({
+        path: `artifacts/redesign/admin-design-${width}.png`,
+        fullPage: true,
+      });
+      assert.equal(
+        await page
+          .locator(".mgms-admin")
+          .evaluate((el) => el.scrollWidth <= el.clientWidth + 1),
+        true,
+      );
+    }
+    console.log("PASS Admin: Tastatur-Tabs und drei Bildschirmbreiten");
   } finally {
     fixture("restore");
     await browser.close();

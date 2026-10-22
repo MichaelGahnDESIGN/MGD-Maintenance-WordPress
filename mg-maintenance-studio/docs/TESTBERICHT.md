@@ -1,6 +1,14 @@
 # Testbericht vom 22.10.2026
 
-## Umfang und Umgebung
+## Nachprüfung der Gestaltung 0.2.0
+
+Erneut lokal unter WordPress 7.1.3 / PHP 8.1.34 geprüft: 30 Integrationstests, 19 Browserabläufe und 11 Sicherheitsfälle bestanden. Drei Vorlagen jeweils bei 390×844, 768×1024 und 1440×900 ohne Überlauf oder automatisch gefundene WCAG-2.2-AA-Verstöße. Admin-Übersicht mit axe, Tastatur-Tabs und Designformular bei drei Breiten geprüft. Lange Texte und leere optionale Bereiche zusätzlich geprüft. Kein externer Ressourcenabruf oder JavaScript-Laufzeitfehler in der geprüften Wartungsansicht. PHP-Lint und PHP-WPCS-Projektprofil fehlerfrei.
+
+Ein um die Rahmenbreite zu breites Vorschaufenster wurde mit border-box korrigiert. Lange Admin-Aktionsnamen können umbrechen. Der ECC-Nachweis liegt lokal unter artifacts/redesign/evidence.json; die Bilder wurden zusätzlich angesehen. Der Checker prüft die Vollständigkeit des Nachweises und ersetzt kein visuelles Urteil.
+
+ECC Browser QA: Funktion und Gestaltung lokal geprüft. Automatische Pixelregression bleibt INCONCLUSIVE, weil keine eingecheckte Screenshot-Baseline vorliegt. Vorher-/Nachher-Bilder wurden lokal verglichen. Vollständiger Screenreader-Test und Core-Web-Vitals-Feldmessung (insbesondere INP) sind nicht erfolgt. Keine Live-Freigabe. Die Mindestversions- und Lebenszyklusprüfungen im folgenden historischen Abschnitt gehören zu 0.1.0; die Überarbeitung ändert keine WordPress-API- oder Zugriffslogik.
+
+## Historischer Prüfstand 0.1.0: Umfang und Umgebung
 
 Ausschließlich neue lokale Docker-Projekte `mgms-local` und `mgms-min`, ohne Kundenverbindung. Portbindung nur an 127.0.0.1, eigene MariaDB-11.4-Testdatenbanken im flüchtigen Speicher, Plugin-Verzeichnis schreibgeschützt eingebunden. Testkonten wurden zufällig lokal erzeugt und nie ausgegeben. Kein Remote-Repository, kein Upload, keine Live-Installation.
 

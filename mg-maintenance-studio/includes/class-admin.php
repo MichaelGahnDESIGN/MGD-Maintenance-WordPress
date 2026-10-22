@@ -10,8 +10,8 @@ final class Admin {
 		if ( 'settings_page_mg-maintenance-studio' !== $hook ) {
 			return; }
 		wp_enqueue_media();
-		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), '0.1.0' );
-		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), '0.1.0', true );
+		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
+		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), MGMS_VERSION, true );
 		wp_localize_script( 'mgms-admin', 'mgmsPresets', self::presets() );
 	}
 	public static function presets(): array {

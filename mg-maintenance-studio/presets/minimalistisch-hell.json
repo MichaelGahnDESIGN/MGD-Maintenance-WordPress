@@ -2,15 +2,16 @@
   "name": "Minimalistisch Hell",
   "values": {
     "background": "#ffffff",
-    "text": "#232830",
-    "accent": "#45556d",
-    "button": "#232830",
+    "text": "#24262a",
+    "accent": "#4a535f",
+    "button": "#24262a",
     "button_text": "#ffffff",
     "card": "#ffffff",
-    "border_color": "#a7adb6",
+    "border_color": "#d3d5d8",
     "font": "sans-serif",
     "radius": 0,
     "shadow": false,
-    "container": "plain"
+    "container": "plain",
+    "align": "left"
   }
 }

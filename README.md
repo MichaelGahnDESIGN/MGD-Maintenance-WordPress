@@ -1,6 +1,6 @@
 # MG Maintenance Studio
 
-Eigenständiges WordPress-Plugin für einen gestaltbaren Wartungsmodus. **Version 0.1.0 – lokale Erstversion, nicht für eine Kundenwebsite freigegeben.** WordPress ab 6.5, PHP ab 8.1. Lizenz: GPL-2.0-or-later.
+Eigenständiges WordPress-Plugin für einen gestaltbaren Wartungsmodus. **Version 0.2.0 – lokale Erstversion, nicht für eine Kundenwebsite freigegeben.** WordPress ab 6.5, PHP ab 8.1. Lizenz: GPL-2.0-or-later.
 
 Das Plugin wurde ausschließlich in einer neu angelegten lokalen WordPress-Testinstallation entwickelt. Kein Kundenserver wurde verbunden, kein Remote-Repository eingerichtet, nichts veröffentlicht.
 
@@ -18,6 +18,10 @@ Das Plugin wurde ausschließlich in einer neu angelegten lokalen WordPress-Testi
 ## Projektaufbau
 
 `mg-maintenance-studio/` ist das installierbare Plugin-Verzeichnis. `includes/` trennt Felddefinitionen, Validierung, Zugriff, IP-Auflösung, Vorschau, Admin und Ausgabe. `templates/` enthält die beiden Oberflächen; `assets/` lokales CSS/JavaScript, `presets/` die drei Vorlagen. `tests/` enthält lokale Integrations- und Browserprüfungen. `mg-maintenance-studio/docs/` enthält die deutschsprachigen Betriebs- und Sicherheitsinformationen. `.local/`, Zugangsdaten, Werkzeuge und Testartefakte sind von Git ausgeschlossen.
+
+## Gestaltung
+
+Version 0.2.0 ersetzt die große Schmuckkarte durch eine ruhige Wartungsmitteilung. Das Backend orientiert sich an WordPress-Einstellungen. Die Gestaltung und lokalen ECC-Nachweise sind in [DESIGN.md](mg-maintenance-studio/docs/DESIGN.md) dokumentiert. Gespeicherte Betreiberwerte werden nicht automatisch ersetzt.
 
 ## Dokumentation
 

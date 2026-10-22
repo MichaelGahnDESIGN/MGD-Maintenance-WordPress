@@ -21,3 +21,7 @@ Für den Mindestversionstest wurde ein zweites Projekt `mgms-min` auf Port 18866
 - `phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 8.1- --extensions=php mg-maintenance-studio` prüft bekannte PHP-Kompatibilitätsregeln.
 - PHP-Lint auf alle Plugin-PHP-Dateien, `node --check` auf die drei ausgelieferten JavaScript-Dateien.
 - Die Browser-Suiten ergänzen tatsächliche Ausgabe, HTTP-Header und Verhalten. Sie ersetzen keine manuelle Screenreader- oder Kundenumgebungsprüfung.
+
+## Gestaltung 0.2.0
+
+`node tests/visual.cjs` legt neue Aufnahmen unter `artifacts/redesign/` an und prüft drei Bildschirmbreiten. Anschließend `node tests/design-states.cjs` für lange Texte und leere optionale Bereiche ausführen. Veränderungen durch diesen Stresstest bleiben im Browser; die ursprünglichen Testoptionen werden wiederhergestellt.

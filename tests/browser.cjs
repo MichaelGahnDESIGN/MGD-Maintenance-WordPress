@@ -152,7 +152,7 @@ const ok = (label) => {
     .click();
   assert.equal(
     await editor.locator("#mgms-background").inputValue(),
-    "#141b1b",
+    "#f7f5ef",
   );
   ok("Preset anwenden und eigene Designwerte zurückholen");
   await editor.screenshot({ path: ".local/admin-editor.png", fullPage: true });
@@ -176,7 +176,7 @@ const ok = (label) => {
   response = await page.goto(base);
   assert.equal(
     await page
-      .getByRole("heading", { name: "Ein neuer Moment entsteht." })
+      .getByRole("heading", { name: "Wir sind bald wieder da." })
       .count(),
     1,
   );
@@ -211,7 +211,7 @@ const ok = (label) => {
   await page.goto(base);
   assert.equal(
     await page
-      .getByRole("heading", { name: "Ein neuer Moment entsteht." })
+      .getByRole("heading", { name: "Wir sind bald wieder da." })
       .count(),
     1,
   );

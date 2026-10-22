@@ -1,0 +1,15 @@
+# Gestaltungsüberarbeitung 0.2.0
+
+## Gestaltungsauftrag nach ECC Frontend Design Direction
+
+Besucher müssen erkennen, dass die Website vorübergehend nicht erreichbar ist, und Kontakt oder Rechtstexte finden. Die Wartungsseite wird deshalb wie eine kurze redaktionelle Mitteilung aufgebaut: Marke, Anlass, Titel und Erklärung, anschließend Kontakt und Rechtliches. Keine Schmucksterne, Werbeslogans, großen runden Karten oder automatischen Animationen als Standard.
+
+Die lokale Ausgangsansicht zeigte eine übergroße zentrierte Karte mit Stern, Gold auf Grün und austauschbarer Atelier-Sprache. Diese Elemente hatten keinen Bezug zur Aufgabe. Die neue Fassung verwendet einen hellen Papiergrund, einen sparsamen Goldton und eine linksbündige Satzordnung. Atelier und Minimalistisch erhalten abgestimmte Alternativen. Bilder sind optional, für eine sachliche Statusmitteilung nicht notwendig.
+
+Administratoren sollen Status erkennen, Inhalte bearbeiten und die Auswirkungen ihrer Aktionen verstehen. Das Backend verwendet deshalb WordPress-nahe Farben, kompakte Zeilen statt Kennzahlenkarten, schlichte Tabs und native Buttons. Die Aktion zum Einschalten bleibt von Entwurf und Veröffentlichung getrennt.
+
+Prüfbare Vorgaben: 390×844, 768×1024 und 1440×900; keine horizontale Überbreite; lange Texte umbrechen; Kontrast nach WCAG AA automatisch prüfen; Fokus und Tabs per Tastatur; Rechtstextdialog und Anker ohne JavaScript. Kein neuer externer Dienst und keine neue Laufzeitabhängigkeit.
+
+Zustände: Die serverseitige Seite erscheint ohne asynchrones Laden. Fehlende Rechtstexte werden im Backend benannt. Validierungsfehler dürfen nichts veröffentlichen. Erfolg wird nach Speichern bestätigt. Vorschau benötigt weiterhin Administratorberechtigung; abgelaufene Freigaben geben einen erklärenden Fehler aus. Teilweise konfigurierte Inhalte (ohne Bild, ohne Kontakt) müssen ohne leere Karten funktionieren.
+
+Vorher-Bilder liegen lokal unter artifacts/redesign/before. Neue Bilder und ECC-Prüfdatensatz werden unter artifacts/redesign abgelegt. Der historische Stand ist zusätzlich in Git und im Paket 0.1.0 erhalten. Bestehende gespeicherte Einstellungen werden nicht migriert; neue Standardwerte gelten für neue Installationen, Vorlagen für bewusste Auswahl.

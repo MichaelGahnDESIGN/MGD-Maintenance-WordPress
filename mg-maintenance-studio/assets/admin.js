@@ -13,7 +13,7 @@
       document.querySelector(item.getAttribute("href")).hidden = !selected;
     });
     document.querySelector(".editor-layout").hidden =
-      tab.getAttribute("href") === "#panel-0";
+      ["#panel-0", "#panel-9"].includes(tab.getAttribute("href"));
     if (focus) tab.focus();
   };
   tabs.forEach((tab, index) => {

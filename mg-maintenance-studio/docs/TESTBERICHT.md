@@ -56,3 +56,29 @@ Der ungefilterte WordPress-Standard meldete anfangs auch PHPDoc- und JavaScript-
 - Ein vorheriger Stand ersetzt kein vollständiges Dateien-/Datenbankbackup.
 
 Die manuelle Checkliste steht in ABNAHME.md. Lokale Tests sind keine Live-Freigabe.
+
+## Erweiterung 0.3.0 – GitHub-Updates und Verwaltung
+
+Lokal mit WordPress 7.1.3 und PHP 8.1.34 geprüft:
+
+- 18 Updateprüfungen: Zustimmung, Versions-/Paketvalidierung, Entwurf/Vorabversion,
+  fremde URLs, Zwischenspeicherung, WordPress-Update-URI-Hook, gleiche Version und Ausfall.
+- Tatsächlicher `Plugin_Upgrader` installiert das 0.3.0-ZIP über eine mit 0.2.0
+  gekennzeichnete Wegwerfkopie. Pluginpfad, veröffentlichte Werte und Wartungsstatus
+  bleiben erhalten. Der Download wird durch eine lokale ZIP-Kopie ersetzt.
+- Sechs Browserprüfungen: Updates bei drei Bildschirmgrößen mit axe und Überlaufprüfung,
+  fehlende Nonce, separates Speichern sowie Icon und natives Detailfenster.
+- Bestehende 30 Integrationsprüfungen, 19 Browserabläufe, 11 Sicherheitsfälle und
+  11 Prüfungen von Vorlagen/Verwaltung erneut erfolgreich.
+- PHP-Lint, WordPress-Coding-Standards im Projektprofil und JavaScript-Syntax erfolgreich.
+- Paketbau prüft Inhalt, ZIP-Integrität und SHA256 je Datei.
+
+Screenshots: `artifacts/updates/settings-{1440,768,390}.png` und `plugin-list.png`.
+Desktop und Smartphone zusätzlich visuell geprüft. Die Tabnavigation bleibt auf
+kleinen Geräten umgebrochen; es gibt keinen horizontalen Überlauf. Keine Aussage
+über vollständige WCAG-Konformität oder einen Screenreader-Praxistest.
+
+Kein echtes GitHub-Release dieses Plugins veröffentlicht. GitHub-Antworten wurden
+in den Updatetests simuliert. Ein Ende-zu-Ende-Test einschließlich öffentlichem
+GitHub-Download bleibt nach Veröffentlichung erforderlich. Keine Kundenwebsite
+verbunden, keine Live-Installation und keine Veröffentlichung vorgenommen.

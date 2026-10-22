@@ -1,0 +1,16 @@
+tr[data-plugin="mg-maintenance-studio/mg-maintenance-studio.php"]
+  .plugin-title
+  strong {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+tr[data-plugin="mg-maintenance-studio/mg-maintenance-studio.php"]
+  .plugin-title
+  strong::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  background: url("icon.svg") center/contain no-repeat;
+}

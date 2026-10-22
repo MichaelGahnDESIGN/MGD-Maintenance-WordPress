@@ -25,3 +25,17 @@ Für den Mindestversionstest wurde ein zweites Projekt `mgms-min` auf Port 18866
 ## Gestaltung 0.2.0
 
 `node tests/visual.cjs` legt neue Aufnahmen unter `artifacts/redesign/` an und prüft drei Bildschirmbreiten. Anschließend `node tests/design-states.cjs` für lange Texte und leere optionale Bereiche ausführen. Veränderungen durch diesen Stresstest bleiben im Browser; die ursprünglichen Testoptionen werden wiederhergestellt.
+
+## Updates 0.3.0
+
+`updates.php` im lokalen Container als `/tmp/mgms-updates.php` ablegen und mit
+`MGMS_TEST=isolated-local` ausführen. Alle HTTP-Antworten sind Testdaten; es erfolgt
+kein GitHub-Zugriff. `node tests/update-ui.cjs` verwendet dieselben lokalen
+Browserabhängigkeiten wie `browser.cjs` und erzeugt Screenshots unter artifacts/updates.
+
+Für `update-install.php` eine wegwerfbare Kopie des Pluginordners unter
+`/tmp/mgms-upgrade/plugins/mg-maintenance-studio` im Testcontainer anlegen und nur
+in deren Hauptdatei die Version auf 0.2.0 setzen. Das aktuelle gebaute ZIP nach
+`/tmp/mgms-package.zip` kopieren. Das Skript mit `MGMS_TEST=isolated-local` starten.
+Es definiert einen getrennten Pluginpfad und verwendet den echten WordPress-Upgrader;
+der Download wird lokal ersetzt. Niemals auf einer bestehenden Website ausführen.

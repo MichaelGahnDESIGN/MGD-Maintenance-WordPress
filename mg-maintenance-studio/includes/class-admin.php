@@ -125,7 +125,7 @@ final class Admin {
 		$s       = Settings::get( true );
 		$live    = Settings::get();
 		$enabled = (bool) get_option( Settings::STATE );
-		$tabs    = array( 'Übersicht', 'Wartungsmodus', 'Design', 'Rechtstexte', 'IP-Freigaben', 'Eingeloggte Benutzer', 'SEO und Crawler', 'Erweitert', 'Hilfe' );
+		$tabs    = array( 'Übersicht', 'Wartungsmodus', 'Design', 'Rechtstexte', 'IP-Freigaben', 'Eingeloggte Benutzer', 'SEO und Crawler', 'Erweitert', 'Hilfe', 'Updates' );
 		$notices = array(
 			'saved'     => 'Entwurf gespeichert. Der veröffentlichte Stand bleibt unverändert.',
 			'published' => 'Einstellungen ausdrücklich veröffentlicht. Der Wartungsstatus wurde nicht verändert.',

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 ?>
 <div class="wrap mgms-admin">
-<header class="studio-header"><div><h1>MG Maintenance Studio</h1></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
+<header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>MG Maintenance Studio</h1><p>Michael Gahn DESIGN <span aria-hidden="true">·</span> Version <?php echo esc_html( MGMS_VERSION ); ?></p></div></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
 <?php
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Feste Meldungsauswahl ohne Zustandsänderung.
 $notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( $notices[ $notice ] ) ) :
@@ -25,13 +25,14 @@ if ( '503' !== $live['status'] ) :
 	<p class="studio-warning">Der veröffentlichte HTTP-Status ist nicht 503. Suchmaschinen können den Inhalt anders behandeln.</p><?php endif; ?>
 <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'mgms_state' ); ?><input type="hidden" name="action" value="mgms_state"><label><input type="checkbox" name="confirm_state" value="1" required> Ich bestätige: Die öffentliche Ausgabe wird jetzt <?php echo $enabled ? 'auf die normale Website umgestellt' : 'auf den veröffentlichten Wartungsstand umgestellt'; ?>.</label><p><button class="button button-primary" name="intent" value="<?php echo $enabled ? 'disable' : 'enable'; ?>"><?php echo $enabled ? 'Wartungsmodus ausdrücklich deaktivieren' : 'Wartungsmodus ausdrücklich aktivieren'; ?></button></p></form>
 </section>
+<?php require MGMS_DIR . 'templates/updates.php'; ?>
 <div class="editor-layout"><form id="mgms-editor" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 <?php wp_nonce_field( 'mgms_save' ); ?><input type="hidden" name="action" value="mgms_save"><input type="hidden" name="revision" value="<?php echo esc_attr( Admin::revision() ); ?>"><input type="hidden" id="mgms-preset" name="settings[preset]" value="<?php echo esc_attr( $s['preset'] ); ?>">
 <?php
 foreach ( $tabs as $i => $panel_label ) :
 	?>
 	<?php
-	if ( 0 === $i ) {
+	if ( 0 === $i || 'Updates' === $panel_label ) {
 		continue; }
 	?>
 <section class="studio-panel" id="panel-<?php echo (int) $i; ?>"><h2><?php echo esc_html( $panel_label ); ?></h2>

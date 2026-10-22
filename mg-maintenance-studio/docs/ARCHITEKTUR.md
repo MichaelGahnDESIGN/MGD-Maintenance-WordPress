@@ -31,3 +31,11 @@ Anonyme REST-Anfragen werden während Wartung mit 503 zurückgewiesen, außer ei
 WordPress 6.5+, PHP 8.1+. Keine Änderungen an Core, Theme oder anderen Plugins. Keine REST-Routen für den Editor. Netzwerkaktivierung wird abgewiesen; in Multisite pro Website einzeln einrichten. Vorschau-Freigaben im gemeinsamen Benutzerkonto können sich zwischen Websites gegenseitig ersetzen (sicherer Fehler: neue Vorschau erforderlich).
 
 Eine konservative Namensprüfung meldet bekannte Wartungsplugin-Muster in aktiven normalen und Netzwerkplugins. Sie kann nicht jedes Plugin erkennen und schaltet keines ab. Page Cache, CDN und statische Dateien können PHP umgehen: `DONOTCACHEPAGE` und [nocache_headers](https://developer.wordpress.org/reference/functions/nocache_headers/) sind Hinweise, keine garantierte Cache-Löschung.
+
+## Version 0.3.0
+
+`class-updates.php` enthält Releasevalidierung, Cache, WordPress-Updatefilter und den
+separaten POST-Endpunkt. `templates/updates.php` rendert die Verwaltung ohne eigene
+Netzwerkanfrage. `class-presentation.php` ergänzt Einstellungen-Link, Details und
+lokales Pluginlisten-Icon. `assets/icon.svg` ist eine eigenständige Vektorgrafik.
+Updatekonfiguration bleibt getrennt von Entwurf, veröffentlichtem Design und Wartungsstatus.

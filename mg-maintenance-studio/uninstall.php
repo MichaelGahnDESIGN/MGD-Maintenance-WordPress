@@ -3,9 +3,10 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit; }
 $mgms_cleanup = static function (): void {
+	delete_transient( 'mgms_release' );
 	$draft = get_option( 'mgms_draft', array() );
 	if ( ! empty( $draft['delete_data'] ) ) {
-		foreach ( array( 'mgms_draft', 'mgms_published', 'mgms_enabled', 'mgms_previous_draft', 'mgms_previous_published' ) as $option ) {
+		foreach ( array( 'mgms_draft', 'mgms_published', 'mgms_enabled', 'mgms_previous_draft', 'mgms_previous_published', 'mgms_updates' ) as $option ) {
 			delete_option( $option ); }
 	}
 };

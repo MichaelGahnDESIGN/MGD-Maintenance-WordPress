@@ -1,5 +1,13 @@
 # Änderungsprotokoll
 
+## 0.3.0
+
+- Optionale GitHub-Releases über native WordPress-Aktualisierungen.
+- Getrennte Updateeinstellungen, manuelle Prüfung, Fehler- und Versionsanzeige.
+- Lokales Wartungs-Icon in Kopfzeile und Pluginliste, Einstellungen-Link und Detailfenster.
+- Ruhige Kartenoberfläche nach dem Vorbild der MGD AI Kennzeichnung.
+- Strenge Release- und URL-Prüfung, positive und negative Zwischenspeicherung.
+
 ## 0.2.0 – 22.10.2026
 
 Gestaltung nach ECC Frontend Design Direction überarbeitet: linksbündige Wartungsmitteilung, direkte Standardtexte, zurückhaltende Farben und neue Vorlagenwerte. Schmuckstern, Werbeslogan und große Standardkarte entfernt. Backend an WordPress-Einstellungen angelehnt; Statuszeilen statt Kennzahlenkarten. Tabellenbreiten, Tastatur-Tabs, Farbkontrast und lange Texte geprüft. Bestehende gespeicherte Einstellungen und Sicherheitsregeln bleiben erhalten. Lokale Screenshots und ECC-Prüfdatensatz ergänzen die Dokumentation. Kein Live-Einsatz.

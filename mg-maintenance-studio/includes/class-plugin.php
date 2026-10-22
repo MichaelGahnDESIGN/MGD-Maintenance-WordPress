@@ -16,6 +16,8 @@ final class Plugin {
 		delete_metadata( 'user', 0, 'mgms_preview', '', true );
 	}
 	public static function boot(): void {
+		Updates::register();
+		Presentation::register();
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
 		add_action( 'admin_enqueue_scripts', array( Admin::class, 'assets' ) );
 		add_action( 'admin_post_mgms_save', array( Admin::class, 'save' ) );

@@ -234,3 +234,30 @@
   white-space: normal;
   height: auto;
 }
+/* Produktkopf und ruhige Karten wie in der MGD-Kennzeichnung. */
+.mgms-admin .studio-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.mgms-admin .studio-brand img {
+  flex: 0 0 56px;
+}
+.mgms-admin .studio-brand p {
+  margin: 6px 0 0;
+  color: #50575e;
+}
+.mgms-admin .studio-panel,
+.mgms-admin .save-bar {
+  border-color: #dcdcde;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 3%);
+}
+.mgms-admin #panel-9 {
+  max-width: 920px;
+}
+.mgms-admin #panel-9 .description {
+  max-width: 760px;
+  line-height: 1.6;
+}

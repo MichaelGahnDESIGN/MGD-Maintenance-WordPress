@@ -21,3 +21,17 @@ Vorschau-Tokens werden nicht in URLs oder Plugin-Logs geschrieben. POST-Body-Auf
 Einträge aus Entwurf entfernen, speichern und ausdrücklich veröffentlichen; danach alte Stände löschen. Für vollständige Entfernung die Löschoption im Entwurf setzen und speichern, Plugin deaktivieren und über WordPress deinstallieren. Ohne gesetzte Löschoption bleiben Einstellungen für spätere Wiederverwendung erhalten. Vorschau-Metadaten werden bei Deinstallation immer gelöscht. Mediathek-Anhänge werden nie automatisch gelöscht.
 
 Diese technische Beschreibung ist keine Rechtsberatung und kein fertiger Datenschutzerklärungstext für die Website. Der Betreiber muss eigene Kontaktdaten, Rechtsgrundlagen, Dienste und Aufbewahrungsfristen prüfen.
+
+## Optionale GitHub-Updates ab 0.3.0
+
+Nur nach Einrichtung und Einschalten kontaktiert der Server `api.github.com`.
+GitHub erhält technisch die öffentliche Server-IP, die abgefragte Repositoryadresse
+und die Pluginversion im User-Agent. Keine Seiteninhalte, Besucher-IP-Adressen,
+Nutzerkonten oder Zugangsdaten werden übertragen. Paketdownloads verwenden GitHub
+und dessen Asset-Infrastruktur. Es kann eine Verarbeitung außerhalb der EU stattfinden.
+Die Wartungsseite selbst lädt weiterhin ausschließlich lokale Ressourcen.
+
+`mgms_updates` speichert Repository und Zustimmung. `mgms_release` speichert nur
+Version, Paketadresse, Prüfzeit und eine allgemeine Ergebnismeldung; zwölf Stunden
+bei Erfolg, fünfzehn Minuten bei Fehlern. Der Cache wird bei Änderung oder Deinstallation
+entfernt. Die Updateeinstellung folgt bei Deinstallation der vorhandenen Löschoption.

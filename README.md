@@ -1,6 +1,6 @@
 # MG Maintenance Studio
 
-Eigenständiges WordPress-Plugin für einen gestaltbaren Wartungsmodus. **Version 0.2.0 – lokale Erstversion, nicht für eine Kundenwebsite freigegeben.** WordPress ab 6.5, PHP ab 8.1. Lizenz: GPL-2.0-or-later.
+Eigenständiges WordPress-Plugin für einen gestaltbaren Wartungsmodus. **Version 0.3.0 – lokale Erstversion, nicht für eine Kundenwebsite freigegeben.** WordPress ab 6.5, PHP ab 8.1. Lizenz: GPL-2.0-or-later.
 
 Das Plugin wurde ausschließlich in einer neu angelegten lokalen WordPress-Testinstallation entwickelt. Kein Kundenserver wurde verbunden, kein Remote-Repository eingerichtet, nichts veröffentlicht.
 
@@ -46,3 +46,7 @@ Die Integrationstests verweigern die Ausführung ohne `MGMS_TEST=isolated-local`
 ## Wichtige Grenze
 
 Der Wartungsmodus ist keine Firewall und kein Schutz vertraulicher Dateien. Webserver, CDN und Cache können WordPress umgehen. Anmeldung, Backend, Cron, AJAX und authentifizierte REST-Anfragen behalten ihre eigenen WordPress-Berechtigungen. Direkte Upload-URLs und XML-RPC werden nicht abgeschirmt. Für eine spätere Live-Installation sind Backup, Wiederherstellung, Testumgebung und ausdrückliche Freigabe separat zu bestätigen.
+
+## GitHub-Updates und Produktdarstellung
+
+Version 0.3.0 ergänzt ein eigenes lokales Icon, Plugin-Details und den Reiter Updates. Das öffentliche Repository wird einmal eingerichtet; anschließend erscheinen passende Releases in den normalen WordPress-Aktualisierungen. Noch kein Repository veröffentlicht oder verbunden. Ablauf und Grenzen: [UPDATES.md](mg-maintenance-studio/docs/UPDATES.md).

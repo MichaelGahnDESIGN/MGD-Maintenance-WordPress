@@ -13,3 +13,14 @@ Prüfbare Vorgaben: 390×844, 768×1024 und 1440×900; keine horizontale Überbr
 Zustände: Die serverseitige Seite erscheint ohne asynchrones Laden. Fehlende Rechtstexte werden im Backend benannt. Validierungsfehler dürfen nichts veröffentlichen. Erfolg wird nach Speichern bestätigt. Vorschau benötigt weiterhin Administratorberechtigung; abgelaufene Freigaben geben einen erklärenden Fehler aus. Teilweise konfigurierte Inhalte (ohne Bild, ohne Kontakt) müssen ohne leere Karten funktionieren.
 
 Vorher-Bilder liegen lokal unter artifacts/redesign/before. Neue Bilder und ECC-Prüfdatensatz werden unter artifacts/redesign abgelegt. Der historische Stand ist zusätzlich in Git und im Paket 0.1.0 erhalten. Bestehende gespeicherte Einstellungen werden nicht migriert; neue Standardwerte gelten für neue Installationen, Vorlagen für bewusste Auswahl.
+
+## Erweiterung 0.3.0: Verwaltung und Produktdarstellung
+
+Referenz: MichaelGahnDESIGN/MGD-AI-Kennzeichnung-WordPress, Stand 0416ebc.
+Übernommen wird das Bedienmuster: native WordPress-Aktualisierungen, lokale
+Produktgrafik in der Pluginliste, Detailfenster und ruhige weiße Einstellungsflächen.
+Die Umsetzung ist eigenständig; das Symbol zeigt ein Browserfenster mit Pausezeichen.
+Keine Animation, keine externe Grafik und keine Änderung am Besucherdesign.
+Der neue Reiter Updates trennt Versionspflege vom Entwurf und Wartungsstatus.
+Prüfgrößen: 1440 × 900, 768 × 1024, 390 × 844. Zustände: unkonfiguriert,
+Prüfung aus, gültiges Release, kein neueres Release, Netzwerkfehler.

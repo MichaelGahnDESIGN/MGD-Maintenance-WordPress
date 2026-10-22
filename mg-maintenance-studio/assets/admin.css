@@ -1,0 +1,242 @@
+/* Studio Oberfläche */
+.mgms-admin {
+  max-width: 1600px;
+  color: #26332e;
+}
+.studio-header {
+  background: #182721;
+  color: #f4f0e6;
+  padding: 32px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 22px 0;
+}
+.studio-header h1 {
+  color: inherit;
+  font-size: 28px;
+  padding: 0;
+}
+.studio-header h1 span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 12px;
+  color: #d4dacf;
+}
+.studio-kicker {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: #e6c88a;
+}
+.state-pill {
+  padding: 10px 16px;
+  border: 1px solid #647968;
+  border-radius: 24px;
+}
+.studio-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 0 16px;
+}
+.studio-tabs a {
+  color: #26332e;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 6px;
+  background: white;
+}
+.studio-tabs a:hover,
+.studio-tabs a:focus {
+  background: #e4ebdf;
+}
+.studio-panel {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #dce1da;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  scroll-margin-top: 45px;
+}
+.studio-panel h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.overview-grid > div {
+  padding: 16px;
+  background: #f5f6f2;
+  border-radius: 8px;
+}
+.overview-grid small,
+.overview-grid strong {
+  display: block;
+}
+.overview-grid small {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.studio-warning {
+  border-left: 3px solid #a67b27;
+  padding: 12px;
+  background: #fff9ed;
+}
+.editor-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(350px, 1fr);
+  gap: 24px;
+}
+.field {
+  display: grid;
+  grid-template-columns: 1fr minmax(100px, 1.1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.field > label {
+  font-weight: 600;
+}
+.field textarea,
+.field input:not([type="checkbox"]):not([type="color"]),
+.field select {
+  width: 100%;
+  max-width: 100%;
+}
+.field .media-picker {
+  grid-column: 2;
+}
+.field input[type="color"] {
+  width: 64px;
+  height: 36px;
+}
+.preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.preset {
+  background: #e9eee6;
+  border: 1px solid #b4c0ae;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+}
+.legal-editor {
+  border: 1px solid #dce1da;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 20px 0;
+}
+.legal-editor legend {
+  font-weight: 700;
+}
+.legal-editor label {
+  display: block;
+  margin-bottom: 12px;
+}
+.legal-editor textarea,
+.legal-editor input[type="text"] {
+  width: 100%;
+  display: block;
+}
+.preview-panel {
+  position: sticky;
+  top: 48px;
+  align-self: start;
+  background: #e6eae2;
+  border-radius: 12px;
+  padding: 20px;
+}
+.preview-panel h2 {
+  margin-top: 0;
+}
+.preview-panel iframe {
+  margin-top: 16px;
+  width: 100%;
+  height: 700px;
+  border: 1px solid #b7c3b5;
+  border-radius: 8px;
+  background: #fff;
+}
+.save-bar {
+  background: #e6eae2;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.save-bar label {
+  max-width: 500px;
+}
+.save-bar button {
+  white-space: normal !important;
+  height: auto !important;
+}
+.mgms-admin :focus-visible {
+  outline: 3px solid #886422;
+  outline-offset: 3px;
+}
+@media (max-width: 1150px) {
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+  .preview-panel {
+    position: static;
+  }
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .studio-header {
+    padding: 20px;
+    display: block;
+  }
+  .state-pill {
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .field {
+    grid-template-columns: 1fr;
+  }
+  .field .media-picker {
+    grid-column: 1;
+  }
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+  .studio-panel {
+    padding: 18px;
+  }
+}
+
+/* Native hidden-Semantik auch bei Grid-Layouts erhalten */
+.mgms-admin [hidden] {
+  display: none !important;
+}
+.studio-tabs [aria-selected="true"] {
+  background: #263d30;
+  color: #fff;
+}
+/* Ausgewählte Tabs behalten auch bei Hover und Fokus ausreichenden Kontrast. */
+.studio-tabs a {
+  transition: none;
+}
+.studio-tabs a[aria-selected="true"],
+.studio-tabs a[aria-selected="true"]:hover,
+.studio-tabs a[aria-selected="true"]:focus {
+  background: #263d30;
+  color: #ffffff;
+}

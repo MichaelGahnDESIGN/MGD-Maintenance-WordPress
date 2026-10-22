@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.local/
+vendor/
+node_modules/
+.DS_Store
+._*
+*.log
+artifacts/

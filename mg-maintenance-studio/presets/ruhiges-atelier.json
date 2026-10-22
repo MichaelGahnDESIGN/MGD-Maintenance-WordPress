@@ -1,0 +1,16 @@
+{
+  "name": "Ruhiges Atelier",
+  "values": {
+    "background": "#e8e4dc",
+    "text": "#293c36",
+    "accent": "#48604a",
+    "button": "#365246",
+    "button_text": "#ffffff",
+    "card": "#f5f2eb",
+    "border_color": "#8c9b8c",
+    "font": "serif",
+    "radius": 8,
+    "shadow": false,
+    "container": "card"
+  }
+}

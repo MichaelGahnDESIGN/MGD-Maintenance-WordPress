@@ -1,0 +1,16 @@
+{
+  "name": "Elegant Gold",
+  "values": {
+    "background": "#141b1b",
+    "text": "#f5f0e6",
+    "accent": "#e6c88a",
+    "button": "#e6c88a",
+    "button_text": "#141b1b",
+    "card": "#1d2727",
+    "border_color": "#55615a",
+    "font": "serif",
+    "radius": 24,
+    "shadow": true,
+    "container": "card"
+  }
+}

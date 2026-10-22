@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.3.1
+
+- Öffentliches Repository MGD-Maintenance-WordPress als Updatequelle vorbelegt.
+- Lokale PNG-Icons für Pluginliste und WordPress-Updateinformationen ergänzt.
+- GitHub-Prüfung bleibt bis zur bewussten Aktivierung ausgeschaltet.
+
 ## 0.3.0
 
 - Optionale GitHub-Releases über native WordPress-Aktualisierungen.

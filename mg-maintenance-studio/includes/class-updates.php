@@ -7,14 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Updates {
 	public static function register(): void {
-		add_filter( 'update_plugins_michael-gahn.de', array( self::class, 'offer' ), 10, 3 );
+		add_filter( 'update_plugins_github.com', array( self::class, 'offer' ), 10, 3 );
 		add_filter( 'plugins_api', array( self::class, 'information' ), 20, 3 );
 		add_action( 'admin_post_mgms_updates', array( self::class, 'save' ) );
 	}
 	public static function config(): array {
 		return array_merge(
 			array(
-				'repository' => '',
+				'repository' => 'MichaelGahnDESIGN/MGD-Maintenance-WordPress',
 				'enabled'    => false,
 			),
 			(array) get_option( 'mgms_updates', array() )
@@ -100,7 +100,11 @@ final class Updates {
 				'url'          => 'https://github.com/' . self::config()['repository'],
 				'requires_php' => '8.1',
 				'requires'     => '6.5',
-				'icons'        => array( 'svg' => MGMS_URL . 'assets/icon.svg' ),
+				'icons'        => array(
+					'svg' => MGMS_URL . 'assets/icon.svg',
+					'1x'  => MGMS_URL . 'assets/icon-128.png',
+					'2x'  => MGMS_URL . 'assets/icon-256.png',
+				),
 			)
 		);
 	}
@@ -117,7 +121,11 @@ final class Updates {
 			'requires'      => '6.5',
 			'requires_php'  => '8.1',
 			'download_link' => $release['package'] ?? '',
-			'icons'         => array( 'svg' => MGMS_URL . 'assets/icon.svg' ),
+			'icons'         => array(
+				'svg' => MGMS_URL . 'assets/icon.svg',
+				'1x'  => MGMS_URL . 'assets/icon-128.png',
+				'2x'  => MGMS_URL . 'assets/icon-256.png',
+			),
 			'sections'      => array(
 				'description'  => '<p>Wartungsseiten gestalten, geschützt prüfen und bewusst veröffentlichen. Mit Rechtstexten, Rollen- und IP-Freigaben.</p>',
 				'installation' => '<p>ZIP unter Plugins → Installieren hochladen. Einstellungen → Maintenance Studio öffnen. Aktivierung schaltet den Wartungsmodus nicht automatisch ein.</p>',

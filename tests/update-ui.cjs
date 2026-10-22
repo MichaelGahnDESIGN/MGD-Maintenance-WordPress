@@ -91,7 +91,7 @@ const assert = require("node:assert/strict");
         'tr[data-plugin="mg-maintenance-studio/mg-maintenance-studio.php"] .plugin-title strong',
       )
       .evaluate((el) => getComputedStyle(el, "::before").backgroundImage);
-    assert(icon.includes("icon.svg"));
+    assert(icon.includes("icon-128.png"));
     await page.screenshot({
       path: "artifacts/updates/plugin-list.png",
       fullPage: true,

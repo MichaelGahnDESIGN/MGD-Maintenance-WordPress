@@ -26,7 +26,7 @@ try {
  verify(Updates::offer('other',[],'other/main.php')==='other','Fremde Plugins unberührt');
  delete_site_transient('update_plugins'); wp_update_plugins(); $updates=get_site_transient('update_plugins');
  verify(($updates->response[plugin_basename(MGMS_FILE)]->new_version??'')==='0.4.0','Core zeigt neue Version über Update-URI an');
- $release['tag_name']='v0.3.0';$release['assets'][0]=['name'=>'mg-maintenance-studio-0.3.0.zip','browser_download_url'=>'https://github.com/'.$repo.'/releases/download/v0.3.0/mg-maintenance-studio-0.3.0.zip'];
+ $release['tag_name']='v'.MGMS_VERSION;$release['assets'][0]=['name'=>'mg-maintenance-studio-'.MGMS_VERSION.'.zip','browser_download_url'=>'https://github.com/'.$repo.'/releases/download/v'.MGMS_VERSION.'/mg-maintenance-studio-'.MGMS_VERSION.'.zip'];
  delete_transient('mgms_release'); delete_site_transient('update_plugins');wp_update_plugins();$updates=get_site_transient('update_plugins');
  verify(!isset($updates->response[plugin_basename(MGMS_FILE)]) && isset($updates->no_update[plugin_basename(MGMS_FILE)]),'Gleiche Version erzeugt kein Update');
  $mode='error';delete_transient('mgms_release');$before=$calls;Updates::latest();Updates::latest();verify($calls===$before+1,'Fehler wird kurz zwischengespeichert');

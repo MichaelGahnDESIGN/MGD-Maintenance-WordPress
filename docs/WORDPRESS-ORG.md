@@ -61,3 +61,7 @@ Nur die lesende Auswahl fester Statusmeldungen und registrierter Verwaltungsbere
 Es gibt jetzt ausdrücklich offengelegte statische Einzel-Ausnahmen. Die früheren Aussagen zu unverändert erhaltenen Rohmeldungen beschreiben die damaligen Läufe; der neue Stand enthält die fachlich geprüften Code-Anmerkungen. Keine Laufzeit-/Performance-Prüfung wird ausgeschaltet. Vollständige Liste: `wordpress-org/GEPRUEFTE-AUSNAHMEN.md`; neuer Bericht: `wordpress-org/ERGEBNIS.md`.
 
 Die alte dateiweite EnqueuedResources-Ausnahme der eigenständigen Wartungsseite wurde ebenfalls entfernt. Auch dort werden CSS, optionale lokale Schrift und JavaScript über native WordPress-Handles registriert und gezielt ausgegeben. Fremde Theme-Head-Hooks werden nicht aufgerufen. Der Browsertest bestätigt das eigene Stylesheet und defer-Skript sowie 503/200 und die geschützte Statussteuerung.
+
+## Rohbericht statt nur Exit-Code
+
+Die CI prüft nach dem offiziellen Plugin Check auch dessen vollständige Datei im Runner-Temp-Verzeichnis. Ein neuer Validator schlägt bei PHP-/Datenbankfehlern oder unbekannten Ausgaben fehl, selbst wenn der Plugin-Check-Wrapper einen grünen Status liefern sollte. Acht Parser-Regressionen laufen vor jedem Check; keine Warnungsgruppe wird dadurch ausgeblendet.

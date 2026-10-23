@@ -6,6 +6,8 @@
 
 Es gibt keine eigene Datenbanktabelle und keine Schema-Migration. Die Options-API speichert Entwurf (`mgms_draft`), Veröffentlichung (`mgms_published`), Status (`mgms_enabled`) und jeweils einen vorherigen Stand. Alle werden ohne Autoload angelegt. Neue Felder erhalten beim Lesen Standardwerte. Größere spätere Datenmodelländerungen benötigen eigene versionierte Migrationen und Rückfalltests.
 
+Fehlerseiten verwenden getrennte Optionen `mgms_error_draft` und `mgms_error_published`. `Error_Pages` validiert die zwei festen Statuscodes und bindet die 404-Vorlage über `template_include` ein. Der `wp_die_handler` ersetzt nur öffentliche HTML-403-Antworten von WordPress. Server-/CDN-403, Anmeldung, Admin, REST und XML-RPC bleiben außerhalb dieses Bereichs. Die Fehlerseiten senden den passenden Status und noindex-Header; der Wartungsmodus hat Vorrang.
+
 ## Schreibschutz
 
 Jeder Admin-POST prüft `manage_options`, HTTP-Methode und eine aktionsbezogene WordPress-Nonce. Vorschauen benötigen zusätzlich einen zufälligen Token mit 256 Bit, gespeichert als SHA-256-Hash, gebunden an Benutzer und Session, gültig für zwei Minuten. Bedingtes Löschen des passenden Benutzermetadatensatzes macht ihn einmalig. Die Vorschau setzt keine Freigabecookies und verändert keine Zugriffsregeln. Es gibt keinen anonymen Preview-Handler und keinen AJAX-Schreibendpunkt.

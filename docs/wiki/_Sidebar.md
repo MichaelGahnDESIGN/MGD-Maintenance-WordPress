@@ -3,6 +3,7 @@
 - [Home](Home.md)
 - [Installation](Installation.md)
 - [Design und Vorschau](Design-und-Vorschau.md)
+- [404 und 403 Fehlerseiten](404-und-403-Fehlerseiten.md)
 - [Zugriffe](Zugriffe.md)
 - [Rechtstexte und Kontakt](Rechtstexte-und-Kontakt.md)
 - [Updates und Releases](Updates-und-Releases.md)

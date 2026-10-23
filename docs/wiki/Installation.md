@@ -11,7 +11,7 @@ Wenn bereits ein Wartungsplugin läuft, plane den Wechsel bewusst. MG Maintenanc
 ## Das richtige ZIP installieren
 
 1. Das [neueste Release](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) öffnen.
-2. Unter **Assets** das Plugin-ZIP laden, zum Beispiel `mg-maintenance-studio-0.3.1.zip`.
+2. Unter **Assets** das Plugin-ZIP laden, zum Beispiel `mg-maintenance-studio-0.3.2.zip`.
 3. In WordPress **Plugins → Installieren → Plugin hochladen** wählen.
 4. ZIP hochladen, installieren und aktivieren.
 5. **Einstellungen → Maintenance Studio** öffnen.

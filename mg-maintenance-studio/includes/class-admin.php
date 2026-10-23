@@ -5,10 +5,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 final class Admin {
 	public static function menu(): void {
-		add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ); }
+		add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) );
+		add_submenu_page( 'options-general.php', 'Fehlerseiten · Maintenance Studio', 'Fehlerseiten', 'manage_options', 'mgms-error-pages', array( Error_Pages_Admin::class, 'page' ) ); }
 	public static function assets( string $hook ): void {
-		if ( 'settings_page_mg-maintenance-studio' !== $hook ) {
+		if ( ! in_array( $hook, array( 'settings_page_mg-maintenance-studio', 'settings_page_mgms-error-pages' ), true ) ) {
 			return; }
+		if ( 'settings_page_mgms-error-pages' === $hook ) {
+			wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
+			return;
+		}
 		wp_enqueue_media();
 		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
 		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), MGMS_VERSION, true );

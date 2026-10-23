@@ -18,8 +18,8 @@ das Plugin erzwingt sie nicht. Ausschalten der Prüfung löscht das bekannte Upd
 1. Versionsnummer in Hauptdatei, Konstante, readme.txt, Paketbau und Änderungsprotokoll anheben.
 2. Lokale Tests und Paketprüfung ausführen: `python3 scripts/build-package.py`.
 3. Erst nach Freigabe Quellcode in das gewählte GitHub-Repository veröffentlichen.
-4. Stabiles GitHub-Release mit Tag `v0.3.1` (oder `0.3.1`) anlegen.
-5. `mg-maintenance-studio-0.3.1.zip` als Release-Datei anhängen. Nicht das automatisch
+4. Stabiles GitHub-Release mit Tag `v0.3.2` (oder `0.3.1`) anlegen.
+5. `mg-maintenance-studio-0.3.2.zip` als Release-Datei anhängen. Nicht das automatisch
    erzeugte GitHub-Quellcodearchiv verwenden. Das ZIP enthält nur den Ordner
    `mg-maintenance-studio` mit der gleichnamigen Hauptdatei.
 6. Auf einer separaten Testinstallation eine ältere Version auf die neue aktualisieren.

@@ -1,5 +1,12 @@
 # Änderungsprotokoll
 
+## 0.3.2
+
+- Neues Untermenü unter Einstellungen für getrennte 404- und 403-Seiten.
+- Drei Vorlagen pro Fehlerseite, eigene Texte, Farben und optionale Suche bei 404.
+- Entwurf, geschützte Vorschau und ausdrückliche Veröffentlichung; neue Seiten bleiben zunächst ausgeschaltet.
+- Wartungsmodus hat Vorrang. Anmeldung, Admin, REST und Server-403 bleiben unberührt.
+
 ## 0.3.1
 
 - Öffentliches Repository MGD-Maintenance-WordPress als Updatequelle vorbelegt.

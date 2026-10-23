@@ -39,3 +39,7 @@ in deren Hauptdatei die Version auf 0.2.0 setzen. Das aktuelle gebaute ZIP nach
 `/tmp/mgms-package.zip` kopieren. Das Skript mit `MGMS_TEST=isolated-local` starten.
 Es definiert einen getrennten Pluginpfad und verwendet den echten WordPress-Upgrader;
 der Download wird lokal ersetzt. Niemals auf einer bestehenden Website ausführen.
+
+## Fehlerseiten 0.3.2
+
+`php tests/error-pages.php` prüft Standardzustand, Validierung, Kontrast, Vorrang des Wartungsmodus sowie die Ausschlüsse für Anmeldung und Admin ohne Datenbank. Eine echte WordPress- und Theme-Prüfung ist vor produktivem Einsatz zusätzlich nötig.

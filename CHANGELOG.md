@@ -1,5 +1,12 @@
 # Änderungsprotokoll
 
+## 0.5.0 – 23.10.2026
+
+- Wartungsseite unterstützt im Markenbereich nur Text, nur Logo oder Text und Logo.
+- Logo und Hintergrundbild werden im Editor als Bildauswahl mit Vorschau dargestellt; technische Attachment-IDs bleiben verborgen.
+- Einheitlicher Wartungsmodus-Schalter oben rechts auf Übersicht, Editor und Fehlerseiten. Das Hauptmenü steht am Ende der WordPress-Navigation.
+- Vier Vorlagen erklären und zeigen eigenständige Layoutformen. Der Verlassen-Hinweis erscheint nicht mehr beim Speichern.
+
 ## 0.4.0 – 23.10.2026
 
 - Eigenes WordPress-Hauptmenü mit Übersicht, Wartungsseite, Layouts & Design, Zugriffen, Fehlerseiten und Updates.

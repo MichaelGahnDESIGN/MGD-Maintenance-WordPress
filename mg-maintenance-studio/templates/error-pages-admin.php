@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 ?>
 <div class="wrap mgms-admin mgms-errors-admin">
-<header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>Fehlerseiten</h1><p>Maintenance Studio <span aria-hidden="true">·</span> 404 und 403 getrennt gestalten</p></div></div><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ); ?>">Zur Übersicht</a></header>
+<header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>Fehlerseiten</h1><p>Maintenance Studio <span aria-hidden="true">·</span> 404 und 403 getrennt gestalten</p></div></div><div class="mgms-header-actions"><?php Admin::status_switch( 'mgms-error-pages', $enabled ); ?><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ); ?>">Zur Übersicht</a></div></header>
 <?php
 // Feste Meldungen, keine Zustandsänderung durch die URL.
 $notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) );

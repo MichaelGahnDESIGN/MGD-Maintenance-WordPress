@@ -54,6 +54,11 @@
     }
     if (["left", "center", "right"].includes(values.align))
       document.body.style.setProperty("--align", values.align);
+    const brand = document.querySelector(".brand");
+    if (["text", "logo", "logo-and-text"].includes(values.brand_presentation)) {
+      brand?.classList.remove("brand--text", "brand--logo", "brand--logo-and-text");
+      brand?.classList.add(`brand--${values.brand_presentation}`);
+    }
     if (["editorial", "centered", "split", "poster"].includes(values.layout)) {
       document.body.classList.remove(
         "mgms-layout-editorial", "mgms-layout-centered", "mgms-layout-split", "mgms-layout-poster",

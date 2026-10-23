@@ -1,6 +1,6 @@
 # Gestaltungsüberarbeitung 0.2.0
 
-## Dashboard und Layouts 0.4.0
+## Dashboard und Layouts 0.5.0
 
 Die Administration erhält eine eigene Navigation und eine klare Reihenfolge: Status ansehen, Wartungsseite bearbeiten, Layout gestalten, Zugriffe prüfen, Fehlerseiten konfigurieren und Updates verwalten. Die Übersicht verwendet dunkles Grün und warme helle Flächen; der eigentliche Editor bleibt gut lesbar und an WordPress-Bedienelemente angebunden. Status und Veröffentlichungsaktionen sind getrennt.
 

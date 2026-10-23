@@ -1,6 +1,6 @@
 # MG Maintenance Studio · Handbuch
 
-Eine Wartungsseite soll zur Website passen und ihren Zweck klar erfüllen. Dieses Handbuch führt von der ersten Installation bis zum sicheren Betrieb. Es beschreibt den Funktionsstand **0.4.0**.
+Eine Wartungsseite soll zur Website passen und ihren Zweck klar erfüllen. Dieses Handbuch führt von der ersten Installation bis zum sicheren Betrieb. Es beschreibt den Funktionsstand **0.5.0**.
 
 [Plugin herunterladen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) · [Projektübersicht](../../README.md) · [Sicherheitsprüfung](../SECURITY-AUDIT.md)
 

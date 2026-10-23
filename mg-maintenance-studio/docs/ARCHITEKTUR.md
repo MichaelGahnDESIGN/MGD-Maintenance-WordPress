@@ -4,7 +4,7 @@
 
 `Schema` definiert Felder und Standardwerte. `Settings` prüft vollständige Eingaben; bei ungültigen Werten wird nichts gespeichert. `Admin` verwaltet Entwurf, explizite Veröffentlichung, Status und Wiederherstellung. `Access` trifft Benutzerentscheidungen, `IP` wertet Netzwerkfreigaben aus. `Preview` stellt angemeldeten Administratoren eine einmalige Vorschau bereit. `Renderer` und die Frontend-Vorlage liefern ein eigenes Dokument ohne Theme-Hooks aus. `Plugin` registriert die WordPress-Hooks.
 
-Seit 0.4.0 führt `Dashboard` durch Status und Arbeitsschritte. `Admin` registriert ein eigenes Hauptmenü und die Untermenüs; der frühere Einstellungslink bleibt als Alias erreichbar. `Schema` ergänzt `layout` mit vier erlaubten Werten. Fehlt dieser Wert in älteren Optionen, gilt das bisherige Editorial-Layout. Die Presets ändern nur Formularwerte und veröffentlichen nichts. Die Vorschau aktualisiert Texte, validierte CSS-Werte und lokale Medien per `postMessage`; sie nimmt dabei kein freies HTML an.
+Seit 0.5.0 führt `Dashboard` durch Status und Arbeitsschritte. `Admin` registriert ein eigenes Hauptmenü am Ende der WordPress-Navigation und die Untermenüs; der frühere Einstellungslink bleibt als Alias erreichbar. `Schema` ergänzt `layout` mit vier erlaubten Werten sowie `brand_presentation` für Text, Logo oder beides. Fehlt der Markenmodus in älteren Optionen, bleibt die bisherige Textmarke erhalten. Die Presets ändern nur Formularwerte und veröffentlichen nichts. Die Vorschau aktualisiert Texte, validierte CSS-Werte und lokale Medien per `postMessage`; sie nimmt dabei kein freies HTML an.
 
 Es gibt keine eigene Datenbanktabelle und keine Schema-Migration. Die Options-API speichert Entwurf (`mgms_draft`), Veröffentlichung (`mgms_published`), Status (`mgms_enabled`) und jeweils einen vorherigen Stand. Alle werden ohne Autoload angelegt. Neue Felder erhalten beim Lesen Standardwerte. Größere spätere Datenmodelländerungen benötigen eigene versionierte Migrationen und Rückfalltests.
 
@@ -12,7 +12,7 @@ Fehlerseiten verwenden getrennte Optionen `mgms_error_draft` und `mgms_error_pub
 
 ## Schreibschutz
 
-Jeder Admin-POST prüft `manage_options`, HTTP-Methode und eine aktionsbezogene WordPress-Nonce. Vorschauen benötigen zusätzlich einen zufälligen Token mit 256 Bit, gespeichert als SHA-256-Hash, gebunden an Benutzer und Session, gültig für zwei Minuten. Bedingtes Löschen des passenden Benutzermetadatensatzes macht ihn einmalig. Die Vorschau setzt keine Freigabecookies und verändert keine Zugriffsregeln. Es gibt keinen anonymen Preview-Handler und keinen AJAX-Schreibendpunkt.
+Jeder Admin-POST prüft `manage_options`, HTTP-Methode und eine aktionsbezogene WordPress-Nonce. Der sichtbare Statusschalter ist eine eigene, nonce-geschützte Aktion und übernimmt nur einen booleschen Zustand. Vorschauen benötigen zusätzlich einen zufälligen Token mit 256 Bit, gespeichert als SHA-256-Hash, gebunden an Benutzer und Session, gültig für zwei Minuten. Bedingtes Löschen des passenden Benutzermetadatensatzes macht ihn einmalig. Die Vorschau setzt keine Freigabecookies und verändert keine Zugriffsregeln. Es gibt keinen anonymen Preview-Handler und keinen AJAX-Schreibendpunkt.
 
 Eine Nonce allein ist keine Berechtigungsprüfung. Beide Prüfungen sind getrennt implementiert, entsprechend der [WordPress-Dokumentation zu check_admin_referer](https://developer.wordpress.org/reference/functions/check_admin_referer/).
 

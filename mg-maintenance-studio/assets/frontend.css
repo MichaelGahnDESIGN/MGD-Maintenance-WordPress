@@ -35,11 +35,31 @@ body.mgms {
   flex-direction: column;
 }
 .brand {
+	display: flex;
+	align-items: center;
+	gap: 16px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 24px;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.02em;
+}
+.brand .mgms-logo-slot {
+	display: none;
+	line-height: 0;
+}
+.brand--logo .mgms-logo-slot,
+.brand--logo-and-text .mgms-logo-slot {
+	display: block;
+}
+.brand--logo [data-live="brand"] {
+	display: none;
+}
+.brand--logo .logo,
+.brand--logo-and-text .logo {
+	width: var(--logo-width);
+	max-width: min(100%, 400px);
+	height: auto;
 }
 .content {
   width: 100%;
@@ -57,12 +77,6 @@ body.mgms {
 }
 .has-shadow.is-card {
   box-shadow: 0 8px 24px #0000000d;
-}
-.logo {
-  max-width: 100%;
-  width: var(--logo-width);
-  height: auto;
-  margin-bottom: 24px;
 }
 .eyebrow {
   margin: 0 0 28px;
@@ -279,9 +293,13 @@ dialog .legal {
     padding: 24px;
   }
   .brand {
+		gap: 12px;
     padding-bottom: 20px;
     font-size: 16px;
   }
+	.brand--logo-and-text .logo {
+		max-width: 180px;
+	}
   .content {
     padding-block: var(--padding-mobile);
     margin-block: 48px;

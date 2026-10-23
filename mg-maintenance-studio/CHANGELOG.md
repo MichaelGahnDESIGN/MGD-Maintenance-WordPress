@@ -1,5 +1,12 @@
 # Änderungsprotokoll
 
+## 0.5.0
+
+- Markenbereich wahlweise mit Text, Logo oder beidem.
+- Ausgewähltes Logo und Hintergrundbild als Vorschau statt als technische Medien-ID.
+- Wartungsmodus-Schalter im Kopf aller Pluginbereiche; eigener Hauptmenüeintrag steht am Ende der WordPress-Navigation.
+- Speichern unterdrückt den Verlassen-Hinweis zuverlässig; vier Vorlagen erläutern ihren jeweils unterschiedlichen Layoutaufbau.
+
 ## 0.4.0
 
 - Eigenes WordPress-Hauptmenü mit Übersicht, Wartungsseite, Layouts & Design, Zugriffen, Fehlerseiten und Updates.

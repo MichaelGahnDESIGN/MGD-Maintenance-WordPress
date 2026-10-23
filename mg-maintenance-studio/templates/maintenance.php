@@ -35,21 +35,11 @@ if ( $preview ) :
 	?>
 	<div class="preview-label">Geschützte Vorschau · Entwurf · nicht veröffentlicht</div><?php endif; ?>
 <div class="page-shell">
-<header class="brand"><span data-live="brand"><?php echo esc_html( $s['brand'] ); ?></span></header>
+<header class="brand brand--<?php echo esc_attr( $s['brand_presentation'] ); ?>">
+	<div class="mgms-logo-slot"><?php if ( $logo ) : ?><?php if ( $s['logo_link'] ) : ?><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php endif; ?><img class="logo" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( $s['logo_alt'] ); ?>"><?php if ( $s['logo_link'] ) : ?></a><?php endif; ?><?php endif; ?></div>
+	<span data-live="brand"><?php echo esc_html( $s['brand'] ); ?></span>
+</header>
 <main id="main" tabindex="-1" class="content <?php echo 'card' === $s['container'] ? 'is-card' : ''; ?> <?php echo $s['shadow'] ? 'has-shadow' : ''; ?>">
-<div class="mgms-logo-slot">
-<?php
-if ( $logo ) :
-	?>
-	<?php
-	if ( $s['logo_link'] ) :
-		?>
-	<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php endif; ?><img class="logo" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( $s['logo_alt'] ); ?>">
-	<?php
-	if ( $s['logo_link'] ) :
-		?>
-	</a><?php endif; ?><?php endif; ?>
-</div>
 <p class="eyebrow" data-live="tagline"><?php echo esc_html( $s['tagline'] ); ?></p>
 <div class="message-grid"><div class="message-copy">
 <h1 data-live="title"><?php echo esc_html( $s['title'] ); ?></h1>

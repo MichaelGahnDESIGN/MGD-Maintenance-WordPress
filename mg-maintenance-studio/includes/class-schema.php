@@ -26,6 +26,17 @@ final class Schema {
 			'retry'            => array( 'Retry-After in Sekunden', 'number', 3600, 'SEO und Crawler', array( 60, 86400 ) ),
 			'robots'           => array( 'Virtuelle robots.txt um Disallow ergänzen', 'checkbox', false, 'SEO und Crawler' ),
 			'brand'            => array( 'Markenname', 'text', 'Ihre Website', 'Design' ),
+			'brand_presentation' => array(
+				'Markenbereich',
+				'select',
+				'text',
+				'Design',
+				array(
+					'text'          => 'Nur Text',
+					'logo'          => 'Nur Logo',
+					'logo-and-text' => 'Logo und Text',
+				),
+			),
 			'layout'           => array(
 				'Seitenlayout',
 				'select',

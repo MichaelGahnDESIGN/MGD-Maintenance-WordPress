@@ -1,12 +1,1 @@
-FILE: templates/error-pages-admin.php
-[{"line":10,"column":42,"type":"WARNING","code":"WordPress.Security.NonceVerification.Recommended","message":"Processing form data without nonce verification.","docs":""}]
-
-FILE: templates/dashboard.php
-[{"line":9,"column":46,"type":"WARNING","code":"WordPress.Security.NonceVerification.Recommended","message":"Processing form data without nonce verification.","docs":""}]
-
-FILE: includes/class-admin.php
-[{"line":55,"column":44,"type":"WARNING","code":"WordPress.Security.NonceVerification.Missing","message":"Processing form data without nonce verification.","docs":""},{"line":167,"column":42,"type":"WARNING","code":"WordPress.Security.NonceVerification.Recommended","message":"Processing form data without nonce verification.","docs":""}]
-
-FILE: includes/class-plugin.php
-[{"line":44,"column":21,"type":"WARNING","code":"WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound","message":"Global constants defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;DONOTCACHEPAGE&quot;.","docs":""}]
-
+Success: Checks complete. No errors found.

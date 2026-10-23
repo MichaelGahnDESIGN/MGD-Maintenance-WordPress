@@ -49,6 +49,7 @@ No analytics or telemetry service is included. WordPress communicates with WordP
 == Changelog ==
 
 = 0.5.5 =
+* Document narrowly scoped read-only nonce exceptions and the required cache integration constant.
 * Prepared a WordPress.org candidate with native updates, local assets and reviewed public credits.
 
 == Upgrade Notice ==

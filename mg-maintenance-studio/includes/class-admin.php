@@ -52,6 +52,7 @@ final class Admin {
 			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) ); }
 	}
 	private static function redirect( string $notice ): void {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Private Weiterleitung nach Nonce-geschütztem Handler; feste erlaubte Rückkehrseiten.
 		$return_page = sanitize_key( wp_unslash( $_POST['return_page'] ?? 'mg-maintenance-studio' ) );
 		if ( ! in_array( $return_page, self::EDITOR_PAGES, true ) ) {
 			$return_page = 'mg-maintenance-studio';
@@ -164,6 +165,7 @@ final class Admin {
 			'published' => 'Einstellungen ausdrücklich veröffentlicht. Der Wartungsstatus wurde nicht verändert.',
 			'changed'   => 'Bestätigte Aktion ausgeführt.',
 		);
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nur lesende Auswahl eines registrierten Einstellungsbereichs.
 		$page_slug = sanitize_key( wp_unslash( $_GET['page'] ?? 'mg-maintenance-studio' ) );
 		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4, 'mgms-updates' => 9 )[ $page_slug ] ?? 0;
 		require MGMS_DIR . 'templates/admin.php';

@@ -41,6 +41,7 @@ final class Plugin {
 	}
 	public static function cache(): void {
 		if ( get_option( Settings::STATE ) && ! defined( 'DONOTCACHEPAGE' ) ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Etablierte Konstante für Cache-Plugins; Umbenennen würde Wartungsseiten im Seiten-Cache zulassen.
 			define( 'DONOTCACHEPAGE', true ); }
 	}
 	public static function frontend(): void {

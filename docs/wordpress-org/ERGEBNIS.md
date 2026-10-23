@@ -1,19 +1,15 @@
-# Plugin Check – aktualisierter lokaler Lauf
+# Plugin Check – nachgezogene Warnungen
 
-Stand: 23.10.2026. Kandidat 0.5.5; WordPress 7.1.3, PHP 8.3, offizieller Plugin Check 2.1.0 mit Runtime-Bootstrap.
+Kandidat 0.5.5. Lokaler offizieller Plugin Check 2.1.0 auf WordPress 7.1.3/PHP 8.3 mit Runtime-Bootstrap: **0 Fehler, 0 statische Warnungen**. Der vollständige lokale Bericht steht in `plugin-check.txt`. Der zusätzliche wp-env-Lauf in GitHub Actions kann funktional notwendige Enqueue-Scope-Hinweise ausgeben; sein vollständiger Bericht gehört zur Paketübergabe.
 
-**0 Fehler, 5 Warnungen.** Alle Prüfgruppen aktiv, keine Fehlercodes ausgeschlossen. Vollständiger Bericht: `plugin-check.txt`.
+## Tatsächliche Änderungen
 
-- `WordPress.Security.NonceVerification.Recommended`: 3
-- `WordPress.Security.NonceVerification.Missing`: 1
-- `WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound`: 1
+Nur die lesende Auswahl fester Statusmeldungen und registrierter Verwaltungsbereiche sowie die private Rückkehrhilfe nach geschütztem Handler besitzen einzelne Nonce-Ausnahmen. Schreibende Aktionen behalten ihre Berechtigungs- und Nonce-Prüfung. DONOTCACHEPAGE ist eine absichtlich feste Integrationskonstante für Cache-Plugins; ein eigener Präfix würde ihre Funktion aufheben.
 
-Die CI läuft zusätzlich mit einer eigenen wp-env-Installation und kann andere Laufzeit-/Performance-Hinweise liefern. Die Gesamtübergabe bewahrt beide Rohberichte getrennt auf. Ein grüner Lauf ist keine WordPress.org-Zulassung.
+## Umgang mit Prüfregeln
 
-## Prüfung der Resthinweise
+Keine Prüfgruppe und kein Laufzeitcheck wird ausgeschaltet. Technisch notwendige Direktabfragen, rein lesende URL-Auswahl, signierte öffentliche Tokens und die feste Cache-Konstante sind nach Einzelprüfung mit dem jeweils engsten PHPCS-Code und einer Begründung an der konkreten Stelle gekennzeichnet. Diese statischen Einzel-Ausnahmen sind **keine zusätzlichen Sicherheitsprüfungen** und werden ausdrücklich offengelegt. Verzeichnis: `GEPRUEFTE-AUSNAHMEN.md`. Keine Zusage einer WordPress.org-Zulassung.
 
-Die drei empfohlenen Nonce-Hinweise lesen ausschließlich feste Meldungskennungen. Die private Redirect-Hilfe liest die feste Rückkehrseite nach dem geschützten Handler und begrenzt sie auf eine Liste. `DONOTCACHEPAGE` ist absichtlich die etablierte Cache-Konstante; ein Plugin-Präfix würde ihre Funktion aufheben. AN/AUS wurde mit gültiger Nonce (503/200) und ungültiger Nonce (403) im Browser geprüft.
+## Nachweise
 
-## Weitere Belege
-
-Sieben Backends tatsächlich im Browser geöffnet, keine JavaScript-Ausnahmen; echte Screenshots mit künstlichen Daten. 22 lokale Integrationstests zu Formularschutz, Herstellerlink, Entwurf, Menü und privaten/öffentlichen Daten. PHP-Syntax und Verzeichnis-Paketvertrag geprüft. Kein Produktivsystem verändert und keine Einreichung ausgelöst.
+41 Integrationstests bestanden: ursprüngliche 22 Schutzgrenzen-/Datenprüfungen plus 19 Cache-, Invalidierungs-, Empfänger- und AI-Seiten-ID-Prüfungen. Browser: keine Giveaway-Ressourcen ohne Formular, normale und nach wp_head gerenderte Shortcodes, Modal/Escape, 390px sowie echter CSV-Multipart-Import. Ungültige Upload-Nonce und falsche Endung werden abgewiesen. PHP-Syntax aller 86 Laufzeitdateien unter PHP 8.1 und der 15 MCP-Dateien zusätzlich unter PHP 7.4 geprüft. Keine produktiven Daten, keine Live-Einreichung.

@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>Fehlerseiten</h1><p>Maintenance Studio <span aria-hidden="true">·</span> 404 und 403 getrennt gestalten</p></div></div><div class="mgms-header-actions"><?php Admin::status_switch( 'mgms-error-pages', $enabled ); ?><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ); ?>">Zur Übersicht</a></div></header>
 <?php
 // Feste Meldungen, keine Zustandsänderung durch die URL.
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nur feste Rückmeldung eines geschützten Speichervorgangs.
 $mgms_notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) );
 if ( in_array( $mgms_notice, array( 'saved', 'published' ), true ) ) :
 	?><div class="notice notice-success" role="status"><p><?php echo 'saved' === $mgms_notice ? 'Entwurf gespeichert. Die Website bleibt unverändert.' : 'Fehlerseiten veröffentlicht. Aktivierte Seiten sind jetzt sichtbar.'; ?></p></div><?php endif; ?>

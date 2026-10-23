@@ -18,10 +18,8 @@ final class Plugin {
 		delete_metadata( 'user', 0, 'mgms_preview', '', true );
 	}
 	public static function boot(): void {
-		Updates::register();
 		Presentation::register();
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
-		( new \MGD_WordPress_Plugin_Catalog() )->register( 'mgms-dashboard' );
 		add_filter( 'custom_menu_order', '__return_true', PHP_INT_MAX );
 		add_filter( 'menu_order', array( Admin::class, 'menu_last' ), PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', array( Admin::class, 'assets' ) );

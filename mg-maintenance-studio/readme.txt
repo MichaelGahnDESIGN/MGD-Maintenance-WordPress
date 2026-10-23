@@ -2,7 +2,7 @@
 Requires at least: 6.5
 Tested up to: 7.1.3
 Requires PHP: 8.1
-Stable tag: 0.5.1
+Stable tag: 0.5.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -26,6 +26,9 @@ Vor späterem Live-Einsatz: Backup, Wiederherstellung, Testumgebung und Freigabe
 Bei Reaktivierung bleibt der zuvor bewusst gesetzte Wartungsstatus erhalten.
 
 == Changelog ==
+= 0.5.2 =
+Falsche Anmeldedaten zeigen eine neutrale Fehlermeldung, ohne konkrete Ursache. Gilt bei aktivem Plugin auch außerhalb des Wartungsmodus.
+
 = 0.5.1 =
 Der Statushinweis auf der öffentlichen Website ist für Administratoren ein geschützter AN/AUS-Schalter.
 

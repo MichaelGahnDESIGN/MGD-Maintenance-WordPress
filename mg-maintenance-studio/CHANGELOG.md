@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.5.2
+
+- Die WordPress-Anmeldeseite zeigt bei Fehlern einheitlich „Die Anmeldung war nicht möglich. Bitte prüfe deine Eingaben.“
+- Konkrete Hinweise auf unbekannte E-Mail-Adressen, Benutzernamen oder falsche Passwörter entfallen. Die Funktion gilt bei aktivem Plugin unabhängig vom Wartungsstatus.
+- Authentifizierung, interne Fehlercodes, Sicherheits-Sperren und Informationsmeldungen bleiben unverändert; keine zusätzlichen Einstellungen oder Datenspeicherung.
+
 ## 0.5.1
 
 - Die Statusplakette auf der öffentlichen Website wird für Administratoren zum geschützten AN/AUS-Schalter.

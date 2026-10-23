@@ -1,0 +1,22 @@
+/* Eigenständige Fehlerseite ohne Theme-Abhängigkeiten. */
+*,*::before,*::after{box-sizing:border-box}
+html{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{margin:0;background:var(--page-bg);color:var(--page-text)}
+.mgms-error__layout{min-height:100vh;display:flex;flex-direction:column;max-width:1280px;margin:auto;padding:clamp(24px,5vw,72px)}
+.mgms-error__brand{font-size:.9rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.mgms-error__content{margin:auto 0;max-width:780px;padding:80px 0}
+.mgms-error__code{font-size:clamp(4rem,13vw,10rem);line-height:.9;letter-spacing:-.08em;font-weight:700;color:var(--page-accent);margin:0 0 36px}
+h1{font-size:clamp(2.2rem,5vw,4.6rem);letter-spacing:-.05em;line-height:1.06;margin:0 0 24px}
+.mgms-error__message{font-size:clamp(1rem,2vw,1.25rem);line-height:1.65;max-width:620px;margin:0 0 36px}
+.mgms-error__actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.mgms-error__button,form button{display:inline-block;border:1px solid var(--page-accent);border-radius:6px;background:var(--page-accent);color:#fff;padding:13px 18px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer}
+form{display:flex;flex-wrap:wrap;gap:8px}form input{min-height:48px;padding:10px 14px;border:1px solid currentColor;border-radius:6px;background:transparent;color:inherit;font:inherit}
+.mgms-error__footer{font-size:.8rem;opacity:.7;margin:0}
+.mgms-error--editorial .mgms-error__content{border-left:4px solid var(--page-accent);padding-left:clamp(20px,4vw,56px)}
+.mgms-error--editorial .mgms-error__code{font-family:Georgia,serif;font-style:italic;font-weight:400}
+.mgms-error--dark{background:#121b1a;color:#f4f4ed}
+.mgms-error--dark .mgms-error__code{color:#b8d2a1}
+.mgms-error--dark .mgms-error__button,.mgms-error--dark form button{background:#b8d2a1;border-color:#b8d2a1;color:#121b1a}
+.mgms-error :focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.screen-reader-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:600px){.mgms-error__content{padding:64px 0}.mgms-error__actions,form{align-items:stretch;flex-direction:column}form input,form button{width:100%}}

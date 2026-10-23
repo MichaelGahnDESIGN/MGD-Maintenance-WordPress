@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="wrap mgms-admin">
 <header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>MG Maintenance Studio</h1><p>Michael Gahn DESIGN <span aria-hidden="true">·</span> Version <?php echo esc_html( MGMS_VERSION ); ?></p></div></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
+<p><a class="button" href="<?php echo esc_url( admin_url( 'options-general.php?page=mgms-error-pages' ) ); ?>">404- und 403-Seiten gestalten</a></p>
 <?php
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Feste Meldungsauswahl ohne Zustandsänderung.
 $notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( $notices[ $notice ] ) ) :

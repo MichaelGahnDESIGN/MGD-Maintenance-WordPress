@@ -261,3 +261,24 @@
   max-width: 760px;
   line-height: 1.6;
 }
+/* Fehlerseiten-Editor */
+.mgms-errors-admin{max-width:1060px}
+.mgms-error-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.mgms-error-heading h2{font-size:22px;margin:3px 0 0}
+.mgms-error-kicker{margin:0;color:#2271b1;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.mgms-error-fields{display:grid;gap:22px;margin-top:24px}
+.mgms-error-fields>label:not(.mgms-error-switch),.mgms-error-form-grid label{display:grid;gap:8px;font-weight:600}
+.mgms-error-fields input[type=text],.mgms-error-fields textarea{width:100%;font-weight:400}
+.mgms-error-switch{font-weight:600}
+.mgms-error-fields fieldset{border:0;padding:0;margin:0}
+.mgms-error-fields legend{font-weight:600;margin-bottom:10px}
+.mgms-template-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mgms-template-options label{display:grid;gap:9px;border:1px solid #dcdcde;border-radius:10px;padding:12px;cursor:pointer}
+.mgms-template-options label:has(input:checked){border-color:#2271b1;box-shadow:0 0 0 1px #2271b1}
+.mgms-template-swatch{height:64px;border-radius:5px;background:#f7f5f1;border-left:5px solid #244e43}
+.mgms-template-swatch--editorial{background:#faf7f0;border-left:14px solid #244e43}
+.mgms-template-swatch--dark{background:#121b1a;border-left:5px solid #b8d2a1}
+.mgms-error-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.mgms-error-colors{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mgms-error-colors input{display:block;width:64px;height:38px}
+@media(max-width:650px){.mgms-template-options,.mgms-error-form-grid,.mgms-error-colors{grid-template-columns:1fr}.mgms-error-heading{align-items:flex-start;flex-direction:column}}

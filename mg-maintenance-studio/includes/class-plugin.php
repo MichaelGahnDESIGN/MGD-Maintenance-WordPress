@@ -10,6 +10,8 @@ final class Plugin {
 		add_option( Settings::DRAFT, Schema::defaults(), '', false );
 		add_option( Settings::LIVE, Schema::defaults(), '', false );
 		add_option( Settings::STATE, false, '', false );
+		add_option( Error_Pages::DRAFT, Error_Pages::defaults(), '', false );
+		add_option( Error_Pages::LIVE, Error_Pages::defaults(), '', false );
 	}
 	public static function deactivate(): void {
 		// Bewussten Wartungsstatus behalten. Reaktivierung setzt die bisherige Entscheidung fort.
@@ -23,9 +25,13 @@ final class Plugin {
 		add_action( 'admin_post_mgms_save', array( Admin::class, 'save' ) );
 		add_action( 'admin_post_mgms_state', array( Admin::class, 'state' ) );
 		add_action( 'admin_post_mgms_preview', array( Preview::class, 'render' ) );
+		add_action( 'admin_post_mgms_error_save', array( Error_Pages_Admin::class, 'save' ) );
+		add_action( 'admin_post_mgms_error_preview', array( Error_Pages_Admin::class, 'preview' ) );
 		add_action( 'admin_notices', array( Admin::class, 'conflicts' ) );
 		add_action( 'init', array( self::class, 'cache' ), 1 );
 		add_action( 'template_redirect', array( self::class, 'frontend' ), 0 );
+		add_filter( 'template_include', array( Error_Pages::class, 'template' ), 99 );
+		add_filter( 'wp_die_handler', array( Error_Pages::class, 'die_handler' ) );
 		add_filter( 'robots_txt', array( self::class, 'robots' ), 99, 1 );
 		add_filter( 'rest_pre_dispatch', array( self::class, 'rest' ), 99, 1 );
 		add_action( 'wp_footer', array( self::class, 'badge' ) );

@@ -3,7 +3,7 @@
  * Plugin Name: MG Maintenance Studio
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress
  * Description: Lokaler Design-Editor für einen bewussten, barrierearmen Wartungsmodus.
- * Version: 0.3.1
+ * Version: 0.3.2
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: Michael Gahn DESIGN
@@ -15,11 +15,11 @@ namespace MGMS;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
-define( 'MGMS_VERSION', '0.3.1' );
+define( 'MGMS_VERSION', '0.3.2' );
 define( 'MGMS_FILE', __FILE__ );
 define( 'MGMS_DIR', __DIR__ . '/' );
 define( 'MGMS_URL', plugin_dir_url( __FILE__ ) );
-foreach ( array( 'schema', 'settings', 'ip', 'access', 'renderer', 'preview', 'admin', 'updates', 'presentation', 'plugin' ) as $file ) {
+foreach ( array( 'schema', 'settings', 'ip', 'access', 'renderer', 'preview', 'error-pages', 'error-pages-admin', 'admin', 'updates', 'presentation', 'plugin' ) as $file ) {
 	require_once MGMS_DIR . 'includes/class-' . $file . '.php';
 }
 register_activation_hook( __FILE__, array( Plugin::class, 'activate' ) );

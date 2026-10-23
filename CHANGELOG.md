@@ -1,5 +1,12 @@
 # Änderungsprotokoll
 
+## 0.3.2 – 23.10.2026
+
+- Getrennte 404- und 403-Fehlerseiten unter Einstellungen ergänzt.
+- Drei Vorlagen, individuelle Texte und Farben, 404-Suche, Entwurf und bewusste Veröffentlichung.
+- Isolierte lokale WordPress-Prüfung mit echten HTTP-Statuscodes 404 und 403.
+
+
 ## Dokumentation und Sicherheitsprüfung – 22.10.2026
 
 - README mit Projektbild, Schnellstart, Funktionsübersicht und Handbuchnavigation neu aufgebaut.

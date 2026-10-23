@@ -19,7 +19,7 @@ define( 'MGMS_VERSION', '0.5.2' );
 define( 'MGMS_FILE', __FILE__ );
 define( 'MGMS_DIR', __DIR__ . '/' );
 define( 'MGMS_URL', plugin_dir_url( __FILE__ ) );
-foreach ( array( 'schema', 'settings', 'ip', 'access', 'renderer', 'preview', 'error-pages', 'error-pages-admin', 'dashboard', 'admin', 'updates', 'presentation', 'login-errors', 'plugin' ) as $file ) {
+foreach ( array( 'schema', 'settings', 'ip', 'access', 'renderer', 'preview', 'error-pages', 'error-pages-admin', 'dashboard', 'admin', 'updates', 'presentation', 'login-errors', 'mgd-wordpress-plugin-catalog', 'plugin' ) as $file ) {
 	require_once MGMS_DIR . 'includes/class-' . $file . '.php';
 }
 register_activation_hook( __FILE__, array( Plugin::class, 'activate' ) );

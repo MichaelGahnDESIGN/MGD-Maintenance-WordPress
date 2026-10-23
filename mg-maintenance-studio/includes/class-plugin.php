@@ -21,6 +21,7 @@ final class Plugin {
 		Updates::register();
 		Presentation::register();
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
+		( new \MGD_WordPress_Plugin_Catalog() )->register( 'mgms-dashboard' );
 		add_action( 'admin_enqueue_scripts', array( Admin::class, 'assets' ) );
 		add_action( 'admin_post_mgms_save', array( Admin::class, 'save' ) );
 		add_action( 'admin_post_mgms_state', array( Admin::class, 'state' ) );

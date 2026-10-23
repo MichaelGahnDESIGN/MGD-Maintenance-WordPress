@@ -1,6 +1,6 @@
 # Änderungsprotokoll
 
-## 0.5.4 – Katalog-Kandidat, 23.10.2026
+## 0.5.4 – 23.10.2026
 
 - Neue Plugin-Kollektion mit eigenen Icons, Produktkarten, lokaler Suche und Filtern.
 - Details im tastaturbedienbaren Dialog; bewusste Installation ohne automatische Aktivierung.

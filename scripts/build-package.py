@@ -8,7 +8,7 @@ root = Path(__file__).resolve().parents[1]
 plugin = root / 'mg-maintenance-studio'
 output = root / 'artifacts'
 output.mkdir(exist_ok=True)
-archive = output / 'mg-maintenance-studio-0.5.4.zip'
+archive = output / 'mg-maintenance-studio-0.5.5.zip'
 files = sorted(p for p in plugin.rglob('*') if p.is_file() and not any(part.startswith('.') for part in p.relative_to(plugin).parts))
 allowed = {'.php', '.css', '.js', '.json', '.md', '.txt', '.svg', '.png'}
 assert files and all(not p.is_symlink() and (p.suffix in allowed or p.name == 'LICENSE') for p in files)

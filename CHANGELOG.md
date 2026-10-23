@@ -1,5 +1,13 @@
 # Änderungsprotokoll
 
+## 0.5.4 – Katalog-Kandidat, 23.10.2026
+
+- Neue Plugin-Kollektion mit eigenen Icons, Produktkarten, lokaler Suche und Filtern.
+- Details im tastaturbedienbaren Dialog; bewusste Installation ohne automatische Aktivierung.
+- Vollständiger Ersatzkatalog bei Feed-Ausfall; alle sieben bekannten WordPress-Plugins werden berücksichtigt.
+- Installationsstatus frisch ermitteln, ZIP-Assets gezielt prüfen und native WordPress-Updateaktionen verwenden.
+- Lokale Browser-, Rechte-, Nonce-, Paket- und Installationstests dokumentiert; kein Kunden-Deployment.
+
 ## 0.5.2 – 23.10.2026
 
 - Die WordPress-Anmeldeseite zeigt bei Fehlern einheitlich „Die Anmeldung war nicht möglich. Bitte prüfe deine Eingaben.“

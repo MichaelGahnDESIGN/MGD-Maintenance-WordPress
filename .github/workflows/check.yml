@@ -16,6 +16,8 @@ jobs:
         run: find mg-maintenance-studio -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Fehlerseiten-Grenzfälle
         run: php tests/error-pages.php
+      - name: Layout-Vorlagen und alter Standard
+        run: php tests/layout-presets.php
       - name: JavaScript-Syntax
         run: |
           node --check mg-maintenance-studio/assets/admin.js

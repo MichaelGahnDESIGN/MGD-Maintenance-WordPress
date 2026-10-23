@@ -2,13 +2,14 @@
 
 [Zur Übersicht](Home.md) · [Weiter: Rechtstexte](Rechtstexte-und-Kontakt.md)
 
-## Die drei Vorlagen
+## Vier Vorlagen und Layouts
 
 | Vorlage | Charakter |
 |---|---|
-| Ruhiges Atelier | Naturtöne, ruhige Serifenschrift, klare Gliederung |
-| Elegant Gold | Heller Hintergrund und gedämpfte goldene Akzente |
-| Minimalistisch Hell | Helle, reduzierte Gestaltung mit Systemschrift |
+| Ruhiges Atelier | Naturtöne und geteilte Ansicht mit zwei Bereichen |
+| Elegant Gold | Heller redaktioneller Aufbau mit goldenen Akzenten |
+| Minimalistisch Hell | Zentrierte, reduzierte Gestaltung mit Systemschrift |
+| Nachtstudio | Dunkles Poster mit prägnanter Mitteilung |
 
 Die Vorlagen setzen Designwerte im Formular. Texte und Zugangsregeln bleiben erhalten. Die Rückgängig-Funktion bezieht sich auf Formularänderungen; für gespeicherte Stände gibt es die gesonderte Wiederherstellung.
 
@@ -24,13 +25,14 @@ Systemschriften funktionieren ohne Download. Für eine eigene Schrift kann ein b
 
 ## Die Vorschau verwenden
 
-Zuerst den Entwurf speichern, dann die Vorschau öffnen. Die Freigabe benötigt eine Administrator-Sitzung, eine WordPress-Nonce und einen zusätzlichen Einmal-Token. Dieser muss innerhalb von zwei Minuten eingelöst werden. Ein neuer Editoraufruf ersetzt die bisherige Freigabe desselben Kontos.
+Unter **Maintenance Studio → Layouts & Design** öffnet sich die geschützte Vorschau automatisch. Zuerst einen Entwurf speichern, wenn die Änderungen dauerhaft bleiben sollen. Die Freigabe benötigt eine Administrator-Sitzung, eine WordPress-Nonce und einen zusätzlichen Einmal-Token. Dieser muss innerhalb von zwei Minuten eingelöst werden. Ein neuer Editoraufruf ersetzt die bisherige Freigabe desselben Kontos.
 
 | Änderung | In der geöffneten Vorschau |
 |---|---|
 | Texte wie Titel, Beschreibung und Hinweise | Unmittelbare Aktualisierung |
 | Farben, Abstände, Ausrichtung, Schriftwahl und Container | Unmittelbare Aktualisierung |
-| Logo, Hintergrund, Kontaktlinks, Countdown und Rechtstexte | Speichern und Vorschau neu öffnen |
+| Logo und Hintergrundbild | Direkt nach Auswahl in der Mediathek sichtbar |
+| Kontaktlinks, Countdown und Rechtstexte | Speichern und Vorschau neu öffnen |
 
 Die Vorschau veröffentlicht nichts. Eine schon geöffnete Vorschau bleibt sichtbar, auch wenn ihr Token danach verbraucht ist. Das Abschalten der Vorschau verhindert neue Aufrufe, schließt aber keine bereits geladene Browseransicht.
 

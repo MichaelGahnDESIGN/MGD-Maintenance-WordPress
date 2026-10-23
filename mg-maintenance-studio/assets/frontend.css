@@ -320,3 +320,92 @@ dialog .legal {
     animation: none;
   }
 }
+
+/* Vier eigenständige Seitenlayouts. Bestehende Entwürfe bleiben Editorial. */
+.mgms-layout-centered .page-shell {
+  align-items: center;
+}
+.mgms-layout-centered .brand,
+.mgms-layout-centered .site-footer {
+  width: 100%;
+}
+.mgms-layout-centered .brand,
+.mgms-layout-centered .content {
+  text-align: center;
+}
+.mgms-layout-centered .content {
+  margin: auto;
+  max-width: min(760px, var(--width));
+}
+.mgms-layout-centered .message-grid {
+  display: block;
+}
+.mgms-layout-centered h1,
+.mgms-layout-centered .description {
+  max-width: none;
+}
+.mgms-layout-centered .message-details {
+  max-width: 560px;
+  margin: 36px auto 0;
+}
+.mgms-layout-centered .contact-details {
+  align-items: center;
+}
+
+.mgms-layout-split .content {
+  max-width: var(--width);
+}
+.mgms-layout-split .message-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: stretch;
+}
+.mgms-layout-split .message-copy {
+  align-self: center;
+}
+.mgms-layout-split .message-details {
+  background: var(--card);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: clamp(24px, 3vw, 48px);
+  margin: 0;
+}
+.mgms-layout-split .message-details:not(:has(.notice:not(:empty), .return-time, .contact-button, .contact-details a, [data-live="newsletter"]:not(:empty))) {
+  display: none;
+}
+
+.mgms-layout-poster .content {
+  max-width: min(920px, var(--width));
+}
+.mgms-layout-poster .message-grid {
+  display: block;
+}
+.mgms-layout-poster h1 {
+  max-width: 18ch;
+  font-size: clamp(3.2rem, 8vw, 7.5rem);
+  line-height: 0.99;
+  margin-bottom: 38px;
+}
+.mgms-layout-poster .description {
+  font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+  max-width: 52ch;
+}
+.mgms-layout-poster .message-details {
+  max-width: 620px;
+  margin-top: 48px;
+}
+.mgms-layout-poster .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+@media (max-width: 700px) {
+  .mgms-layout-split .message-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .mgms-layout-poster h1 {
+    font-size: clamp(2.75rem, 11vw, 4.6rem);
+  }
+}

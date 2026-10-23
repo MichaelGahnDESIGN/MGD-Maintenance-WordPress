@@ -4,9 +4,9 @@ namespace MGMS;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 ?>
-<div class="wrap mgms-admin">
+<div class="wrap mgms-admin" data-initial-panel="<?php echo (int) $initial_panel; ?>">
 <header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>MG Maintenance Studio</h1><p>Michael Gahn DESIGN <span aria-hidden="true">·</span> Version <?php echo esc_html( MGMS_VERSION ); ?></p></div></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
-<p><a class="button" href="<?php echo esc_url( admin_url( 'options-general.php?page=mgms-error-pages' ) ); ?>">404- und 403-Seiten gestalten</a></p>
+<p class="mgms-editor-breadcrumb"><a href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ); ?>">Übersicht</a><span aria-hidden="true">/</span><span>Editor</span></p>
 <?php
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Feste Meldungsauswahl ohne Zustandsänderung.
 $notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( $notices[ $notice ] ) ) :
@@ -24,11 +24,11 @@ foreach ( $tabs as $i => $panel_label ) :
 if ( '503' !== $live['status'] ) :
 	?>
 	<p class="studio-warning">Der veröffentlichte HTTP-Status ist nicht 503. Suchmaschinen können den Inhalt anders behandeln.</p><?php endif; ?>
-<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'mgms_state' ); ?><input type="hidden" name="action" value="mgms_state"><label><input type="checkbox" name="confirm_state" value="1" required> Ich bestätige: Die öffentliche Ausgabe wird jetzt <?php echo $enabled ? 'auf die normale Website umgestellt' : 'auf den veröffentlichten Wartungsstand umgestellt'; ?>.</label><p><button class="button button-primary" name="intent" value="<?php echo $enabled ? 'disable' : 'enable'; ?>"><?php echo $enabled ? 'Wartungsmodus ausdrücklich deaktivieren' : 'Wartungsmodus ausdrücklich aktivieren'; ?></button></p></form>
+<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'mgms_state' ); ?><input type="hidden" name="action" value="mgms_state"><input type="hidden" name="return_page" value="<?php echo esc_attr( $page_slug ); ?>"><label><input type="checkbox" name="confirm_state" value="1" required> Ich bestätige: Die öffentliche Ausgabe wird jetzt <?php echo $enabled ? 'auf die normale Website umgestellt' : 'auf den veröffentlichten Wartungsstand umgestellt'; ?>.</label><p><button class="button button-primary" name="intent" value="<?php echo $enabled ? 'disable' : 'enable'; ?>"><?php echo $enabled ? 'Wartungsmodus ausdrücklich deaktivieren' : 'Wartungsmodus ausdrücklich aktivieren'; ?></button></p></form>
 </section>
 <?php require MGMS_DIR . 'templates/updates.php'; ?>
 <div class="editor-layout"><form id="mgms-editor" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-<?php wp_nonce_field( 'mgms_save' ); ?><input type="hidden" name="action" value="mgms_save"><input type="hidden" name="revision" value="<?php echo esc_attr( Admin::revision() ); ?>"><input type="hidden" id="mgms-preset" name="settings[preset]" value="<?php echo esc_attr( $s['preset'] ); ?>">
+<?php wp_nonce_field( 'mgms_save' ); ?><input type="hidden" name="action" value="mgms_save"><input type="hidden" name="return_page" value="<?php echo esc_attr( $page_slug ); ?>"><input type="hidden" name="revision" value="<?php echo esc_attr( Admin::revision() ); ?>"><input type="hidden" id="mgms-preset" name="settings[preset]" value="<?php echo esc_attr( $s['preset'] ); ?>">
 <?php
 foreach ( $tabs as $i => $panel_label ) :
 	?>
@@ -38,13 +38,10 @@ foreach ( $tabs as $i => $panel_label ) :
 	?>
 <section class="studio-panel" id="panel-<?php echo (int) $i; ?>"><h2><?php echo esc_html( $panel_label ); ?></h2>
 	<?php
-	if ( 'Design' === $panel_label ) :
-		?>
-		<p>Vorlagen ändern nur Designwerte im Formular. Speichern und Veröffentlichen bleiben eigene Aktionen.</p><div class="preset-list">
-		<?php
-		foreach ( Admin::presets() as $key => $preset ) :
-			?>
-		<button type="button" class="preset" data-preset="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $preset['name'] ); ?></button><?php endforeach; ?><button type="button" class="button" id="undo-preset" disabled>Letzte Vorlage rückgängig</button></div><p id="contrast-hint" role="status"></p><?php endif; ?>
+	if ( 'Design' === $panel_label ) {
+		require MGMS_DIR . 'templates/admin-design.php';
+	}
+	?>
 	<?php
 	if ( 'IP-Freigaben' === $panel_label ) :
 		?>
@@ -59,7 +56,7 @@ foreach ( $tabs as $i => $panel_label ) :
 		<p>Kein Tracking, keine Telemetrie, kein Kontaktformular. Die Schriftdatei muss bereits als lokale WOFF2-Datei in der Mediathek verfügbar sein. Das Plugin erweitert keine Upload-Rechte.</p><?php endif; ?>
 	<?php
 	foreach ( Schema::fields() as $key => $field ) {
-		if ( $field[3] === $panel_label ) {
+		if ( $field[3] === $panel_label && 'Design' !== $panel_label ) {
 			Admin::field( $key, $field, $s ); }
 	}
 	?>
@@ -102,11 +99,11 @@ foreach ( $tabs as $i => $panel_label ) :
 		<ol><li>Entwurf gestalten, eigene Rechtstexte eintragen und speichern.</li><li>Geschützte Vorschau öffnen. Änderungen im Formular aktualisieren Text und Design sofort; strukturelle Änderungen nach erneutem Speichern und Neuladen prüfen.</li><li>Veröffentlichung ausdrücklich bestätigen. Damit ändern Sie den für Wartung bereitstehenden Stand.</li><li>Wartungsmodus separat in der Übersicht einschalten und anonym prüfen.</li></ol><p>Im Plugin-Verzeichnis liegt die Dokumentation mit Installation, Datenschutz, Abnahme und Rückfallanleitung. Multisite: je Website aktivieren, keine Netzwerkaktivierung. REST: anonyme Zugriffe werden während Wartung abgewiesen; angemeldete API-Nutzer, Admin, Login, Cron und AJAX behalten ihre eigenen WordPress-Berechtigungen. Statische Dateien, XML-RPC und Server-Caches werden nicht abgeschirmt. Dieses Plugin ist kein Zugriffsschutz für vertrauliche Inhalte.</p><?php endif; ?>
 </section><?php endforeach; ?>
 <div class="save-bar"><button class="button button-primary" name="intent" value="draft">Entwurf speichern</button><label><input type="checkbox" name="confirm_publish" value="1"> Ich bestätige die Veröffentlichung dieser Einstellungen. Bei aktivem Wartungsmodus wird die Änderung sofort sichtbar.</label><button class="button" name="intent" value="publish">Einstellungen veröffentlichen</button><span id="dirty-state" role="status"></span></div></form>
-<aside class="preview-panel"><h2>Vorschau</h2><p>Vorschau nur für Ihr Administratorkonto. Einmal gültig, zwei Minuten zum Öffnen.</p>
+<aside class="preview-panel"><div class="mgms-preview-header"><div><span class="mgms-kicker">ENTWURF · LIVE</span><h2>Vorschau</h2></div><div class="mgms-device-switch" role="group" aria-label="Vorschaugröße"><button type="button" data-preview-size="desktop" aria-pressed="true">Desktop</button><button type="button" data-preview-size="mobile" aria-pressed="false">Mobil</button></div></div><p>Änderungen im Editor erscheinen sofort. Die geschützte Vorschau gilt nur für dein Administratorkonto.</p>
 <?php
 if ( $s['preview_enabled'] ) :
 	?>
-	<form id="preview-form" method="post" target="mgms-preview" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'mgms_preview' ); ?><input type="hidden" name="action" value="mgms_preview"><input type="hidden" name="preview_token" value="<?php echo esc_attr( Preview::issue() ); ?>"><button class="button" type="submit">Geschützte Vorschau öffnen</button></form><iframe name="mgms-preview" id="mgms-preview" title="Geschützte Wartungsvorschau" sandbox="allow-scripts allow-same-origin"></iframe>
+	<form id="preview-form" method="post" target="mgms-preview" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'mgms_preview' ); ?><input type="hidden" name="action" value="mgms_preview"><input type="hidden" name="preview_token" value="<?php echo esc_attr( Preview::issue() ); ?>"><button class="button" type="submit">Geschützte Vorschau öffnen</button><span id="mgms-preview-status" role="status" hidden>Vorschau aktiv · Änderungen erscheinen sofort</span></form><iframe name="mgms-preview" id="mgms-preview" title="Geschützte Wartungsvorschau" sandbox="allow-scripts allow-same-origin"></iframe>
 	<?php
 else :
 	?>

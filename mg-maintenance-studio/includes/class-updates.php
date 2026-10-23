@@ -164,7 +164,7 @@ final class Updates {
 			self::latest();
 			wp_update_plugins();
 		}
-		wp_safe_redirect( admin_url( 'options-general.php?page=mg-maintenance-studio#panel-9' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=mgms-updates#panel-9' ) );
 		exit;
 	}
 }

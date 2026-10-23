@@ -1,5 +1,13 @@
 # Gestaltungsüberarbeitung 0.2.0
 
+## Dashboard und Layouts 0.4.0
+
+Die Administration erhält eine eigene Navigation und eine klare Reihenfolge: Status ansehen, Wartungsseite bearbeiten, Layout gestalten, Zugriffe prüfen, Fehlerseiten konfigurieren und Updates verwalten. Die Übersicht verwendet dunkles Grün und warme helle Flächen; der eigentliche Editor bleibt gut lesbar und an WordPress-Bedienelemente angebunden. Status und Veröffentlichungsaktionen sind getrennt.
+
+Vier Seitenlayouts teilen dieselben validierten Inhalts- und Farbwerte: Editorial, zentriert, geteilt und Poster. Die vier Vorlagen zeigen jeweils einen anderen Ausgangspunkt. Auch ohne Logo und Hintergrundbild bleibt die Seite vollständig. Bei alten Installationen bleibt Editorial der Standard. Die geschützte Vorschau öffnet in den Editor-Untermenüs automatisch und zeigt Änderungen an Text, Farbe, Layout sowie neu ausgewähltem Logo und Hintergrund sofort. Desktop und Mobil können im Editor umgeschaltet werden. Externe Grafiken oder Schriften werden nicht nachgeladen.
+
+Lokale Browserabnahme: Dashboard und Designeditor bei 1440 × 900 sowie Dashboard bei 390 × 844 ohne horizontale Überbreite; Vorlagenwechsel und Medienvorschau im isolierten WordPress geprüft. Screenshots und ECC-Prüfdatensatz liegen im lokalen, nicht veröffentlichten Ordner `artifacts/`.
+
 ## Gestaltungsauftrag nach ECC Frontend Design Direction
 
 Besucher müssen erkennen, dass die Website vorübergehend nicht erreichbar ist, und Kontakt oder Rechtstexte finden. Die Wartungsseite wird deshalb wie eine kurze redaktionelle Mitteilung aufgebaut: Marke, Anlass, Titel und Erklärung, anschließend Kontakt und Rechtliches. Keine Schmucksterne, Werbeslogans, großen runden Karten oder automatischen Animationen als Standard.

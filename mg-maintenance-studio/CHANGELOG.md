@@ -1,5 +1,14 @@
 # Änderungsprotokoll
 
+## 0.4.0
+
+- Eigenes WordPress-Hauptmenü mit Übersicht, Wartungsseite, Layouts & Design, Zugriffen, Fehlerseiten und Updates.
+- Dashboard mit Wartungsstatus, Entwurfsstand und klar getrennten Aktionen.
+- Vier Wartungsseiten-Layouts, vier Vorlagen, Farb-, Logo- und Hintergrundeinstellungen.
+- Geschützte Live-Vorschau mit Desktop-/Mobilansicht und direkter Medienaktualisierung.
+- Bestehende Einstellungen behalten das bisherige Editorial-Layout.
+
+
 ## 0.3.2
 
 - Neues Untermenü unter Einstellungen für getrennte 404- und 403-Seiten.

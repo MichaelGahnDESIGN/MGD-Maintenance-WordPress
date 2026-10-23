@@ -2,7 +2,7 @@
 
 ## Installation zuerst in einer Testumgebung
 
-Den Ordner `mg-maintenance-studio` nach `wp-content/plugins/` einer eigens angelegten Testinstallation kopieren oder ein ZIP dieses Ordners installieren. Danach Plugin aktivieren. Die erste Aktivierung legt Standardwerte an und lässt den Wartungsmodus **ausgeschaltet**. Einstellungen finden sich unter **Einstellungen → Maintenance Studio**. Erforderlich ist die WordPress-Berechtigung `manage_options`.
+Den Ordner `mg-maintenance-studio` nach `wp-content/plugins/` einer eigens angelegten Testinstallation kopieren oder ein ZIP dieses Ordners installieren. Danach Plugin aktivieren. Die erste Aktivierung legt Standardwerte an und lässt den Wartungsmodus **ausgeschaltet**. Einstellungen finden sich unter **Maintenance Studio**. Erforderlich ist die WordPress-Berechtigung `manage_options`.
 
 Die Plugin-Aktivierung ist etwas anderes als die Aktivierung des Wartungsmodus. Eine spätere Plugin-Reaktivierung verwendet den bewusst gespeicherten Wartungsstatus; vor Reaktivierung deshalb den letzten Status kennen.
 
@@ -12,7 +12,7 @@ Marke, Titel, Beschreibung und Hinweise im Entwurf bearbeiten. Eigene Rechtstext
 
 Entwurf speichern und die geschützte Vorschau öffnen. Sie benötigt Administrator-Anmeldung, eine WordPress-Nonce und einen einmaligen Token, der innerhalb von zwei Minuten verwendet werden muss. Der Token wird per POST übertragen, niemals als URL-Parameter. Pro Konto ist eine Freigabe gleichzeitig gültig; ein neu geladener Editor ersetzt die vorherige. Nach dem Öffnen bleibt die bereits geladene Vorschau im Browser sichtbar. „Vorschau erlauben“ ausschalten und den Entwurf speichern verhindert neue Vorschauen, schließt aber keine bereits geladene Browseransicht.
 
-Text, Farben, Abstände, Ausrichtung, Schriftwahl und Container lassen sich nach Öffnen unmittelbar im Vorschaufenster prüfen. Logo-, Hintergrundbild-, Kontakt-, Countdown- und Rechtstextänderungen benötigen Speichern und erneutes Öffnen der Vorschau. Eine ungespeicherte Vorschau veröffentlicht nichts.
+Text, Farben, Abstände, Ausrichtung, Schriftwahl und Container lassen sich nach Öffnen unmittelbar im Vorschaufenster prüfen. Ein neu gewähltes Logo oder Hintergrundbild erscheint ebenfalls direkt. Kontakt-, Countdown- und Rechtstextänderungen benötigen Speichern und erneutes Öffnen der Vorschau. Eine ungespeicherte Vorschau veröffentlicht nichts.
 
 Erst **Einstellungen veröffentlichen** übernimmt den Stand, und nur bei angekreuzter Bestätigung. Ein aktiver Wartungsmodus zeigt diese Veröffentlichung sofort. **Wartungsmodus aktivieren/deaktivieren** in der Übersicht ist eine separate bestätigte Aktion. Countdown und Datum ändern den Modus niemals selbständig.
 

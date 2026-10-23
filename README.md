@@ -5,7 +5,7 @@
 
 ![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
-**WordPress ab 6.5 · PHP ab 8.1 · Version 0.3.2 · Deutsch · GPL-2.0-or-later**
+**WordPress ab 6.5 · PHP ab 8.1 · Version 0.4.0 · Deutsch · GPL-2.0-or-later**
 
 MG Maintenance Studio ersetzt die öffentliche Ansicht während Wartungsarbeiten durch eine eigene, anpassbare Seite. Besucher erhalten eine verständliche Mitteilung; berechtigte Personen können weiter an der Website arbeiten. Farben, Typografie, Logo, Kontaktmöglichkeiten und Rechtstexte werden im WordPress-Backend gepflegt.
 
@@ -16,9 +16,9 @@ Das Plugin kommt ohne Konto bei einem Drittanbieter, Lizenzschlüssel oder exter
 
 ## Schnellstart
 
-1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.3.2.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
+1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.4.0.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
 2. In WordPress **Plugins → Installieren → Plugin hochladen** öffnen, ZIP auswählen und das Plugin aktivieren. Die erste Aktivierung schaltet den Wartungsmodus noch **nicht** ein.
-3. Unter **Einstellungen → Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
+3. Unter **Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
 4. **Entwurf speichern**, dann die geschützte Vorschau öffnen und die Darstellung prüfen.
 5. **Einstellungen veröffentlichen** ausdrücklich bestätigen. Anschließend den **Wartungsmodus aktivieren** separat bestätigen.
 6. Die Website ausgeloggt oder in einem privaten Browserfenster aufrufen. Bei vorgeschaltetem Cache/CDN auch dort die neue Ausgabe prüfen.
@@ -29,7 +29,7 @@ Vor einer produktiven Installation zuerst auf einer Testwebsite prüfen und Date
 
 | Bereich | Möglichkeiten |
 |---|---|
-| Gestaltung | Drei Vorlagen, Farben, Logo, Hintergrundbild, Systemschriften oder vorhandene lokale WOFF2-Dateien, Ausrichtung, Container und geräteabhängige Abstände |
+| Gestaltung | Vier Vorlagen mit vier Seitenlayouts, Farben, Logo, Hintergrundbild, Systemschriften oder vorhandene lokale WOFF2-Dateien, Ausrichtung, Container und geräteabhängige Abstände |
 | Inhalte | Marke, Überschrift, Beschreibung, Zusatzhinweise, Kontaktlinks und geplanter Rückkehrzeitpunkt |
 | Vorschau | Administratorzugang, kurzlebiger Einmal-Token und unmittelbare Vorschau vieler Text- und Designänderungen |
 | Veröffentlichung | Getrennter Entwurf, veröffentlichter Stand und Wartungsschalter; ein vorheriger Stand zur Wiederherstellung |
@@ -49,17 +49,17 @@ Vor einer produktiven Installation zuerst auf einer Testwebsite prüfen und Date
 
 Ein Countdown ist nur eine Anzeige. Er beendet den Wartungsmodus nicht automatisch. Bei Deaktivierung des Plugins endet dessen Ausgabe; der gespeicherte Wartungsstatus bleibt erhalten. Eine spätere Reaktivierung kann deshalb die zuvor eingeschaltete Wartungsseite wieder anzeigen.
 
-## Gestaltung mit ruhigen Vorlagen
+## Vier Vorlagen und vier Seitenlayouts
 
-**Ruhiges Atelier** verwendet Naturtöne und eine Serifenschrift. **Elegant Gold** kombiniert einen hellen Hintergrund mit gedämpften goldenen Akzenten. **Minimalistisch Hell** setzt auf eine klare, helle Oberfläche. Alle drei beginnen ohne große Schmuckkarten oder aufdringliche Animationen.
+**Elegant Gold** verwendet eine großzügige redaktionelle Ansicht. **Minimalistisch Hell** zentriert die Mitteilung. **Ruhiges Atelier** teilt Text und Zusatzinformationen in zwei Bereiche. **Nachtstudio** stellt die Botschaft wie ein dunkles Poster dar. Jede Vorlage lässt sich mit Farben, Logo, Hintergrund und Abständen weiter gestalten.
 
 Vorlagen ändern Designwerte im Formular. Eigene Texte und Freigaben bleiben erhalten. Bilder und Schriften müssen aus der lokalen Mediathek und vom selben Ursprung wie die Website stammen. Das Plugin schaltet keine zusätzlichen Upload-Dateitypen frei.
 
-Viele Texte, Farben und Abstände werden direkt in der geöffneten Vorschau aktualisiert. Änderungen an Medien, Kontaktlinks, Countdown und Rechtstexten benötigen Speichern und erneutes Öffnen. [Mehr zur Gestaltung →](docs/wiki/Design-und-Vorschau.md)
+Viele Texte, Farben und Abstände werden direkt in der geöffneten Vorschau aktualisiert. Ein neu ausgewähltes Logo oder Hintergrundbild wird ebenfalls direkt angezeigt. Kontaktlinks, Countdown und Rechtstexte benötigen Speichern und erneutes Öffnen. [Mehr zur Gestaltung →](docs/wiki/Design-und-Vorschau.md)
 
 ## Updates über GitHub
 
-Unter **Einstellungen → Maintenance Studio → Updates** ist `MichaelGahnDESIGN/MGD-Maintenance-WordPress` vorbelegt. **GitHub-Prüfung einschalten** und **Speichern und jetzt prüfen** wählen. Danach meldet WordPress passende neuere Releases unter **Plugins** bzw. **Dashboard → Aktualisierungen**.
+Unter **Maintenance Studio → Updates** ist `MichaelGahnDESIGN/MGD-Maintenance-WordPress` vorbelegt. **GitHub-Prüfung einschalten** und **Speichern und jetzt prüfen** wählen. Danach meldet WordPress passende neuere Releases unter **Plugins** bzw. **Dashboard → Aktualisierungen**.
 
 Es ist kein GitHub-Token nötig. Private Repositories werden nicht unterstützt. Automatische Installationen werden, falls gewünscht, separat in WordPress eingeschaltet. Die Prüfung verwendet einen Cache; ein erneutes Speichern prüft die Quelle sofort. [Updateablauf und Rückfall →](docs/wiki/Updates-und-Releases.md)
 
@@ -97,7 +97,7 @@ mg-maintenance-studio/   Installierbares Plugin
   includes/             Validierung, Zugriff, Vorschau, Ausgabe und Verwaltung
   templates/            Admin- und Wartungsansicht
   assets/               Lokales CSS, JavaScript und Icons
-  presets/              Drei Designvorlagen
+  presets/              Vier Designvorlagen
   docs/                 Mitgelieferte technische Betriebsdokumentation
 docs/wiki/              Ausführliches Handbuch
 scripts/                Paketbau und Dokumentationsprüfung
@@ -119,7 +119,7 @@ python3 scripts/build-package.py
 
 ## Aktueller Stand
 
-Version 0.3.2 ergänzt Fehlerseiten. Für 404 und 403 wurden die echten HTTP-Statuscodes in einer isolierten lokalen WordPress-Installation geprüft. Die früheren Browserprüfungen und der reale GitHub-Paketdownload beziehen sich auf Version 0.3.1. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
+Version 0.4.0 ergänzt Dashboard, Menüstruktur, vier Layouts und Live-Vorschau. Dashboard, Designeditor und Logo-/Hintergrundvorschau wurden in einer isolierten lokalen WordPress-Installation geprüft. Die 404-/403-Statusprüfungen stammen aus Version 0.3.2. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
 
 Fehler ohne sensible Daten können über [GitHub Issues](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/issues) gemeldet werden. Für Sicherheitsprobleme gilt die [Security Policy](SECURITY.md).
 

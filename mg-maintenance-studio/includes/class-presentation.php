@@ -11,7 +11,7 @@ final class Presentation {
 		add_action( 'admin_enqueue_scripts', array( self::class, 'assets' ) );
 	}
 	public static function links( array $links ): array {
-		array_unshift( $links, '<a href="' . esc_url( admin_url( 'options-general.php?page=mg-maintenance-studio' ) ) . '">Einstellungen</a>' );
+		array_unshift( $links, '<a href="' . esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ) . '">Einstellungen</a>' );
 		return $links;
 	}
 	public static function details( array $links, string $file ): array {

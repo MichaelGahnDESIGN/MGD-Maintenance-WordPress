@@ -24,7 +24,7 @@ if ( $preview ) :
 	?>
 	<script defer src="<?php echo esc_url( MGMS_URL . 'assets/preview.js?ver=' . MGMS_VERSION ); ?>"></script><?php endif; ?>
 </head>
-<body class="mgms <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
+<body class="mgms mgms-layout-<?php echo esc_attr( in_array( $s['layout'], array( 'editorial', 'centered', 'split', 'poster' ), true ) ? $s['layout'] : 'editorial' ); ?> <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
 <a class="skip" href="#main">Zum Inhalt</a>
 <?php
 if ( $background ) :
@@ -37,6 +37,7 @@ if ( $preview ) :
 <div class="page-shell">
 <header class="brand"><span data-live="brand"><?php echo esc_html( $s['brand'] ); ?></span></header>
 <main id="main" tabindex="-1" class="content <?php echo 'card' === $s['container'] ? 'is-card' : ''; ?> <?php echo $s['shadow'] ? 'has-shadow' : ''; ?>">
+<div class="mgms-logo-slot">
 <?php
 if ( $logo ) :
 	?>
@@ -48,6 +49,7 @@ if ( $logo ) :
 	if ( $s['logo_link'] ) :
 		?>
 	</a><?php endif; ?><?php endif; ?>
+</div>
 <p class="eyebrow" data-live="tagline"><?php echo esc_html( $s['tagline'] ); ?></p>
 <div class="message-grid"><div class="message-copy">
 <h1 data-live="title"><?php echo esc_html( $s['title'] ); ?></h1>

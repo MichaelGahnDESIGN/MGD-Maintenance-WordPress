@@ -4,6 +4,14 @@ namespace MGMS;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 final class Admin {
+	public static function menu_last( $order ) {
+		if ( ! is_array( $order ) || ! in_array( 'mgms-dashboard', $order, true ) ) {
+			return $order;
+		}
+		$order = array_values( array_diff( $order, array( 'mgms-dashboard' ) ) );
+		$order[] = 'mgms-dashboard';
+		return $order;
+	}
 	private static array $hooks = array();
 	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-error-pages', 'mgms-updates' );
 	public static function menu(): void {
@@ -12,7 +20,7 @@ final class Admin {
 			add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ),
 		) );
 		remove_submenu_page( 'options-general.php', 'mg-maintenance-studio' );
-		// Position 99 hält den eigenen Bereich am Ende der Hauptnavigation.
+		// Die endgültige Reihenfolge wird nach allen registrierten Menüs gesetzt.
 		self::$hooks['dashboard'] = add_menu_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 99 );
 		add_submenu_page( 'mgms-dashboard', 'Übersicht', 'Übersicht', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ) );
 		foreach ( array( 'mgms-editor' => 'Wartungsseite', 'mgms-design' => 'Layouts & Design', 'mgms-access' => 'Zugriffe' ) as $slug => $label ) {

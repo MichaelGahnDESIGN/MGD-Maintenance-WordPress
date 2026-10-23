@@ -6,10 +6,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 final class Updates {
+	public const ORIGINAL = 'MichaelGahnDESIGN/MGD-Maintenance-WordPress';
 	public static function register(): void {
 		add_filter( 'update_plugins_github.com', array( self::class, 'offer' ), 10, 3 );
 		add_filter( 'plugins_api', array( self::class, 'information' ), 20, 3 );
 		add_action( 'admin_post_mgms_updates', array( self::class, 'save' ) );
+		add_action( 'admin_post_mgms_restore_updates', array( self::class, 'restore' ) );
 	}
 	public static function config(): array {
 		return array_merge(
@@ -68,6 +70,10 @@ final class Updates {
 		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
 			$data    = json_decode( wp_remote_retrieve_body( $response ), true );
 			$release = is_array( $data ) ? self::normalize( $data, $config['repository'] ) : array();
+			if ( $release ) {
+				// Nur eine Quelle mit tatsächlich passendem Paket als Rückfall merken.
+				update_option( 'mgms_last_good_repository', $config['repository'], false );
+			}
 			$message = $release ? ( version_compare( $release['version'], MGMS_VERSION, '>' ) ? 'Eine neue Version ist verfügbar.' : 'Kein neueres Release verfügbar.' ) : 'Kein passendes stabiles Release-Paket gefunden.';
 		} elseif ( ! is_wp_error( $response ) && 404 === wp_remote_retrieve_response_code( $response ) ) {
 			$message = 'Repository oder öffentliches Release noch nicht verfügbar.';
@@ -128,8 +134,8 @@ final class Updates {
 			),
 			'sections'      => array(
 				'description'  => '<p>Wartungsseiten gestalten, geschützt prüfen und bewusst veröffentlichen. Mit Rechtstexten, Rollen- und IP-Freigaben.</p>',
-				'installation' => '<p>ZIP unter Plugins → Installieren hochladen. Einstellungen → Maintenance Studio öffnen. Aktivierung schaltet den Wartungsmodus nicht automatisch ein.</p>',
-				'changelog'    => '<h4>0.3.0</h4><p>GitHub-Updates, eigenes Icon, Plugin-Details und überarbeitete Verwaltung.</p>',
+				'installation' => '<p>ZIP unter Plugins → Installieren hochladen. Maintenance Studio am Ende der Hauptnavigation öffnen. Aktivierung schaltet den Wartungsmodus nicht automatisch ein.</p>',
+				'changelog'    => '<h4>0.5.3</h4><p>Separate Update-Prüfung, wiederherstellbare Update-Quelle und letzter Menüplatz.</p>',
 			),
 		);
 	}
@@ -164,6 +170,23 @@ final class Updates {
 			self::latest();
 			wp_update_plugins();
 		}
+		wp_safe_redirect( admin_url( 'admin.php?page=mgms-updates#panel-9' ) );
+		exit;
+	}
+	public static function restore(): void {
+		if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) || ! current_user_can( 'manage_options' ) || ! current_user_can( 'update_plugins' ) ) {
+			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) );
+		}
+		check_admin_referer( 'mgms_restore_updates' );
+		$repository = 'original' === ( $_POST['source'] ?? '' ) ? self::ORIGINAL : get_option( 'mgms_last_good_repository', self::ORIGINAL );
+		if ( ! is_string( $repository ) || ! self::valid_repository( $repository ) ) {
+			$repository = self::ORIGINAL;
+		}
+		$config = self::config();
+		$config['repository'] = $repository;
+		update_option( 'mgms_updates', $config, false );
+		delete_transient( 'mgms_release' );
+		delete_site_transient( 'update_plugins' );
 		wp_safe_redirect( admin_url( 'admin.php?page=mgms-updates#panel-9' ) );
 		exit;
 	}

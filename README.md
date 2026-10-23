@@ -126,3 +126,7 @@ Version 0.5.2 ergänzt neutrale Anmeldefehler. Version 0.5.0 ergänzt den Marken
 Fehler ohne sensible Daten können über [GitHub Issues](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/issues) gemeldet werden. Für Sicherheitsprobleme gilt die [Security Policy](SECURITY.md).
 
 Entwickelt von **Michael Gahn DESIGN**. Quellcode unter [GPL-2.0-or-later](mg-maintenance-studio/LICENSE).
+
+## 0.5.3 – Plugin-Verwaltung
+
+Separate Update-Prüfung, Plugin-Links und ergänzte lokale Details. [Anleitung](docs/WORDPRESS-VERWALTUNG.md).

@@ -41,7 +41,9 @@ def check(root, archive=None):
         with ZipFile(archive) as package:
             if package.testzip() is not None:
                 raise ValueError('Beschädigte ZIP-Datei')
-            for key in ('icon', 'cardBackground'):
+            # WordPress.org verwaltet Verzeichnisbilder außerhalb des installierbaren ZIPs.
+            package_assets = () if channel == 'wordpress-org' else ('icon', 'cardBackground')
+            for key in package_assets:
                 relative = Path(data[key]).relative_to(runtime)
                 name = prefix + '/' + relative.as_posix()
                 if package.read(name) != checked[key].read_bytes():

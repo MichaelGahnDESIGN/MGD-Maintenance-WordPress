@@ -5,7 +5,7 @@
 
 ![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
-**WordPress ab 6.5 · PHP ab 8.1 · Version 0.5.2 · Deutsch · GPL-2.0-or-later**
+**WordPress ab 6.5 · PHP ab 8.1 · Version 0.5.6 · Deutsch · GPL-2.0-or-later**
 
 MG Maintenance Studio ersetzt die öffentliche Ansicht während Wartungsarbeiten durch eine eigene, anpassbare Seite. Besucher erhalten eine verständliche Mitteilung; berechtigte Personen können weiter an der Website arbeiten. Farben, Typografie, Logo, Kontaktmöglichkeiten und Rechtstexte werden im WordPress-Backend gepflegt.
 
@@ -16,7 +16,7 @@ Das Plugin kommt ohne Konto bei einem Drittanbieter, Lizenzschlüssel oder exter
 
 ## Schnellstart
 
-1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.5.2.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
+1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.5.6.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
 2. In WordPress **Plugins → Installieren → Plugin hochladen** öffnen, ZIP auswählen und das Plugin aktivieren. Die erste Aktivierung schaltet den Wartungsmodus noch **nicht** ein.
 3. Unter **Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
 4. **Entwurf speichern**, dann die geschützte Vorschau öffnen und die Darstellung prüfen.
@@ -121,7 +121,7 @@ python3 scripts/build-package.py
 
 ## Aktueller Stand
 
-Version 0.5.2 ergänzt neutrale Anmeldefehler. Version 0.5.0 ergänzt den Markenmodus, Medienkarten, einen kopfseitigen Wartungsschalter und präziser beschriebene Layoutvorlagen. Die automatischen Prüfungen bestätigen Syntax, abgesicherte Speicherung, Preset-Kompatibilität und Paketstruktur. Die frühere lokale WordPress-Sichtprüfung deckt Dashboard, Designeditor und Medienvorschau ab; die neuen Bedienelemente benötigen noch eine erneute Prüfung in einer isolierten WordPress-Installation. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
+Version 0.5.6 ergänzt neutrale Anmeldefehler. Version 0.5.6 ergänzt den Markenmodus, Medienkarten, einen kopfseitigen Wartungsschalter und präziser beschriebene Layoutvorlagen. Die automatischen Prüfungen bestätigen Syntax, abgesicherte Speicherung, Preset-Kompatibilität und Paketstruktur. Die frühere lokale WordPress-Sichtprüfung deckt Dashboard, Designeditor und Medienvorschau ab; die neuen Bedienelemente benötigen noch eine erneute Prüfung in einer isolierten WordPress-Installation. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
 
 Fehler ohne sensible Daten können über [GitHub Issues](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/issues) gemeldet werden. Für Sicherheitsprobleme gilt die [Security Policy](SECURITY.md).
 
@@ -142,3 +142,7 @@ Die bisherige Empfehlungstabelle wird zur Plugin-Kollektion mit eigenen Icons, v
 ## 0.5.5 – Updateanzeige nach der Installation
 
 Die Übersicht vergleicht zwischengespeicherte WordPress-Updateangebote zusätzlich mit der tatsächlich installierten Version. Gleiche, ältere oder fehlende Versionsangaben zeigen keine erneute Updateaktion. Sieben Regressionstests sichern diesen Zustand und die Rechteprüfung ab.
+
+### Eigene Motive in der Plugin-Kollektion
+
+Sieben passende, lokal mitgelieferte Hintergrundbilder ergänzen die Plugin-Karten. Icons, Suche und Filter bleiben erhalten. [Gestaltung und Herkunft](docs/PLUGIN-KATALOG.md#kartenmotive--24102026).

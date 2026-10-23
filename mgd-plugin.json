@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "platform": "wordpress",
+  "channel": "github",
+  "externalCatalog": true,
+  "runtime": "mg-maintenance-studio",
+  "packageRoot": "mg-maintenance-studio",
+  "icon": "mg-maintenance-studio/assets/icon-256.png",
+  "cardBackground": "mg-maintenance-studio/assets/plugin-catalog/backgrounds/maintenance.webp",
+  "readme": "README.md",
+  "changelog": "CHANGELOG.md",
+  "documentation": "docs/PLUGIN-KATALOG.md"
+}

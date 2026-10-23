@@ -1,0 +1,58 @@
+/* Frontend-Schalter nur für Administratorkonten */
+.mgms-status-control {
+  color: var(--mgms-control-text, #fff);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.mgms-status-control label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 7px 10px 7px 13px;
+  border: 1px solid #ffffff42;
+  border-radius: 12px;
+  background: var(--mgms-control-background, #2d423a);
+  box-shadow: 0 8px 24px #0000002e;
+  cursor: pointer;
+}
+.mgms-status-control strong {
+  font-size: .73em;
+  letter-spacing: .1em;
+}
+.mgms-status-control input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+}
+.mgms-status-switch {
+  position: relative;
+  inline-size: 36px;
+  block-size: 21px;
+  border-radius: 999px;
+  background: #9ba7a0;
+  transition: background .18s ease;
+}
+.mgms-status-switch::after {
+  position: absolute;
+  inset: 3px auto 3px 3px;
+  inline-size: 15px;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+  transition: transform .18s ease;
+}
+.mgms-status-control input:checked + .mgms-status-switch {
+  background: #4eae78;
+}
+.mgms-status-control input:checked + .mgms-status-switch::after {
+  transform: translateX(15px);
+}
+.mgms-status-control input:focus-visible + .mgms-status-switch {
+  outline: 3px solid #2271b1;
+  outline-offset: 3px;
+}
+.mgms-status-control.is-saving label {
+  cursor: progress;
+  opacity: .76;
+}

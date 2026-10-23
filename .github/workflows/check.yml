@@ -23,6 +23,7 @@ jobs:
           node --check mg-maintenance-studio/assets/admin.js
           node --check mg-maintenance-studio/assets/frontend.js
           node --check mg-maintenance-studio/assets/preview.js
+          node --check mg-maintenance-studio/assets/status-control.js
       - name: Dokumentationslinks
         run: python3 scripts/check-docs.py
       - name: Paket und Prüfsummen

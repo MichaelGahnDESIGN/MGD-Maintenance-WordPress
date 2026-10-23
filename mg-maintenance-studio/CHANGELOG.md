@@ -1,5 +1,9 @@
 # Änderungsprotokoll
 
+## 0.5.1
+
+- Die Statusplakette auf der öffentlichen Website wird für Administratoren zum geschützten AN/AUS-Schalter.
+
 ## 0.5.0
 
 - Markenbereich wahlweise mit Text, Logo oder beidem.

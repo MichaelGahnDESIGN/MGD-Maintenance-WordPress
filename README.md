@@ -5,7 +5,7 @@
 
 ![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
-**WordPress ab 6.5 · PHP ab 8.1 · Version 0.5.0 · Deutsch · GPL-2.0-or-later**
+**WordPress ab 6.5 · PHP ab 8.1 · Version 0.5.1 · Deutsch · GPL-2.0-or-later**
 
 MG Maintenance Studio ersetzt die öffentliche Ansicht während Wartungsarbeiten durch eine eigene, anpassbare Seite. Besucher erhalten eine verständliche Mitteilung; berechtigte Personen können weiter an der Website arbeiten. Farben, Typografie, Logo, Kontaktmöglichkeiten und Rechtstexte werden im WordPress-Backend gepflegt.
 
@@ -16,7 +16,7 @@ Das Plugin kommt ohne Konto bei einem Drittanbieter, Lizenzschlüssel oder exter
 
 ## Schnellstart
 
-1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.5.0.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
+1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.5.1.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
 2. In WordPress **Plugins → Installieren → Plugin hochladen** öffnen, ZIP auswählen und das Plugin aktivieren. Die erste Aktivierung schaltet den Wartungsmodus noch **nicht** ein.
 3. Unter **Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
 4. **Entwurf speichern**, dann die geschützte Vorschau öffnen und die Darstellung prüfen.
@@ -33,6 +33,7 @@ Vor einer produktiven Installation zuerst auf einer Testwebsite prüfen und Date
 | Inhalte | Marke, Überschrift, Beschreibung, Zusatzhinweise, Kontaktlinks und geplanter Rückkehrzeitpunkt |
 | Vorschau | Administratorzugang, kurzlebiger Einmal-Token und unmittelbare Vorschau vieler Text- und Designänderungen |
 | Veröffentlichung | Getrennter Entwurf, veröffentlichter Stand und Wartungsschalter; ein vorheriger Stand zur Wiederherstellung |
+| Statusschalter | Sichtbar im Plugin-Backend und, wenn die Statusplakette aktiviert ist, auch auf der öffentlichen Website ausschließlich für Administratoren |
 | Zugänge | Separate Administrator-Ausnahme, Benutzer-/Rollenregeln, IPv4-/IPv6-Adressen und begrenzte CIDR-Netze |
 | Rechtstexte | Bis zu fünf eigene Textblöcke, Footerlinks, Dialoge oder ausdrücklich freigegebene WordPress-Seiten |
 | Fehlerseiten | Getrennte 404- und 403-Seiten mit drei Vorlagen, Texten, Farben, Entwurf und Vorschau |

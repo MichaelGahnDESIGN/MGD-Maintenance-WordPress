@@ -28,6 +28,7 @@ final class Plugin {
 		add_action( 'admin_post_mgms_error_save', array( Error_Pages_Admin::class, 'save' ) );
 		add_action( 'admin_post_mgms_error_preview', array( Error_Pages_Admin::class, 'preview' ) );
 		add_action( 'admin_notices', array( Admin::class, 'conflicts' ) );
+		add_action( 'wp_enqueue_scripts', array( self::class, 'badge_assets' ) );
 		add_action( 'init', array( self::class, 'cache' ), 1 );
 		add_action( 'template_redirect', array( self::class, 'frontend' ), 0 );
 		add_filter( 'template_include', array( Error_Pages::class, 'template' ), 99 );
@@ -35,6 +36,7 @@ final class Plugin {
 		add_filter( 'robots_txt', array( self::class, 'robots' ), 99, 1 );
 		add_filter( 'rest_pre_dispatch', array( self::class, 'rest' ), 99, 1 );
 		add_action( 'wp_footer', array( self::class, 'badge' ) );
+		add_action( 'wp_ajax_mgms_frontend_state', array( self::class, 'frontend_state' ) );
 	}
 	public static function cache(): void {
 		if ( get_option( Settings::STATE ) && ! defined( 'DONOTCACHEPAGE' ) ) {
@@ -66,12 +68,51 @@ final class Plugin {
 			return "User-agent: *\nDisallow: /\n"; }
 		return $output;
 	}
+	/** Lädt die kleine Steuerung nur für berechtigte Administratorkonten. */
+	public static function badge_assets(): void {
+		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) || ! Settings::get( true )['badge'] ) {
+			return;
+		}
+		wp_enqueue_style( 'mgms-status-control', MGMS_URL . 'assets/status-control.css', array(), MGMS_VERSION );
+		wp_enqueue_script( 'mgms-status-control', MGMS_URL . 'assets/status-control.js', array(), MGMS_VERSION, true );
+		wp_localize_script(
+			'mgms-status-control',
+			'mgmsStatusControl',
+			array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'mgms_frontend_state' ),
+				'error'   => 'Der Wartungsmodus konnte nicht geändert werden. Bitte erneut versuchen.',
+			)
+		);
+	}
+	/** Ändert den Status aus der geschützten Frontend-Steuerung. */
+	public static function frontend_state(): void {
+		check_ajax_referer( 'mgms_frontend_state', 'nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Keine Berechtigung.' ), 403 );
+		}
+		$enabled = ! empty( wp_unslash( $_POST['enabled'] ?? '' ) );
+		update_option( Settings::STATE, $enabled, false );
+		wp_send_json_success(
+			array(
+				'enabled' => $enabled,
+				'label'   => $enabled ? 'AN' : 'AUS',
+				'message' => $enabled ? 'Wartungsmodus ist jetzt AN.' : 'Wartungsmodus ist jetzt AUS.',
+			)
+		);
+	}
 	public static function badge(): void {
 		$s = Settings::get();
-		if ( ! get_option( Settings::STATE ) || ! $s['badge'] || ! is_user_logged_in() || ! Access::allowed( $s ) ) {
+		if ( ! $s['badge'] || ! is_user_logged_in() || ! current_user_can( 'manage_options' ) || ( get_option( Settings::STATE ) && ! Access::allowed( $s ) ) ) {
 			return; }
 		$position = explode( '-', $s['badge_position'] );
-		$css      = 'position:fixed;z-index:99999;' . $position[0] . ':' . ( 'top' === $position[0] ? '52' : '12' ) . 'px;' . $position[1] . ':12px;padding:8px 12px;border-radius:8px;max-width:calc(100vw - 48px);pointer-events:none;background:' . sanitize_hex_color( $s['badge_color'] ) . ';color:' . sanitize_hex_color( $s['badge_text'] ) . ';font: ' . absint( $s['badge_size'] ) . 'px/1.4 system-ui,sans-serif';
-		echo '<span class="mgms-badge" style="' . esc_attr( $css ) . '">Wartungsmodus aktiv</span>';
+		$enabled  = (bool) get_option( Settings::STATE );
+		$css      = 'position:fixed;z-index:99999;' . $position[0] . ':' . ( 'top' === $position[0] ? '52' : '12' ) . 'px;' . $position[1] . ':12px;--mgms-control-background:' . sanitize_hex_color( $s['badge_color'] ) . ';--mgms-control-text:' . sanitize_hex_color( $s['badge_text'] ) . ';font-size:' . absint( $s['badge_size'] ) . 'px';
+		?>
+		<form class="mgms-status-control" style="<?php echo esc_attr( $css ); ?>" data-mgms-status-control>
+			<label for="mgms-frontend-enabled"><span>Wartungsmodus</span><strong data-state-label><?php echo $enabled ? 'AN' : 'AUS'; ?></strong><input id="mgms-frontend-enabled" type="checkbox" <?php checked( $enabled ); ?>><span class="mgms-status-switch" aria-hidden="true"></span></label>
+			<span class="screen-reader-text" data-status-message aria-live="polite"></span>
+		</form>
+		<?php
 	}
 }

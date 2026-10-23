@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.5.1 – 23.10.2026
+
+- Die Statusplakette auf der öffentlichen Website ist für Administratoren jetzt ein klarer AN/AUS-Schalter am selben Platz.
+- Die Änderung läuft ohne Seitenwechsel über einen WordPress-Nonce und prüft weiterhin `manage_options`; Besucher und normale Konten sehen keine Steuerung.
+- JavaScript-Prüfung um die neue Statussteuerung ergänzt.
+
 ## 0.5.0 – 23.10.2026
 
 - Wartungsseite unterstützt im Markenbereich nur Text, nur Logo oder Text und Logo.

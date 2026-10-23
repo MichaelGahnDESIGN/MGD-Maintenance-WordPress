@@ -92,7 +92,7 @@ final class Plugin {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array( 'message' => 'Keine Berechtigung.' ), 403 );
 		}
-		$enabled = ! empty( wp_unslash( $_POST['enabled'] ?? '' ) );
+		$enabled = '1' === sanitize_text_field( wp_unslash( $_POST['enabled'] ?? '' ) );
 		update_option( Settings::STATE, $enabled, false );
 		wp_send_json_success(
 			array(

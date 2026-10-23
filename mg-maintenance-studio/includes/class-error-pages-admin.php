@@ -28,7 +28,7 @@ final class Error_Pages_Admin {
 			wp_die( 'Der Entwurf wurde inzwischen geändert. Bitte die Seite neu laden.', '', array( 'response' => 409 ) );
 		}
 		// Jedes Feld wird vor dem Speichern einzeln geprüft.
-		$settings = Error_Pages::sanitize( (array) wp_unslash( $_POST['settings'] ?? array() ) );
+		$settings = Error_Pages::sanitize( map_deep( (array) wp_unslash( $_POST['settings'] ?? array() ), 'sanitize_textarea_field' ) );
 		if ( is_wp_error( $settings ) ) {
 			wp_die( esc_html( implode( ' ', $settings->get_error_messages() ) ), '', array( 'response' => 400, 'back_link' => true ) );
 		}

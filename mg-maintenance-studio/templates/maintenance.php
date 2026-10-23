@@ -69,16 +69,16 @@ if ( $s['phone'] ) :
 </main>
 <footer class="site-footer"><nav aria-label="Rechtliche Hinweise">
 <?php
-foreach ( $legal as $index => $row ) :
+foreach ( $legal as $mgms_index => $mgms_row ) :
 	?>
 	<?php
-	if ( $row['footer'] ) :
+	if ( $mgms_row['footer'] ) :
 		?>
-	<a href="<?php echo esc_url( $row['page'] ? get_permalink( $row['page'] ) : '#legal-' . $index ); ?>"
+	<a href="<?php echo esc_url( $mgms_row['page'] ? get_permalink( $mgms_row['page'] ) : '#legal-' . $mgms_index ); ?>"
 		<?php
-		if ( $row['modal'] && ! $row['page'] ) :
+		if ( $mgms_row['modal'] && ! $mgms_row['page'] ) :
 			?>
-	data-modal="legal-<?php echo (int) $index; ?>"<?php endif; ?>><?php echo esc_html( $row['title'] ); ?></a><?php endif; ?><?php endforeach; ?>
+	data-modal="legal-<?php echo (int) $mgms_index; ?>"<?php endif; ?>><?php echo esc_html( $mgms_row['title'] ); ?></a><?php endif; ?><?php endforeach; ?>
 </nav>
 <?php
 if ( $s['credit'] ) :
@@ -95,12 +95,12 @@ if ( $s['credit'] ) :
 </footer>
 <div class="legal-sections">
 <?php
-foreach ( $legal as $index => $row ) :
+foreach ( $legal as $mgms_index => $mgms_row ) :
 	?>
 	<?php
-	if ( ! $row['page'] ) :
+	if ( ! $mgms_row['page'] ) :
 		?>
-	<section class="legal" id="legal-<?php echo (int) $index; ?>" aria-labelledby="legal-title-<?php echo (int) $index; ?>"><h2 id="legal-title-<?php echo (int) $index; ?>"><?php echo esc_html( $row['title'] ); ?></h2><div class="legal-content"><?php echo wp_kses_post( wpautop( $row['content'] ) ); ?></div><a class="legal-back" href="#main">Zurück zum Inhalt</a></section><?php endif; ?><?php endforeach; ?>
+	<section class="legal" id="legal-<?php echo (int) $mgms_index; ?>" aria-labelledby="legal-title-<?php echo (int) $mgms_index; ?>"><h2 id="legal-title-<?php echo (int) $mgms_index; ?>"><?php echo esc_html( $mgms_row['title'] ); ?></h2><div class="legal-content"><?php echo wp_kses_post( wpautop( $mgms_row['content'] ) ); ?></div><a class="legal-back" href="#main">Zurück zum Inhalt</a></section><?php endif; ?><?php endforeach; ?>
 </div>
 </div>
 </body></html>

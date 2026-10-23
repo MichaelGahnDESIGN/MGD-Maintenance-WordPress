@@ -9,14 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <p class="mgms-editor-breadcrumb"><a href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ); ?>">Übersicht</a><span aria-hidden="true">/</span><span>Editor</span></p>
 <?php
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Feste Meldungsauswahl ohne Zustandsänderung.
-$notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( $notices[ $notice ] ) ) :
+$mgms_notice = sanitize_key( wp_unslash( $_GET['mgms_notice'] ?? '' ) ); if ( isset( $notices[ $mgms_notice ] ) ) :
 	?>
-	<div class="notice notice-success" role="status"><p><?php echo esc_html( $notices[ $notice ] ); ?></p></div><?php endif; ?>
+	<div class="notice notice-success" role="status"><p><?php echo esc_html( $notices[ $mgms_notice ] ); ?></p></div><?php endif; ?>
 <nav class="studio-tabs" aria-label="Einstellungsbereiche">
 <?php
-foreach ( $tabs as $i => $panel_label ) :
+foreach ( $tabs as $mgms_i => $mgms_panel_label ) :
 	?>
-	<a href="#panel-<?php echo (int) $i; ?>"><?php echo esc_html( $panel_label ); ?></a><?php endforeach; ?></nav>
+	<a href="#panel-<?php echo (int) $mgms_i; ?>"><?php echo esc_html( $mgms_panel_label ); ?></a><?php endforeach; ?></nav>
 <section class="studio-panel" id="panel-0"><h2>Status der Website</h2><p>Öffentliche Website: <strong><?php echo $enabled ? 'Wartungsseite gemäß veröffentlichten Zugriffsregeln' : 'Normale Website'; ?></strong></p>
 <div class="overview-grid"><div><small>Veröffentlichte Vorlage</small><strong><?php echo esc_html( Admin::presets()[ $live['preset'] ]['name'] ?? 'Eigene Gestaltung' ); ?></strong></div><div><small>Rechtstexte</small><strong><?php echo count( array_filter( $live['legal'], static fn( $r ) => $r['enabled'] && ( $r['content'] || $r['page'] ) ) ) ? 'Eingerichtet · Inhalt selbst prüfen' : 'Noch nicht eingerichtet'; ?></strong></div><div><small>IP-Freigaben</small><strong><?php echo $live['ip_enabled'] ? 'Aktiv' : 'Inaktiv'; ?></strong></div><div><small>Benutzerzugriff</small><strong><?php echo esc_html( Schema::fields()['users'][4][ $live['users'] ] ); ?> · Admin-Ausnahme <?php echo $live['admin_bypass'] ? 'an' : 'aus'; ?></strong></div></div>
 <p class="studio-warning">Seiten-Caches und CDNs können PHP umgehen. Nach jeder Statusänderung Cache gezielt leeren und anonym prüfen. Eine Plugin-Deaktivierung beendet die Ausgabe; der gespeicherte Status bleibt für eine Reaktivierung erhalten.</p>
@@ -30,71 +30,71 @@ if ( '503' !== $live['status'] ) :
 <div class="editor-layout"><form id="mgms-editor" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 <?php wp_nonce_field( 'mgms_save' ); ?><input type="hidden" name="action" value="mgms_save"><input type="hidden" name="return_page" value="<?php echo esc_attr( $page_slug ); ?>"><input type="hidden" name="revision" value="<?php echo esc_attr( Admin::revision() ); ?>"><input type="hidden" id="mgms-preset" name="settings[preset]" value="<?php echo esc_attr( $s['preset'] ); ?>">
 <?php
-foreach ( $tabs as $i => $panel_label ) :
+foreach ( $tabs as $mgms_i => $mgms_panel_label ) :
 	?>
 	<?php
-	if ( 0 === $i || 'Updates' === $panel_label ) {
+	if ( 0 === $mgms_i || 'Updates' === $mgms_panel_label ) {
 		continue; }
 	?>
-<section class="studio-panel" id="panel-<?php echo (int) $i; ?>"><h2><?php echo esc_html( $panel_label ); ?></h2>
+<section class="studio-panel" id="panel-<?php echo (int) $mgms_i; ?>"><h2><?php echo esc_html( $mgms_panel_label ); ?></h2>
 	<?php
-	if ( 'Design' === $panel_label ) {
+	if ( 'Design' === $mgms_panel_label ) {
 		require MGMS_DIR . 'templates/admin-design.php';
 	}
 	?>
 	<?php
-	if ( 'IP-Freigaben' === $panel_label ) :
+	if ( 'IP-Freigaben' === $mgms_panel_label ) :
 		?>
 		<p>Erkannte IP dieser Admin-Anfrage: <code><?php echo esc_html( IP::detect( $_SERVER, $live['proxies'] ) ); ?></code></p><p>Freigaben umgehen nur die Wartungsseite, niemals die WordPress-Anmeldung. IPv4-Netze unter /24 und IPv6-Netze unter /64 werden abgelehnt. Proxy-Einträge nur nach Prüfung der eigenen Infrastruktur setzen.</p><?php endif; ?>
 	<?php
-	if ( 'SEO und Crawler' === $panel_label ) :
+	if ( 'SEO und Crawler' === $mgms_panel_label ) :
 		?>
 		<p>Meta-Robots und X-Robots-Tag sind immer aktiv. 503 mit Retry-After ist die empfohlene Einstellung für vorübergehende Wartung. robots.txt ist freiwillig beachtet und sperrt keine Bots technisch. Bei Disallow können Crawler das noindex-Signal nicht lesen. Physische robots.txt-Dateien werden nicht verändert.</p><?php endif; ?>
 	<?php
-	if ( 'Erweitert' === $panel_label ) :
+	if ( 'Erweitert' === $mgms_panel_label ) :
 		?>
 		<p>Kein Tracking, keine Telemetrie, kein Kontaktformular. Die Schriftdatei muss bereits als lokale WOFF2-Datei in der Mediathek verfügbar sein. Das Plugin erweitert keine Upload-Rechte.</p><?php endif; ?>
 	<?php
-	foreach ( Schema::fields() as $key => $field ) {
-		if ( $field[3] === $panel_label && 'Design' !== $panel_label ) {
-			Admin::field( $key, $field, $s ); }
+	foreach ( Schema::fields() as $mgms_key => $mgms_field ) {
+		if ( $mgms_field[3] === $mgms_panel_label && 'Design' !== $mgms_panel_label ) {
+			Admin::field( $mgms_key, $mgms_field, $s ); }
 	}
 	?>
 	<?php
-	if ( 'Rechtstexte' === $panel_label ) :
+	if ( 'Rechtstexte' === $mgms_panel_label ) :
 		?>
 		<p>Nur eigene Betreibertexte eintragen. Dieses Plugin ersetzt keine Rechtsberatung. HTML wird auf sichere Textformatierung und Links begrenzt. Eine verlinkte reguläre Seite bleibt während Wartung öffentlich erreichbar und verwendet ihr Theme.</p>
 		<?php
-		foreach ( array( 'Impressum', 'Datenschutz', 'Cookie-Hinweise', 'Weitere rechtliche Hinweise', 'Wartungshinweis' ) as $index => $legal_title ) :
+		foreach ( array( 'Impressum', 'Datenschutz', 'Cookie-Hinweise', 'Weitere rechtliche Hinweise', 'Wartungshinweis' ) as $mgms_index => $mgms_legal_title ) :
 			?>
 			<?php
-			$row    = $s['legal'][ $index ] ?? array(
-				'title'   => $legal_title,
+			$mgms_row    = $s['legal'][ $mgms_index ] ?? array(
+				'title'   => $mgms_legal_title,
 				'content' => '',
 				'enabled' => false,
 				'footer'  => true,
 				'modal'   => true,
-				'order'   => $index,
+				'order'   => $mgms_index,
 				'page'    => 0,
 			);
-			$prefix = 'settings[legal][' . $index . ']';
+			$mgms_prefix = 'settings[legal][' . $mgms_index . ']';
 			?>
-<fieldset class="legal-editor"><legend><?php echo esc_html( $legal_title ); ?></legend>
-<label>Titel <input type="text" name="<?php echo esc_attr( $prefix . '[title]' ); ?>" value="<?php echo esc_attr( $row['title'] ); ?>"></label>
-<label>Eigener Inhalt (einfaches HTML möglich)<textarea rows="6" name="<?php echo esc_attr( $prefix . '[content]' ); ?>"><?php echo esc_textarea( $row['content'] ); ?></textarea></label>
+<fieldset class="legal-editor"><legend><?php echo esc_html( $mgms_legal_title ); ?></legend>
+<label>Titel <input type="text" name="<?php echo esc_attr( $mgms_prefix . '[title]' ); ?>" value="<?php echo esc_attr( $mgms_row['title'] ); ?>"></label>
+<label>Eigener Inhalt (einfaches HTML möglich)<textarea rows="6" name="<?php echo esc_attr( $mgms_prefix . '[content]' ); ?>"><?php echo esc_textarea( $mgms_row['content'] ); ?></textarea></label>
 			<?php
 			foreach ( array(
 				'enabled' => 'Aktiv',
 				'footer'  => 'Im Footer',
 				'modal'   => 'Als Modal',
-			) as $key => $label ) :
+			) as $mgms_key => $mgms_label ) :
 				?>
-																			<label><input type="checkbox" name="<?php echo esc_attr( $prefix . '[' . $key . ']' ); ?>" value="1" <?php checked( $row[ $key ] ); ?>><?php echo esc_html( $label ); ?></label><?php endforeach; ?>
-<label>Sortierung <input type="number" min="0" max="99" name="<?php echo esc_attr( $prefix . '[order]' ); ?>" value="<?php echo (int) $row['order']; ?>"></label>
-<label>ID einer regulären WordPress-Seite (0 = eigener Text) <input type="number" min="0" name="<?php echo esc_attr( $prefix . '[page]' ); ?>" value="<?php echo (int) $row['page']; ?>"></label>
+																			<label><input type="checkbox" name="<?php echo esc_attr( $mgms_prefix . '[' . $mgms_key . ']' ); ?>" value="1" <?php checked( $mgms_row[ $mgms_key ] ); ?>><?php echo esc_html( $mgms_label ); ?></label><?php endforeach; ?>
+<label>Sortierung <input type="number" min="0" max="99" name="<?php echo esc_attr( $mgms_prefix . '[order]' ); ?>" value="<?php echo (int) $mgms_row['order']; ?>"></label>
+<label>ID einer regulären WordPress-Seite (0 = eigener Text) <input type="number" min="0" name="<?php echo esc_attr( $mgms_prefix . '[page]' ); ?>" value="<?php echo (int) $mgms_row['page']; ?>"></label>
 </fieldset><?php endforeach; ?><?php endif; ?>
 	<?php
-	if ( 'Hilfe' === $panel_label ) :
+	if ( 'Hilfe' === $mgms_panel_label ) :
 		?>
 		<ol><li>Entwurf gestalten, eigene Rechtstexte eintragen und speichern.</li><li>Geschützte Vorschau öffnen. Änderungen im Formular aktualisieren Text und Design sofort; strukturelle Änderungen nach erneutem Speichern und Neuladen prüfen.</li><li>Veröffentlichung ausdrücklich bestätigen. Damit ändern Sie den für Wartung bereitstehenden Stand.</li><li>Wartungsmodus separat in der Übersicht einschalten und anonym prüfen.</li></ol><p>Im Plugin-Verzeichnis liegt die Dokumentation mit Installation, Datenschutz, Abnahme und Rückfallanleitung. Multisite: je Website aktivieren, keine Netzwerkaktivierung. REST: anonyme Zugriffe werden während Wartung abgewiesen; angemeldete API-Nutzer, Admin, Login, Cron und AJAX behalten ihre eigenen WordPress-Berechtigungen. Statische Dateien, XML-RPC und Server-Caches werden nicht abgeschirmt. Dieses Plugin ist kein Zugriffsschutz für vertrauliche Inhalte.</p><?php endif; ?>
 </section><?php endforeach; ?>

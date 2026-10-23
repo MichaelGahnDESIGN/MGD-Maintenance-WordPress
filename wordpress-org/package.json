@@ -1,0 +1,7 @@
+{
+  "slug": "mg-maintenance-studio",
+  "source": "mg-maintenance-studio",
+  "include": [
+    "."
+  ]
+}

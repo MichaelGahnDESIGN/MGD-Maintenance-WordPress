@@ -12,3 +12,6 @@ artifacts/
 
 __pycache__/
 *.py[cod]
+
+/build/wordpress-org/
+/artifacts/wordpress-org/

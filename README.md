@@ -1,3 +1,5 @@
+> **WordPress.org-Kandidat:** Dieser Branch verwendet native Verzeichnis-Updates. Paketbau, Prüfergebnisse und Wechselhinweise: [WordPress.org-Vorbereitung](docs/WORDPRESS-ORG.md). Die nachfolgende bisherige Dokumentation beschreibt auch die separate GitHub-Ausgabe.
+
 <p align="center"><img src="mg-maintenance-studio/assets/icon-256.png" width="88" height="88" alt="MG Maintenance Studio – Plugin-Icon"></p>
 <h1 align="center">MG Maintenance Studio</h1>
 <p align="center"><strong>Eine gute Wartungsseite gehört zur Website.</strong><br>Gestalten, geschützt prüfen und bewusst veröffentlichen – direkt in WordPress.</p>

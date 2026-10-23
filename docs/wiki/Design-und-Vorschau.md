@@ -17,9 +17,9 @@ Die Vorlagen setzen Designwerte im Formular. Texte und Zugangsregeln bleiben erh
 
 ## Was sich gestalten lässt
 
-Markenname, kurze Einordnung, Überschrift, Beschreibung und Zusatzhinweise bilden die Hauptmitteilung. Dazu kommen Farben für Hintergrund, Text, Akzente und Schaltflächen, maximale Breite, Ausrichtung, Rahmen, Rundung, optionaler Schatten sowie getrennte Innenabstände für Desktop, Tablet und Smartphone.
+Markenname, kurze Einordnung, Überschrift, Beschreibung und Zusatzhinweise bilden die Hauptmitteilung. Im Bereich **Markenbereich** wählen Sie unabhängig zwischen **nur Text**, **nur Logo** und **Logo und Text**. „Nur Logo“ verlangt ein ausgewähltes lokales Bild. Dazu kommen Farben für Hintergrund, Text, Akzente und Schaltflächen, maximale Breite, Ausrichtung, Rahmen, Rundung, optionaler Schatten sowie getrennte Innenabstände für Desktop, Tablet und Smartphone.
 
-Logo und Hintergrundbild stammen aus der WordPress-Mediathek. Unterstützt werden JPEG, PNG, WebP, GIF und AVIF. Die Datei muss denselben Ursprung wie die Website verwenden: Protokoll, Hostname und gegebenenfalls Port müssen übereinstimmen. Ausgelagerte CDN-Medien werden damit nicht akzeptiert.
+Logo und Hintergrundbild stammen aus der WordPress-Mediathek. Nach der Auswahl erscheint jeweils eine Bildvorschau; die technische WordPress-ID bleibt verborgen. Unterstützt werden JPEG, PNG, WebP, GIF und AVIF. Die Datei muss denselben Ursprung wie die Website verwenden: Protokoll, Hostname und gegebenenfalls Port müssen übereinstimmen. Ausgelagerte CDN-Medien werden damit nicht akzeptiert.
 
 Systemschriften funktionieren ohne Download. Für eine eigene Schrift kann ein bereits erlaubter lokaler WOFF2-Anhang verwendet werden. Das Plugin erweitert weder Uploadrechte noch erlaubte WordPress-Dateitypen. Bild- und Schriftlizenzen liegen beim Betreiber.
 

@@ -2,7 +2,7 @@
 Requires at least: 6.5
 Tested up to: 7.1.3
 Requires PHP: 8.1
-Stable tag: 0.4.0
+Stable tag: 0.5.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -26,6 +26,9 @@ Vor späterem Live-Einsatz: Backup, Wiederherstellung, Testumgebung und Freigabe
 Bei Reaktivierung bleibt der zuvor bewusst gesetzte Wartungsstatus erhalten.
 
 == Changelog ==
+= 0.5.0 =
+Markenmodus für Text, Logo oder beides, sichtbare Medienvorschauen, Statusschalter im Kopf und überarbeitete Designauswahl.
+
 = 0.4.0 =
 Dashboard, Hauptmenü mit Untermenüs, vier Wartungsseiten-Layouts und direkte Live-Vorschau.
 

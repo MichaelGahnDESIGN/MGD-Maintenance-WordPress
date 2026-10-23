@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 ?>
 <div class="wrap mgms-admin" data-initial-panel="<?php echo (int) $initial_panel; ?>">
-<header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>MG Maintenance Studio</h1><p>Michael Gahn DESIGN <span aria-hidden="true">·</span> Version <?php echo esc_html( MGMS_VERSION ); ?></p></div></div><span class="state-pill"><?php echo $enabled ? 'Wartungsmodus aktiv' : 'Wartungsmodus inaktiv'; ?></span></header>
+<header class="studio-header"><div class="studio-brand"><img src="<?php echo esc_url( MGMS_URL . 'assets/icon.svg' ); ?>" width="56" height="56" alt=""><div><h1>MG Maintenance Studio</h1><p>Michael Gahn DESIGN <span aria-hidden="true">·</span> Version <?php echo esc_html( MGMS_VERSION ); ?></p></div></div><?php Admin::status_switch( $page_slug, $enabled ); ?></header>
 <p class="mgms-editor-breadcrumb"><a href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-dashboard' ) ); ?>">Übersicht</a><span aria-hidden="true">/</span><span>Editor</span></p>
 <?php
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Feste Meldungsauswahl ohne Zustandsänderung.

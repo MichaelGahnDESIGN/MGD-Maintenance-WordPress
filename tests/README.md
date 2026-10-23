@@ -43,3 +43,7 @@ der Download wird lokal ersetzt. Niemals auf einer bestehenden Website ausführe
 ## Fehlerseiten 0.3.2
 
 `php tests/error-pages.php` prüft Standardzustand, Validierung, Kontrast, Vorrang des Wartungsmodus sowie die Ausschlüsse für Anmeldung und Admin ohne Datenbank. Eine echte WordPress- und Theme-Prüfung ist vor produktivem Einsatz zusätzlich nötig.
+
+## Markenmodus und Medienvorschau 0.5.0
+
+`tests/branding.php` in den isolierten Container kopieren und mit `MGMS_TEST=isolated-local php /tmp/mgms-branding.php` ausführen. Der Test legt ausschließlich ein lokales Ein-Pixel-Testbild an, prüft die drei Markenmodi und schreibt danach einen veröffentlichten Testentwurf für die Browseransicht. Die Wegwerf-Datenbank wird beim Entfernen des Compose-Projekts vollständig verworfen.

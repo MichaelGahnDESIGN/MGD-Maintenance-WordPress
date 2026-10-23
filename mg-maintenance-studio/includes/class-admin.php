@@ -5,14 +5,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 final class Admin {
 	private static array $hooks = array();
-	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-updates' );
+	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-error-pages', 'mgms-updates' );
 	public static function menu(): void {
 		// Die alte Einstellungs-URL bleibt für gespeicherte Links gültig.
 		self::$hooks['editor'] = array_filter( array(
 			add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ),
 		) );
 		remove_submenu_page( 'options-general.php', 'mg-maintenance-studio' );
-		self::$hooks['dashboard'] = add_menu_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 59 );
+		// Position 99 hält den eigenen Bereich am Ende der Hauptnavigation.
+		self::$hooks['dashboard'] = add_menu_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 99 );
 		add_submenu_page( 'mgms-dashboard', 'Übersicht', 'Übersicht', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ) );
 		foreach ( array( 'mgms-editor' => 'Wartungsseite', 'mgms-design' => 'Layouts & Design', 'mgms-access' => 'Zugriffe' ) as $slug => $label ) {
 			self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', $label, $label, 'manage_options', $slug, array( self::class, 'page' ) );
@@ -24,11 +25,11 @@ final class Admin {
 		if ( ! in_array( $hook, array_merge( self::$hooks['editor'] ?? array(), array( self::$hooks['dashboard'] ?? '', self::$hooks['errors'] ?? '' ) ), true ) ) {
 			return; }
 		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
+		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), MGMS_VERSION, true );
 		if ( ! in_array( $hook, self::$hooks['editor'] ?? array(), true ) ) {
 			return;
 		}
 		wp_enqueue_media();
-		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), MGMS_VERSION, true );
 		wp_localize_script( 'mgms-admin', 'mgmsPresets', self::presets() );
 	}
 	public static function presets(): array {
@@ -99,7 +100,9 @@ final class Admin {
 	public static function state(): void {
 		self::guard();
 		check_admin_referer( 'mgms_state' );
-		if ( empty( $_POST['confirm_state'] ) ) {
+		$action = sanitize_key( wp_unslash( $_POST['intent'] ?? '' ) );
+		// Der Kopf-Schalter ist selbst die ausdrückliche Handlung; die anderen Aktionen behalten ihre Bestätigung.
+		if ( 'set_state' !== $action && empty( $_POST['confirm_state'] ) ) {
 			wp_die(
 				'Bitte Auswirkung bestätigen.',
 				'',
@@ -108,8 +111,9 @@ final class Admin {
 					'back_link' => true,
 				)
 			); }
-		$action = sanitize_key( wp_unslash( $_POST['intent'] ?? '' ) );
-		if ( 'enable' === $action || 'disable' === $action ) {
+		if ( 'set_state' === $action ) {
+			update_option( Settings::STATE, ! empty( $_POST['enabled'] ), false );
+		} elseif ( 'enable' === $action || 'disable' === $action ) {
 			update_option( Settings::STATE, 'enable' === $action, false );
 		} elseif ( 'restore_draft' === $action ) {
 			$previous = get_option( 'mgms_previous_draft' );
@@ -156,6 +160,16 @@ final class Admin {
 		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4, 'mgms-updates' => 9 )[ $page_slug ] ?? 0;
 		require MGMS_DIR . 'templates/admin.php';
 	}
+	/** Einheitlicher, bewusst sichtbarer Statusschalter für alle Pluginseiten. */
+	public static function status_switch( string $return_page, bool $enabled ): void {
+		?>
+		<form class="mgms-header-switch" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<?php wp_nonce_field( 'mgms_state' ); ?>
+			<input type="hidden" name="action" value="mgms_state"><input type="hidden" name="return_page" value="<?php echo esc_attr( $return_page ); ?>"><input type="hidden" name="intent" value="set_state">
+			<label for="mgms-header-enabled"><span>Wartungsmodus</span><strong data-state-label><?php echo $enabled ? 'AN' : 'AUS'; ?></strong><input id="mgms-header-enabled" type="checkbox" name="enabled" value="1" <?php checked( $enabled ); ?>><span class="mgms-switch-ui" aria-hidden="true"></span></label><button class="screen-reader-text" type="submit">Wartungsmodus speichern</button>
+		</form>
+		<?php
+	}
 	public static function field( string $key, array $field, array $s ): void {
 		$name  = 'settings[' . $key . ']';
 		$value = $s[ $key ];
@@ -178,6 +192,9 @@ final class Admin {
 			echo '</select>';
 		} else {
 			$type = in_array( $field[1], array( 'color', 'number', 'email' ), true ) ? $field[1] : 'text';
+			if ( 'image' === $field[1] ) {
+				$type = 'hidden';
+			}
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Attribute werden oben einzeln mit esc_attr aufgebaut.
 			echo '<input type="' . esc_attr( $type ) . '"' . $attrs . ' value="' . esc_attr( $value ) . '"';
 			if ( 'number' === $type ) {
@@ -189,7 +206,7 @@ final class Admin {
 				$image = Settings::media_url( absint( $value ) );
 				echo '<div class="mgms-image-selection" id="mgms-' . esc_attr( $key ) . '-preview">';
 				if ( $image ) {
-					echo '<img src="' . esc_url( $image ) . '" alt="Ausgewählte Mediendatei">';
+					echo '<img src="' . esc_url( $image ) . '" alt="Ausgewählte Mediendatei"><span class="mgms-image-selection__label">Bild aus der Mediathek ausgewählt</span>';
 				} else {
 					echo '<span>Kein Bild gewählt</span>';
 				}

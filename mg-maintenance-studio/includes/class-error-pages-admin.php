@@ -11,6 +11,7 @@ final class Error_Pages_Admin {
 		}
 		$settings = Error_Pages::get( true );
 		$live = Error_Pages::get();
+		$enabled = (bool) get_option( Settings::STATE );
 		require MGMS_DIR . 'templates/error-pages-admin.php';
 	}
 

@@ -103,6 +103,9 @@ final class Settings {
 					$result[ $key ] = sanitize_text_field( $value );
 			}
 		}
+		if ( 'logo' === $result['brand_presentation'] && ! $result['logo'] ) {
+			$errors->add( 'brand_presentation', 'Nur Logo benötigt ein Bild aus der Mediathek.' );
+		}
 		$result['preset'] = sanitize_key( self::text( $input['preset'] ?? 'custom' ) );
 		foreach ( array_slice( (array) ( $input['legal'] ?? array() ), 0, 5 ) as $index => $row ) {
 			if ( ! is_array( $row ) ) {

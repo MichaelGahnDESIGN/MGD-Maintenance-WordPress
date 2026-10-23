@@ -1,5 +1,12 @@
 (() => {
   "use strict";
+  const headerToggle = document.querySelector(".mgms-header-switch input[type=checkbox]");
+  headerToggle?.addEventListener("change", (event) => {
+    const form = event.currentTarget.form;
+    form.querySelector("[data-state-label]").textContent = event.currentTarget.checked ? "AN" : "AUS";
+    // Der sichtbare Schalter ist die ausdrückliche, nonce-geschützte Statusaktion.
+    form.requestSubmit();
+  });
   const editor = document.getElementById("mgms-editor");
   if (!editor) return;
   // Ohne JavaScript bleiben alle Bereiche über normale Anker erreichbar.
@@ -60,6 +67,7 @@
   );
   const frame = document.getElementById("mgms-preview");
   let dirty = false;
+  let submitting = false;
   const undo = [];
   const values = () =>
     Object.fromEntries(
@@ -120,10 +128,12 @@
       );
       return;
     }
+    // Ein echter Formularwechsel ist ein Speichern, kein Seitenverlust.
+    submitting = true;
     dirty = false;
   });
   window.addEventListener("beforeunload", (event) => {
-    if (dirty) {
+    if (dirty && !submitting) {
       event.preventDefault();
       event.returnValue = "";
     }

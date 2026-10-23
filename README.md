@@ -5,7 +5,7 @@
 
 ![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
-**WordPress ab 6.5 · PHP ab 8.1 · Version 0.4.0 · Deutsch · GPL-2.0-or-later**
+**WordPress ab 6.5 · PHP ab 8.1 · Version 0.5.0 · Deutsch · GPL-2.0-or-later**
 
 MG Maintenance Studio ersetzt die öffentliche Ansicht während Wartungsarbeiten durch eine eigene, anpassbare Seite. Besucher erhalten eine verständliche Mitteilung; berechtigte Personen können weiter an der Website arbeiten. Farben, Typografie, Logo, Kontaktmöglichkeiten und Rechtstexte werden im WordPress-Backend gepflegt.
 
@@ -16,7 +16,7 @@ Das Plugin kommt ohne Konto bei einem Drittanbieter, Lizenzschlüssel oder exter
 
 ## Schnellstart
 
-1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.4.0.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
+1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.5.0.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
 2. In WordPress **Plugins → Installieren → Plugin hochladen** öffnen, ZIP auswählen und das Plugin aktivieren. Die erste Aktivierung schaltet den Wartungsmodus noch **nicht** ein.
 3. Unter **Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
 4. **Entwurf speichern**, dann die geschützte Vorschau öffnen und die Darstellung prüfen.
@@ -29,7 +29,7 @@ Vor einer produktiven Installation zuerst auf einer Testwebsite prüfen und Date
 
 | Bereich | Möglichkeiten |
 |---|---|
-| Gestaltung | Vier Vorlagen mit vier Seitenlayouts, Farben, Logo, Hintergrundbild, Systemschriften oder vorhandene lokale WOFF2-Dateien, Ausrichtung, Container und geräteabhängige Abstände |
+| Gestaltung | Vier Vorlagen mit vier Seitenlayouts, Markenbereich als Text, Logo oder beides, sichtbare lokale Medienvorschauen, Farben, Systemschriften oder vorhandene lokale WOFF2-Dateien, Ausrichtung, Container und geräteabhängige Abstände |
 | Inhalte | Marke, Überschrift, Beschreibung, Zusatzhinweise, Kontaktlinks und geplanter Rückkehrzeitpunkt |
 | Vorschau | Administratorzugang, kurzlebiger Einmal-Token und unmittelbare Vorschau vieler Text- und Designänderungen |
 | Veröffentlichung | Getrennter Entwurf, veröffentlichter Stand und Wartungsschalter; ein vorheriger Stand zur Wiederherstellung |
@@ -119,7 +119,7 @@ python3 scripts/build-package.py
 
 ## Aktueller Stand
 
-Version 0.4.0 ergänzt Dashboard, Menüstruktur, vier Layouts und Live-Vorschau. Dashboard, Designeditor und Logo-/Hintergrundvorschau wurden in einer isolierten lokalen WordPress-Installation geprüft. Die 404-/403-Statusprüfungen stammen aus Version 0.3.2. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
+Version 0.5.0 ergänzt den Markenmodus, Medienkarten, einen kopfseitigen Wartungsschalter und präziser beschriebene Layoutvorlagen. Die automatischen Prüfungen bestätigen Syntax, abgesicherte Speicherung, Preset-Kompatibilität und Paketstruktur. Die frühere lokale WordPress-Sichtprüfung deckt Dashboard, Designeditor und Medienvorschau ab; die neuen Bedienelemente benötigen noch eine erneute Prüfung in einer isolierten WordPress-Installation. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
 
 Fehler ohne sensible Daten können über [GitHub Issues](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/issues) gemeldet werden. Für Sicherheitsprobleme gilt die [Security Policy](SECURITY.md).
 

@@ -1,0 +1,18 @@
+{
+  "name": "Nachtstudio",
+  "values": {
+    "layout": "poster",
+    "background": "#17201d",
+    "text": "#f3f3eb",
+    "accent": "#dce3ad",
+    "button": "#dce3ad",
+    "button_text": "#17201d",
+    "card": "#26322c",
+    "border_color": "#607163",
+    "font": "sans-serif",
+    "radius": 8,
+    "shadow": false,
+    "container": "plain",
+    "align": "left"
+  }
+}

@@ -26,6 +26,18 @@ final class Schema {
 			'retry'            => array( 'Retry-After in Sekunden', 'number', 3600, 'SEO und Crawler', array( 60, 86400 ) ),
 			'robots'           => array( 'Virtuelle robots.txt um Disallow ergänzen', 'checkbox', false, 'SEO und Crawler' ),
 			'brand'            => array( 'Markenname', 'text', 'Ihre Website', 'Design' ),
+			'layout'           => array(
+				'Seitenlayout',
+				'select',
+				'editorial',
+				'Design',
+				array(
+					'editorial' => 'Editorial – großzügig und linksbündig',
+					'centered'  => 'Zentriert – ruhig und fokussiert',
+					'split'     => 'Geteilt – Text und Informationen nebeneinander',
+					'poster'    => 'Poster – prägnante Botschaft',
+				),
+			),
 			'tagline'          => array( 'Untertitel', 'text', 'Wartungsarbeiten', 'Design' ),
 			'logo'             => array( 'Logo aus der Mediathek', 'image', 0, 'Design' ),
 			'logo_alt'         => array( 'Alternativtext des Logos', 'text', '', 'Design' ),

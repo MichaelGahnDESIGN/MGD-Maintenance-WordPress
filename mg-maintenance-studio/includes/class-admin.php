@@ -4,24 +4,36 @@ namespace MGMS;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 final class Admin {
+	private static array $hooks = array();
+	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-updates' );
 	public static function menu(): void {
-		add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) );
-		add_submenu_page( 'options-general.php', 'Fehlerseiten · Maintenance Studio', 'Fehlerseiten', 'manage_options', 'mgms-error-pages', array( Error_Pages_Admin::class, 'page' ) ); }
+		// Die alte Einstellungs-URL bleibt für gespeicherte Links gültig.
+		self::$hooks['editor'] = array_filter( array(
+			add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ),
+		) );
+		remove_submenu_page( 'options-general.php', 'mg-maintenance-studio' );
+		self::$hooks['dashboard'] = add_menu_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 59 );
+		add_submenu_page( 'mgms-dashboard', 'Übersicht', 'Übersicht', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ) );
+		foreach ( array( 'mgms-editor' => 'Wartungsseite', 'mgms-design' => 'Layouts & Design', 'mgms-access' => 'Zugriffe' ) as $slug => $label ) {
+			self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', $label, $label, 'manage_options', $slug, array( self::class, 'page' ) );
+		}
+		self::$hooks['errors'] = add_submenu_page( 'mgms-dashboard', 'Fehlerseiten', 'Fehlerseiten', 'manage_options', 'mgms-error-pages', array( Error_Pages_Admin::class, 'page' ) );
+		self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', 'Updates', 'Updates', 'manage_options', 'mgms-updates', array( self::class, 'page' ) );
+	}
 	public static function assets( string $hook ): void {
-		if ( ! in_array( $hook, array( 'settings_page_mg-maintenance-studio', 'settings_page_mgms-error-pages' ), true ) ) {
+		if ( ! in_array( $hook, array_merge( self::$hooks['editor'] ?? array(), array( self::$hooks['dashboard'] ?? '', self::$hooks['errors'] ?? '' ) ), true ) ) {
 			return; }
-		if ( 'settings_page_mgms-error-pages' === $hook ) {
-			wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
+		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
+		if ( ! in_array( $hook, self::$hooks['editor'] ?? array(), true ) ) {
 			return;
 		}
 		wp_enqueue_media();
-		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
 		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), MGMS_VERSION, true );
 		wp_localize_script( 'mgms-admin', 'mgmsPresets', self::presets() );
 	}
 	public static function presets(): array {
 		$out = array();
-		foreach ( array( 'elegant-gold', 'ruhiges-atelier', 'minimalistisch-hell' ) as $name ) {
+		foreach ( array( 'elegant-gold', 'ruhiges-atelier', 'minimalistisch-hell', 'nachtstudio' ) as $name ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Ausschließlich fest benannte lokale Preset-Dateien.
 			$out[ $name ] = json_decode( file_get_contents( MGMS_DIR . 'presets/' . $name . '.json' ), true ); }
 		return $out;
@@ -31,13 +43,17 @@ final class Admin {
 			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) ); }
 	}
 	private static function redirect( string $notice ): void {
+		$return_page = sanitize_key( wp_unslash( $_POST['return_page'] ?? 'mg-maintenance-studio' ) );
+		if ( ! in_array( $return_page, self::EDITOR_PAGES, true ) ) {
+			$return_page = 'mg-maintenance-studio';
+		}
 		wp_safe_redirect(
 			add_query_arg(
 				array(
-					'page'        => 'mg-maintenance-studio',
+					'page'        => $return_page,
 					'mgms_notice' => $notice,
 				),
-				admin_url( 'options-general.php' )
+				admin_url( 'mg-maintenance-studio' === $return_page ? 'options-general.php' : 'admin.php' )
 			)
 		);
 		exit;
@@ -136,6 +152,8 @@ final class Admin {
 			'published' => 'Einstellungen ausdrücklich veröffentlicht. Der Wartungsstatus wurde nicht verändert.',
 			'changed'   => 'Bestätigte Aktion ausgeführt.',
 		);
+		$page_slug = sanitize_key( wp_unslash( $_GET['page'] ?? 'mg-maintenance-studio' ) );
+		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4, 'mgms-updates' => 9 )[ $page_slug ] ?? 0;
 		require MGMS_DIR . 'templates/admin.php';
 	}
 	public static function field( string $key, array $field, array $s ): void {
@@ -167,6 +185,16 @@ final class Admin {
 			echo '>';
 			if ( in_array( $field[1], array( 'image', 'font' ), true ) ) {
 				echo '<button type="button" class="button media-picker" data-target="mgms-' . esc_attr( $key ) . '" data-kind="' . esc_attr( $field[1] ) . '">Mediathek öffnen</button>'; }
+			if ( 'image' === $field[1] ) {
+				$image = Settings::media_url( absint( $value ) );
+				echo '<div class="mgms-image-selection" id="mgms-' . esc_attr( $key ) . '-preview">';
+				if ( $image ) {
+					echo '<img src="' . esc_url( $image ) . '" alt="Ausgewählte Mediendatei">';
+				} else {
+					echo '<span>Kein Bild gewählt</span>';
+				}
+				echo '</div><button type="button" class="button mgms-media-clear" data-target="mgms-' . esc_attr( $key ) . '">Bild entfernen</button>';
+			}
 		}
 		echo '</div>';
 	}

@@ -3,7 +3,7 @@
 ## Einmalige Einrichtung
 
 Dieses Plugin wird als ZIP verteilt. Es ist nicht im WordPress.org-Verzeichnis veröffentlicht.
-Unter Einstellungen → Maintenance Studio → Updates das eigene öffentliche Repository
+Unter Maintenance Studio → Updates das eigene öffentliche Repository
 im Format `MichaelGahnDESIGN/Repository` eintragen und die GitHub-Prüfung einschalten.
 Ein Zugriffstoken ist nicht erforderlich und wird nicht gespeichert. Private Repositories
 werden in dieser Version nicht unterstützt. Die Voreinstellung ist ausgeschaltet; `MichaelGahnDESIGN/MGD-Maintenance-WordPress` ist als eigene Quelle vorbelegt.
@@ -18,8 +18,8 @@ das Plugin erzwingt sie nicht. Ausschalten der Prüfung löscht das bekannte Upd
 1. Versionsnummer in Hauptdatei, Konstante, readme.txt, Paketbau und Änderungsprotokoll anheben.
 2. Lokale Tests und Paketprüfung ausführen: `python3 scripts/build-package.py`.
 3. Erst nach Freigabe Quellcode in das gewählte GitHub-Repository veröffentlichen.
-4. Stabiles GitHub-Release mit Tag `v0.3.2` (oder `0.3.1`) anlegen.
-5. `mg-maintenance-studio-0.3.2.zip` als Release-Datei anhängen. Nicht das automatisch
+4. Stabiles GitHub-Release mit Tag `v0.4.0` (oder `0.3.1`) anlegen.
+5. `mg-maintenance-studio-0.4.0.zip` als Release-Datei anhängen. Nicht das automatisch
    erzeugte GitHub-Quellcodearchiv verwenden. Das ZIP enthält nur den Ordner
    `mg-maintenance-studio` mit der gleichnamigen Hauptdatei.
 6. Auf einer separaten Testinstallation eine ältere Version auf die neue aktualisieren.

@@ -4,7 +4,7 @@
 
 ## Updates einschalten
 
-1. **Einstellungen → Maintenance Studio → Updates** öffnen.
+1. **Maintenance Studio → Updates** öffnen.
 2. Die vorbelegte Quelle `MichaelGahnDESIGN/MGD-Maintenance-WordPress` prüfen.
 3. Die GitHub-Prüfung einschalten und **Speichern und jetzt prüfen** wählen.
 4. Neuere Versionen anschließend unter **Plugins** oder **Dashboard → Aktualisierungen** installieren.
@@ -15,7 +15,7 @@ Erfolgreiche Prüfungen werden zwölf Stunden zwischengespeichert, Fehler fünfz
 
 ## Was als Update akzeptiert wird
 
-Die Quelle muss zu Michaels GitHub-Konto gehören. Stabile Tags haben das Format `v0.3.2` oder `0.3.2`. Das zugehörige Asset muss exakt `mg-maintenance-studio-0.3.2.zip` heißen und zur Version, zum Repository und zum Tag passen. Entwürfe, Vorabversionen, fremde Downloadhosts und zusätzliche URL-Parameter werden nicht als passende Metadaten akzeptiert.
+Die Quelle muss zu Michaels GitHub-Konto gehören. Stabile Tags haben das Format `v0.4.0` oder `0.4.0`. Das zugehörige Asset muss exakt `mg-maintenance-studio-0.4.0.zip` heißen und zur Version, zum Repository und zum Tag passen. Entwürfe, Vorabversionen, fremde Downloadhosts und zusätzliche URL-Parameter werden nicht als passende Metadaten akzeptiert.
 
 WordPress übernimmt Download und Installation. Die API-Metadatenabfrage ist auf 256 KiB begrenzt und folgt keinen Umleitungen. Der eigentliche HTTPS-Paketdownload kann GitHubs übliche Asset-Umleitungen verwenden.
 

@@ -41,8 +41,11 @@
       }
     });
   });
+  const initialPanel = document.querySelector(".mgms-admin").dataset.initialPanel;
   activateTab(
-    tabs.find((tab) => tab.getAttribute("href") === location.hash) || tabs[0],
+    tabs.find((tab) => tab.getAttribute("href") === location.hash) ||
+      tabs.find((tab) => tab.getAttribute("href") === `#panel-${initialPanel}`) ||
+      tabs[0],
   );
   editor.addEventListener(
     "invalid",
@@ -81,7 +84,10 @@
   const refresh = () => {
     const data = values();
     frame?.contentWindow.postMessage(
-      { type: "mgms-preview", values: data },
+      { type: "mgms-preview", values: data, assets: {
+        logo: document.querySelector("#mgms-logo-preview img")?.src || "",
+        background: document.querySelector("#mgms-background_image-preview img")?.src || "",
+      } },
       location.origin,
     );
     const surface = data.container === "card" ? data.card : data.background;
@@ -148,6 +154,9 @@
       });
       apply(mgmsPresets[button.dataset.preset].values);
       document.getElementById("mgms-preset").value = button.dataset.preset;
+      document.querySelectorAll("[data-preset]").forEach((item) =>
+        item.setAttribute("aria-pressed", String(item === button)),
+      );
       document.getElementById("undo-preset").disabled = false;
     }),
   );
@@ -165,13 +174,35 @@
         },
       });
       picker.on("select", () => {
-        document.getElementById(button.dataset.target).value = picker
-          .state()
-          .get("selection")
-          .first().id;
+        const file = picker.state().get("selection").first();
+        document.getElementById(button.dataset.target).value = file.id;
+        const preview = document.getElementById(`${button.dataset.target}-preview`);
+        if (preview) {
+          preview.replaceChildren();
+          const image = document.createElement("img");
+          image.src = file.get("url");
+          image.alt = "Ausgewählte Mediendatei";
+          preview.append(image);
+        }
         change();
       });
       picker.open();
+    }),
+  );
+  document.querySelectorAll(".mgms-media-clear").forEach((button) =>
+    button.addEventListener("click", () => {
+      document.getElementById(button.dataset.target).value = "0";
+      const preview = document.getElementById(`${button.dataset.target}-preview`);
+      if (preview) preview.textContent = "Kein Bild gewählt";
+      change();
+    }),
+  );
+  document.querySelectorAll("[data-preview-size]").forEach((button) =>
+    button.addEventListener("click", () => {
+      document.querySelectorAll("[data-preview-size]").forEach((item) =>
+        item.setAttribute("aria-pressed", String(item === button)),
+      );
+      frame?.classList.toggle("is-mobile", button.dataset.previewSize === "mobile");
     }),
   );
   document
@@ -179,10 +210,12 @@
     ?.addEventListener("submit", (event) => {
       const button = event.target.querySelector("button");
       setTimeout(() => {
-        button.disabled = true;
-        button.textContent =
-          "Vorschau geöffnet · für neue Vorschau Editor neu laden";
+        button.hidden = true;
+        document.getElementById("mgms-preview-status").hidden = false;
       }, 0);
     });
+  if (document.getElementById("preview-form") && !["0", "9"].includes(initialPanel)) {
+    document.getElementById("preview-form").requestSubmit();
+  }
   refresh();
 })();

@@ -54,6 +54,12 @@
     }
     if (["left", "center", "right"].includes(values.align))
       document.body.style.setProperty("--align", values.align);
+    if (["editorial", "centered", "split", "poster"].includes(values.layout)) {
+      document.body.classList.remove(
+        "mgms-layout-editorial", "mgms-layout-centered", "mgms-layout-split", "mgms-layout-poster",
+      );
+      document.body.classList.add(`mgms-layout-${values.layout}`);
+    }
     document.body.style.setProperty(
       "--heading-font",
       values.font === "serif" ? "Georgia,serif" : "system-ui,sans-serif",
@@ -65,6 +71,44 @@
       .querySelector(".content")
       .classList.toggle("has-shadow", values.shadow === "1");
     document.body.classList.toggle("animate", values.animation === "1");
+    const localImage = (value) => {
+      if (!value) return "";
+      try {
+        const url = new URL(value, location.href);
+        return url.origin === location.origin && ["http:", "https:"].includes(url.protocol)
+          ? url.href
+          : "";
+      } catch {
+        return "";
+      }
+    };
+    const logoSlot = document.querySelector(".mgms-logo-slot");
+    if (logoSlot) {
+      const url = localImage(event.data.assets?.logo);
+      if (!url) logoSlot.replaceChildren();
+      else {
+        let image = logoSlot.querySelector("img");
+        if (!image) {
+          image = document.createElement("img");
+          image.className = "logo";
+          logoSlot.append(image);
+        }
+        image.src = url;
+        image.alt = typeof values.logo_alt === "string" ? values.logo_alt : "";
+      }
+    }
+    const backgroundUrl = localImage(event.data.assets?.background);
+    let background = document.querySelector(".background-image");
+    if (!backgroundUrl && background) background.remove();
+    else if (backgroundUrl) {
+      if (!background) {
+        background = document.createElement("img");
+        background.className = "background-image";
+        background.alt = "";
+        document.body.prepend(background);
+      }
+      background.src = backgroundUrl;
+    }
   });
   parent.postMessage({ type: "mgms-ready" }, location.origin);
 })();

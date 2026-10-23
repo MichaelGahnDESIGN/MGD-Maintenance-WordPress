@@ -10,6 +10,10 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Design maintenance pages with previews, controlled access and error pages.
 
+== Description ==
+
+Design maintenance pages with previews, controlled access and error pages.
+
 Features:
 
 * Design separate maintenance layouts with local logos and background images.
@@ -17,10 +21,6 @@ Features:
 * Configure role and IP access rules and legal-page access.
 * Use a 503 response and crawler hints while maintenance is active.
 * Keep optional error pages separate from the maintenance state.
-
-== Description ==
-
-Design maintenance pages with previews, controlled access and error pages.
 
 This edition uses native WordPress.org updates. There is no GitHub self-updater or external plugin installer. Updates become available after approval and publication in the directory.
 

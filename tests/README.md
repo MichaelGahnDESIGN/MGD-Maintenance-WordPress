@@ -47,3 +47,7 @@ der Download wird lokal ersetzt. Niemals auf einer bestehenden Website ausführe
 ## Markenmodus und Medienvorschau 0.5.0
 
 `tests/branding.php` in den isolierten Container kopieren und mit `MGMS_TEST=isolated-local php /tmp/mgms-branding.php` ausführen. Der Test legt ausschließlich ein lokales Ein-Pixel-Testbild an, prüft die drei Markenmodi und schreibt danach einen veröffentlichten Testentwurf für die Browseransicht. Die Wegwerf-Datenbank wird beim Entfernen des Compose-Projekts vollständig verworfen.
+
+## Neutrale Anmeldefehler 0.5.2
+
+`php tests/login-errors.php` prüft ohne Datenbank die Registrierung des reinen Textfilters, gleiche Ausgabe für unbekannte Konten, falsches Passwort, leere Felder und Sicherheitsfehler sowie das Ausbleiben einer Meldung bei leerem Fehlertext. Es werden keine echten Konten oder fehlgeschlagenen Anmeldungen erzeugt. Die Funktion benötigt keine Wartungseinstellung. Ein WordPress-/Sicherheitsplugin-Test der tatsächlich gerenderten Anmeldeseite ergänzt diese gezielte Prüfung.

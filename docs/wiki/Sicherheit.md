@@ -39,3 +39,9 @@ IP-Ausnahmen sind keine starke Personenidentifikation. Proxy-Konfigurationen mü
 Laufzeitcode benötigt keine Secrets. GitHub-Prüfungen benötigen keinen Token auf der Website. Lokale Testkonfiguration und Zugangsdaten gehören in ignorierte Verzeichnisse, niemals ins Plugin-ZIP. Ein Secret-Scan muss auch die Git-Historie und veröffentlichte Assets prüfen; `.gitignore` allein genügt nicht.
 
 Bei den GitHub-Updates besteht bislang keine unabhängige Paketsignaturprüfung. HTTPS, erwartete Release-Adressen und sichere Release-Rechte bilden die aktuelle Vertrauensbasis. Ergebnisse und Grenzen der konkreten Prüfung stehen im [Sicherheitsaudit](../SECURITY-AUDIT.md).
+
+## Neutrale Anmeldefehler ab 0.5.2
+
+Solange das Plugin aktiv ist, ersetzt es nichtleere Fehlertexte auf der nativen WordPress-Anmeldeseite durch **„Die Anmeldung war nicht möglich. Bitte prüfe deine Eingaben.“** Das gilt auch bei ausgeschaltetem Wartungsmodus. Der sichtbare Text nennt weder unbekannte Konten noch das falsch eingegebene Feld. Leere Fehler bleiben leer; normale Informations- und Erfolgsmeldungen werden nicht umgeschrieben.
+
+Die Funktion verwendet den nativen [WordPress-Filter login_errors](https://developer.wordpress.org/reference/hooks/login_errors/). Sie ändert keine Anmeldung, Fehlercodes, Rate-Limits, Zwei-Faktor-Prüfung oder Sperre und speichert keine Eingaben. Es ist keine vollständige Abwehr aller Verfahren zur Konten-Erkennung: Antwortzeiten, andere Schnittstellen und vom Sicherheitsplugin selbst gerenderte Formulare bleiben außerhalb dieses Textfilters. Eigene Frontend-Loginformulare benötigen gegebenenfalls eine eigene neutrale Ausgabe. Bei Deaktivierung des Plugins gilt wieder die normale WordPress-/Plugin-Ausgabe.

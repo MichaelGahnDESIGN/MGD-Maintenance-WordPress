@@ -27,6 +27,7 @@ Es gibt keine eigene Tabelle und in 0.3.1 keine Datenbankmigration. WordPress-Op
 ## Lokal prüfen
 
 ```bash
+php tests/login-errors.php
 python3 scripts/check-docs.py
 find mg-maintenance-studio -name '*.php' -exec php -l {} \;
 node --check mg-maintenance-studio/assets/admin.js

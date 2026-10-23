@@ -45,3 +45,9 @@ separaten POST-Endpunkt. `templates/updates.php` rendert die Verwaltung ohne eig
 Netzwerkanfrage. `class-presentation.php` ergänzt Einstellungen-Link, Details und
 lokales Pluginlisten-Icon. `assets/icon.svg` ist eine eigenständige Vektorgrafik.
 Updatekonfiguration bleibt getrennt von Entwurf, veröffentlichtem Design und Wartungsstatus.
+
+## Anmeldehinweise 0.5.2
+
+`Login_Errors` registriert den nativen Textfilter `login_errors` mit später Priorität. Nur nichtleere Meldungen werden vereinheitlicht; erfolgreiche Anmeldung, Fehlerobjekte, Authentifizierung und Wartungsstatus werden nicht verändert. Die Klasse ist unabhängig von `Settings::STATE` aktiv. Keine Option, Datenbankmigration oder externe Ressource.
+
+Arbeitsfolge dieser Ergänzung: separaten Textfilter ergänzen, Hook und Fehlerfälle ohne echte Anmeldungen prüfen, Paket bauen und die native WordPress-Ausgabe gezielt prüfen. Rückfall ist der vorherige Pluginstand; Einstellungen werden nicht migriert.

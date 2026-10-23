@@ -39,3 +39,9 @@ Falsche Proxy-Einträge können eine Freigabe unzuverlässig machen. Hosting- od
 Login, Backend, Cron und AJAX bleiben für den normalen WordPress-Betrieb erreichbar und benötigen weiterhin ihre eigenen Berechtigungen. Authentifizierte REST-Aufrufe bleiben verfügbar. Anonyme REST-Aufrufe werden während Wartung mit 503 gesperrt, sofern keine IP-Ausnahme greift. Das kann auch externe Webhooks treffen.
 
 Diese Ausnahmen sind kein allgemeiner Zugriff auf unveröffentlichte Seiten. Direkte Upload-Dateien, XML-RPC und Cache-Antworten liegen außerhalb der vollständigen Kontrolle dieses Plugins.
+
+## Neutrale Anmeldefehler ab 0.5.2
+
+Solange das Plugin aktiv ist, ersetzt es nichtleere Fehlertexte auf der nativen WordPress-Anmeldeseite durch **„Die Anmeldung war nicht möglich. Bitte prüfe deine Eingaben.“** Das gilt auch bei ausgeschaltetem Wartungsmodus. Der sichtbare Text nennt weder unbekannte Konten noch das falsch eingegebene Feld. Leere Fehler bleiben leer; normale Informations- und Erfolgsmeldungen werden nicht umgeschrieben.
+
+Die Funktion verwendet den nativen [WordPress-Filter login_errors](https://developer.wordpress.org/reference/hooks/login_errors/). Sie ändert keine Anmeldung, Fehlercodes, Rate-Limits, Zwei-Faktor-Prüfung oder Sperre und speichert keine Eingaben. Es ist keine vollständige Abwehr aller Verfahren zur Konten-Erkennung: Antwortzeiten, andere Schnittstellen und vom Sicherheitsplugin selbst gerenderte Formulare bleiben außerhalb dieses Textfilters. Eigene Frontend-Loginformulare benötigen gegebenenfalls eine eigene neutrale Ausgabe. Bei Deaktivierung des Plugins gilt wieder die normale WordPress-/Plugin-Ausgabe.

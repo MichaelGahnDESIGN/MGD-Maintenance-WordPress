@@ -13,3 +13,5 @@ Keine Prüfgruppe und kein Laufzeitcheck wird ausgeschaltet. Technisch notwendig
 ## Nachweise
 
 41 Integrationstests bestanden: ursprüngliche 22 Schutzgrenzen-/Datenprüfungen plus 19 Cache-, Invalidierungs-, Empfänger- und AI-Seiten-ID-Prüfungen. Browser: keine Giveaway-Ressourcen ohne Formular, normale und nach wp_head gerenderte Shortcodes, Modal/Escape, 390px sowie echter CSV-Multipart-Import. Ungültige Upload-Nonce und falsche Endung werden abgewiesen. PHP-Syntax aller 86 Laufzeitdateien unter PHP 8.1 und der 15 MCP-Dateien zusätzlich unter PHP 7.4 geprüft. Keine produktiven Daten, keine Live-Einreichung.
+
+Zusatzprüfung Maintenance: die bisherige dateiweite Ressourcen-Ausnahme wurde durch natives Enqueue/Print für ausschließlich eigene Handles ersetzt. PHP 8.1, Einzelvertrag, lokaler Plugin Check und Browser mit eigenem Stylesheet/defer-Skript bestanden.

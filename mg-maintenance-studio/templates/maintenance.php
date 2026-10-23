@@ -1,8 +1,6 @@
 <?php
 namespace MGMS;
 
-// phpcs:disable WordPress.WP.EnqueuedResources -- Eigenständiges Dokument ohne Theme-Hooks; nur eigene lokale Assets ausgeben.
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 ?>
@@ -13,16 +11,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title><?php echo esc_html( $s['title'] ); ?></title>
-<link rel="stylesheet" href="<?php echo esc_url( MGMS_URL . 'assets/frontend.css?ver=' . MGMS_VERSION ); ?>">
 <?php
-if ( $font ) :
-	?>
-	<style>@font-face{font-family:MGMSLocal;src:url(<?php echo esc_url( $font ); ?>) format('woff2');font-display:swap}.mgms h1{font-family:MGMSLocal,system-ui,sans-serif}</style><?php endif; ?>
-<script defer src="<?php echo esc_url( MGMS_URL . 'assets/frontend.js?ver=' . MGMS_VERSION ); ?>"></script>
-<?php
-if ( $preview ) :
-	?>
-	<script defer src="<?php echo esc_url( MGMS_URL . 'assets/preview.js?ver=' . MGMS_VERSION ); ?>"></script><?php endif; ?>
+// Nur die eigenen Handles drucken; Theme- und fremde Head-Ausgaben bleiben außen vor.
+wp_enqueue_style( 'mgms-maintenance', MGMS_URL . 'assets/frontend.css', array(), MGMS_VERSION );
+if ( $font ) {
+	$mgms_font_url = str_replace( array( '\\', '"' ), array( '\\\\', '\\"' ), esc_url_raw( $font ) );
+	wp_add_inline_style( 'mgms-maintenance', '@font-face{font-family:MGMSLocal;src:url("' . $mgms_font_url . '") format("woff2");font-display:swap}.mgms h1{font-family:MGMSLocal,system-ui,sans-serif}' );
+}
+wp_print_styles( array( 'mgms-maintenance' ) );
+wp_enqueue_script( 'mgms-maintenance', MGMS_URL . 'assets/frontend.js', array(), MGMS_VERSION, array( 'strategy' => 'defer' ) );
+wp_print_scripts( array( 'mgms-maintenance' ) );
+if ( $preview ) {
+	wp_enqueue_script( 'mgms-maintenance-preview', MGMS_URL . 'assets/preview.js', array( 'mgms-maintenance' ), MGMS_VERSION, array( 'strategy' => 'defer' ) );
+	wp_print_scripts( array( 'mgms-maintenance-preview' ) );
+}
+?>
 </head>
 <body class="mgms mgms-layout-<?php echo esc_attr( in_array( $s['layout'], array( 'editorial', 'centered', 'split', 'poster' ), true ) ? $s['layout'] : 'editorial' ); ?> <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
 <a class="skip" href="#main">Zum Inhalt</a>

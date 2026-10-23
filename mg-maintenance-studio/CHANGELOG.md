@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.5.6 – 24.10.2026
+
+- Sieben eigene Kartenmotive, lokal als kleine WebP-Dateien eingebunden.
+- Lesbare Kategorie-/Versionsschilder, dekorative Bilder ohne Screenreader-Dopplung und Systemfarben-Unterstützung.
+- Neue Katalogansicht auch bei zuerst geladenen älteren MGD-Plugins.
+
 ## 0.5.2
 
 - Die WordPress-Anmeldeseite zeigt bei Fehlern einheitlich „Die Anmeldung war nicht möglich. Bitte prüfe deine Eingaben.“

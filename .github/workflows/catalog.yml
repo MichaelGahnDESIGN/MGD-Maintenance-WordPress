@@ -29,6 +29,8 @@ jobs:
           PY
       - name: ZIP bauen
         run: python3 scripts/build-catalog-preview.py
+      - name: MGD-Builder-Paket prüfen
+        run: python3 skills/mgd-plugin-builder/scripts/check_plugin_ready.py . --zip artifacts/catalog-preview/*.zip
       - uses: actions/upload-artifact@v7
         with:
           name: plugin-katalog-vorschau

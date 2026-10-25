@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.5.7 – 25.10.2026
+
+- Produktname im Backend auf **MGD Maintenance Studio** vereinheitlicht.
+- Vorlage „Verspielter Moment“ ergänzt; die fünf Vorlagen unterscheiden sich sichtbar in Layout, Farbe und Stil.
+- Optionales Gimmick-Bild aus der lokalen Mediathek mit Position und sanfter Animation ergänzt. Bei reduzierter Bewegung bleibt es statisch.
+
 ## 0.5.6 – 24.10.2026
 
 - Sieben eigene Kartenmotive, lokal als kleine WebP-Dateien eingebunden.

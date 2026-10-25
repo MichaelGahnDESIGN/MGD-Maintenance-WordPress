@@ -1,6 +1,6 @@
 # Testimage-Update vom 25.10.2026
 
-Nur für neue, wegwerfbare lokale Tests und CI. Keine Shopinstallation wird aktualisiert. PHP 8.1 bleibt die Mindestanforderung des Plugins; die neue Haupt-Testumgebung ist kein Nachweis für diese Mindestversion.
+Vorbereitung in [Entwurfs-PR #14](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/pull/14); die beschriebenen Container-/Testskriptänderungen bleiben außerhalb von main. Nur für neue, wegwerfbare lokale Tests und CI. Keine Shopinstallation wird aktualisiert. PHP 8.1 bleibt die Mindestanforderung des Plugins; die neue Haupt-Testumgebung ist kein Nachweis für diese Mindestversion.
 
 Das nicht mehr unterstützte PHP-8.1-Testimage wird durch das offizielle `wordpress:7.1.3-php8.3-apache` ersetzt. WordPress- und Datenbankimage sind nun per SHA-256 fixiert. Die MariaDB-Identität bleibt unverändert in der 11.4-Familie; es findet keine Datenbankmigration statt.
 

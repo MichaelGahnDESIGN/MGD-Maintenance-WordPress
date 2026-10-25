@@ -17,11 +17,11 @@ final class Admin {
 	public static function menu(): void {
 		// Die alte Einstellungs-URL bleibt für gespeicherte Links gültig.
 		self::$hooks['editor'] = array_filter( array(
-			add_options_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ),
+			add_options_page( 'MGD Maintenance Studio', 'MGD Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ),
 		) );
 		remove_submenu_page( 'options-general.php', 'mg-maintenance-studio' );
 		// Die endgültige Reihenfolge wird nach allen registrierten Menüs gesetzt.
-		self::$hooks['dashboard'] = add_menu_page( 'MG Maintenance Studio', 'Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 99 );
+		self::$hooks['dashboard'] = add_menu_page( 'MGD Maintenance Studio', 'MGD Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 99 );
 		add_submenu_page( 'mgms-dashboard', 'Übersicht', 'Übersicht', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ) );
 		foreach ( array( 'mgms-editor' => 'Wartungsseite', 'mgms-design' => 'Layouts & Design', 'mgms-access' => 'Zugriffe' ) as $slug => $label ) {
 			self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', $label, $label, 'manage_options', $slug, array( self::class, 'page' ) );
@@ -42,7 +42,7 @@ final class Admin {
 	}
 	public static function presets(): array {
 		$out = array();
-		foreach ( array( 'elegant-gold', 'ruhiges-atelier', 'minimalistisch-hell', 'nachtstudio' ) as $name ) {
+		foreach ( array( 'elegant-gold', 'ruhiges-atelier', 'minimalistisch-hell', 'nachtstudio', 'verspielt' ) as $name ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Ausschließlich fest benannte lokale Preset-Dateien.
 			$out[ $name ] = json_decode( file_get_contents( MGMS_DIR . 'presets/' . $name . '.json' ), true ); }
 		return $out;
@@ -147,7 +147,7 @@ final class Admin {
 		$active = array_merge( (array) get_option( 'active_plugins', array() ), array_keys( (array) get_site_option( 'active_sitewide_plugins', array() ) ) );
 		foreach ( $active as $plugin ) {
 			if ( ! str_starts_with( $plugin, 'mg-maintenance-studio/' ) && preg_match( '/maintenance|coming-soon|seedprod|under-construction/i', $plugin ) ) {
-				echo '<div class="notice notice-warning"><p>MG Maintenance Studio: Ein weiteres Wartungsplugin ist aktiv. Gegenseitige Ausgabe- und Cache-Konflikte bitte vor Veröffentlichung prüfen.</p></div>';
+				echo '<div class="notice notice-warning"><p>MGD Maintenance Studio: Ein weiteres Wartungsplugin ist aktiv. Gegenseitige Ausgabe- und Cache-Konflikte bitte vor Veröffentlichung prüfen.</p></div>';
 				break;
 			}
 		}

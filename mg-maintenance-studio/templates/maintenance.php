@@ -31,6 +31,13 @@ if ( $background ) :
 	?>
 	<img class="background-image" src="<?php echo esc_url( $background ); ?>" alt=""><?php endif; ?>
 <?php
+if ( $gimmick ) :
+	$gimmick_position = in_array( $s['gimmick_position'], array( 'top-right', 'bottom-right', 'bottom-left' ), true ) ? $s['gimmick_position'] : 'bottom-right';
+	$gimmick_motion   = in_array( $s['gimmick_motion'], array( 'none', 'float', 'wobble' ), true ) ? $s['gimmick_motion'] : 'float';
+	?>
+	<aside class="mgms-gimmick mgms-gimmick--<?php echo esc_attr( $gimmick_position ); ?> mgms-gimmick--<?php echo esc_attr( $gimmick_motion ); ?>" aria-hidden="true"><img src="<?php echo esc_url( $gimmick ); ?>" alt=""></aside>
+<?php endif; ?>
+<?php
 if ( $preview ) :
 	?>
 	<div class="preview-label">Geschützte Vorschau · Entwurf · nicht veröffentlicht</div><?php endif; ?>

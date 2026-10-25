@@ -26,6 +26,25 @@ body.mgms {
   opacity: 0.12;
   z-index: -1;
 }
+.mgms-gimmick {
+  position: fixed;
+  z-index: 1;
+  width: clamp(104px, 16vw, 220px);
+  pointer-events: none;
+  filter: drop-shadow(0 18px 24px rgb(0 0 0 / 18%));
+}
+.mgms-gimmick img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.mgms-gimmick--top-right { top: clamp(16px, 4vw, 56px); right: clamp(16px, 4vw, 56px); }
+.mgms-gimmick--bottom-right { right: clamp(16px, 4vw, 56px); bottom: clamp(16px, 4vw, 56px); }
+.mgms-gimmick--bottom-left { bottom: clamp(16px, 4vw, 56px); left: clamp(16px, 4vw, 56px); }
+.mgms-gimmick--float { animation: mgms-gimmick-float 5s ease-in-out infinite; }
+.mgms-gimmick--wobble { animation: mgms-gimmick-wobble 2.8s ease-in-out infinite; transform-origin: bottom center; }
+@keyframes mgms-gimmick-float { 50% { transform: translateY(-12px) rotate(1.5deg); } }
+@keyframes mgms-gimmick-wobble { 50% { transform: rotate(-4deg); } }
 .page-shell {
   max-width: 1200px;
   min-height: 100svh;
@@ -335,6 +354,10 @@ dialog .legal {
     scroll-behavior: auto;
   }
   .animate .content {
+    animation: none;
+  }
+  .mgms-gimmick--float,
+  .mgms-gimmick--wobble {
     animation: none;
   }
 }

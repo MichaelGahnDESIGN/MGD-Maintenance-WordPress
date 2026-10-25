@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: MG Maintenance Studio
+ * Plugin Name: MGD Maintenance Studio
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress
  * Description: Lokaler Design-Editor für einen bewussten, barrierearmen Wartungsmodus.
  * Version: 0.5.6
@@ -32,7 +32,7 @@ require_once __DIR__ . '/includes/class-mgd-plugin-admin-tools.php';
     'file' => __FILE__,
     'repo' => 'MGD-Maintenance-WordPress',
     'slug' => 'mg-maintenance-studio',
-    'name' => 'MG Maintenance Studio',
+    'name' => 'MGD Maintenance Studio',
     'description' => 'Lokaler Design-Editor für einen bewussten, barrierearmen Wartungsmodus.',
     'version' => '0.5.6',
     'settings' => 'admin.php?page=mgms-dashboard',

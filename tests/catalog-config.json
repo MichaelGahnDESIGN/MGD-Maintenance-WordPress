@@ -1,6 +1,6 @@
 {
   "runtime": "mg-maintenance-studio",
   "main": "mg-maintenance-studio.php",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "slug": "mg-maintenance-studio"
 }

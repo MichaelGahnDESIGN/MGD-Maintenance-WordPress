@@ -9,6 +9,7 @@ $expected = array(
 	'minimalistisch-hell' => 'centered',
 	'ruhiges-atelier'    => 'split',
 	'nachtstudio'        => 'poster',
+	'verspielt'          => 'centered',
 );
 if ( 'editorial' !== MGMS\Schema::defaults()['layout'] ) {
 	throw new RuntimeException( 'Das Layout bestehender Einstellungen darf sich nicht ändern.' );
@@ -25,4 +26,4 @@ foreach ( $expected as $name => $layout ) {
 		throw new RuntimeException( 'Ungültige Vorlage: ' . $name );
 	}
 }
-echo 'PASS Vier Layout-Vorlagen und kompatible Markenstandards' . PHP_EOL;
+echo 'PASS Fünf abwechslungsreiche Layout-Vorlagen und kompatible Markenstandards' . PHP_EOL;

@@ -30,6 +30,7 @@ final class Renderer {
 		uasort( $legal, static fn( $a, $b ) => $a['order'] <=> $b['order'] );
 		$logo       = Settings::media_url( (int) $s['logo'] );
 		$background = Settings::media_url( (int) $s['background_image'] );
+		$gimmick    = Settings::media_url( (int) $s['gimmick_image'] );
 		$font       = Settings::media_url( (int) $s['font_file'], 'font' );
 		require MGMS_DIR . 'templates/maintenance.php';
 	}

@@ -7,7 +7,7 @@ $groups = array(
 	'Layout und Raum' => array( 'layout', 'container', 'align', 'width', 'padding', 'padding_tablet', 'padding_mobile', 'radius', 'border', 'shadow' ),
 	'Farben' => array( 'background', 'text', 'accent', 'button', 'button_text', 'card', 'border_color' ),
 	'Markenbereich' => array( 'brand_presentation', 'brand', 'logo', 'logo_alt', 'logo_width', 'logo_link' ),
-	'Fläche und Hintergrund' => array( 'background_image' ),
+	'Fläche, Hintergrund und Gimmick' => array( 'background_image', 'gimmick_image', 'gimmick_position', 'gimmick_motion' ),
 	'Typografie und Texte' => array( 'tagline', 'font', 'font_file' ),
 	'Feinschliff' => array( 'animation', 'credit', 'credit_url' ),
 );

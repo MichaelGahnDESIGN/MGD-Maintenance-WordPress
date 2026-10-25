@@ -66,6 +66,31 @@ final class Schema {
 				),
 			),
 			'background_image' => array( 'Lokales Hintergrundbild', 'image', 0, 'Design' ),
+			// Das Gimmick bleibt bewusst ein lokales Mediathek-Bild. So entstehen weder Tracking
+			// noch unerwartete Fremd-Inhalte auf einer Wartungsseite.
+			'gimmick_image'    => array( 'Optionales Gimmick-Bild aus der Mediathek', 'image', 0, 'Design' ),
+			'gimmick_position' => array(
+				'Position des Gimmicks',
+				'select',
+				'bottom-right',
+				'Design',
+				array(
+					'top-right'    => 'Oben rechts',
+					'bottom-right' => 'Unten rechts',
+					'bottom-left'  => 'Unten links',
+				),
+			),
+			'gimmick_motion'   => array(
+				'Bewegung des Gimmicks',
+				'select',
+				'float',
+				'Design',
+				array(
+					'none'   => 'Keine Bewegung',
+					'float'  => 'Sanft schweben',
+					'wobble' => 'Sanft wippen',
+				),
+			),
 			'background'       => array( 'Hintergrund', 'color', '#f7f5ef', 'Design' ),
 			'text'             => array( 'Textfarbe', 'color', '#282925', 'Design' ),
 			'accent'           => array( 'Akzentfarbe', 'color', '#795c25', 'Design' ),

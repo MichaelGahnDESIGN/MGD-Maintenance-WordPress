@@ -51,3 +51,10 @@ Die CI ergänzt einen Secret-Scan und eine Prüfung lokaler Dokumentationslinks.
 Die führenden Handbuchdateien liegen unter `docs/wiki/`. `scripts/export-wiki.py` exportiert sie mit für GitHub-Wikis passenden Links in einen angegebenen Zielordner. Die erste Seite eines separaten GitHub-Wikis muss vorher im angemeldeten GitHub-Browser angelegt werden. Danach kann das Wiki-Repository normal per Git aktualisiert werden.
 
 Vor Veröffentlichung fachliche Angaben gegen den Code, Links gegen vorhandene Dateien und Testergebnisse gegen echte Ausgaben prüfen. Die derzeitigen Grenzen stehen im [Sicherheitsaudit](../SECURITY-AUDIT.md) und im [historischen Testbericht](../../mg-maintenance-studio/docs/TESTBERICHT.md).
+
+
+## Vorbereiteter Testimage-Wechsel vom 25.10.2026
+
+[Entwurfs-PR #14](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/pull/14) fixiert das offizielle WordPress-7.1.3-/PHP-8.3.36-Testimage per Prüfsumme. Der neue isolierte Container-Test besteht lokal und in GitHub alle 30 Integrationstests. Paket-, Katalog- und Secret-Prüfungen sind ebenfalls erfolgreich. Der PR ist noch nicht zusammengeführt und ändert keine produktive Website. PHP 8.1 bleibt die Plugin-Mindestanforderung und braucht weiterhin einen gesonderten Mindestversionstest.
+
+Die verbleibenden Paketbefunde und der Rückfall sind in [Sicherheit der Testimages](../../tests/SECURITY-IMAGES.md) dokumentiert. Grüne Funktionstests bestätigen keine Sicherheitsfreiheit. Diese Wiki-Datei ist nur die lokale versionierte Quelle; eine separate Veröffentlichung im GitHub-Wiki wurde nicht ausgeführt.

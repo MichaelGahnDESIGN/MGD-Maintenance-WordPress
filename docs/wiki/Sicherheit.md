@@ -45,3 +45,8 @@ Bei den GitHub-Updates besteht bislang keine unabhängige Paketsignaturprüfung.
 Solange das Plugin aktiv ist, ersetzt es nichtleere Fehlertexte auf der nativen WordPress-Anmeldeseite durch **„Die Anmeldung war nicht möglich. Bitte prüfe deine Eingaben.“** Das gilt auch bei ausgeschaltetem Wartungsmodus. Der sichtbare Text nennt weder unbekannte Konten noch das falsch eingegebene Feld. Leere Fehler bleiben leer; normale Informations- und Erfolgsmeldungen werden nicht umgeschrieben.
 
 Die Funktion verwendet den nativen [WordPress-Filter login_errors](https://developer.wordpress.org/reference/hooks/login_errors/). Sie ändert keine Anmeldung, Fehlercodes, Rate-Limits, Zwei-Faktor-Prüfung oder Sperre und speichert keine Eingaben. Es ist keine vollständige Abwehr aller Verfahren zur Konten-Erkennung: Antwortzeiten, andere Schnittstellen und vom Sicherheitsplugin selbst gerenderte Formulare bleiben außerhalb dieses Textfilters. Eigene Frontend-Loginformulare benötigen gegebenenfalls eine eigene neutrale Ausgabe. Bei Deaktivierung des Plugins gilt wieder die normale WordPress-/Plugin-Ausgabe.
+
+
+## Sicherheit der Entwicklungs- und Testimages
+
+Die im Plugin enthaltenen Schutzmaßnahmen und die Sicherheit eines Testcontainers sind getrennte Prüfbereiche. Der vorbereitete Image-Wechsel ist funktional geprüft, hat aber noch bekannte WordPress-/MariaDB-Paketbefunde. [Vergleich, Grenzen und nächste Schritte](../../tests/SECURITY-IMAGES.md). Keine pauschale Befundunterdrückung und keine Freigabe für einen produktiven Datenbankwechsel.

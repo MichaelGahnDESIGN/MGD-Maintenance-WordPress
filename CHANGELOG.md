@@ -1,5 +1,10 @@
 # Änderungsprotokoll
 
+## 0.5.8 – 27.10.2026
+
+- Icons und Hintergründe der Karten unter „Weitere Plugins“ kommen jetzt aus theme.michael-gahn.de. Der Server holt sie einmal und speichert sie lokal; der Browser lädt nichts extern. Ohne Bild bleibt das mitgelieferte Motiv.
+- Versionen werden ohne führendes „v“ angezeigt.
+
 ## 0.5.7 – 25.10.2026
 
 - Produktname im Backend auf **MGD Maintenance Studio** vereinheitlicht.

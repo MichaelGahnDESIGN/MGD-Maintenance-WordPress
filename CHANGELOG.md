@@ -1,5 +1,18 @@
 # Änderungsprotokoll
 
+## 0.6.0 – 21.11.2026
+
+- Fünf neue, klar unterschiedliche Szenen für die Vorlagen:
+  - **Elegant Gold → Kino:** Bild als Vollbild-Bühne, großer Titel wie im Film.
+  - **Ruhiges Atelier → Atelier:** Bild füllt die linke Hälfte, Text rechts.
+  - **Minimalistisch Hell → Raster:** riesige Überschrift, Bild versetzt gerahmt.
+  - **Nachtstudio → Glas:** Glaskarte über langsam wandernden Leuchtflächen.
+  - **Verspielter Moment → Bloom:** runde Karte, schwebende Farbkleckse.
+- Jede Szene sieht auch ohne eigenes Bild gut aus (Verläufe, Formen, Muster).
+- Neue Einstellung **Bildwirkung**: dezent, ausgewogen oder kräftig.
+- Die bisherigen vier Layouts bleiben wählbar. Bestehende Seiten sehen nach dem Update unverändert aus.
+- Bei „Bewegung reduzieren“ im System laufen keine Animationen.
+
 ## 0.5.9 – 21.11.2026
 
 - Fehler behoben: Ein SVG-Logo aus der Mediathek führte beim Speichern zur Fehlerseite „nur passende lokale Mediathek-Dateien sind erlaubt“. SVG ist jetzt für Logo, Hintergrund und Gimmick erlaubt. Die Datei wird nur als Bild eingebunden.

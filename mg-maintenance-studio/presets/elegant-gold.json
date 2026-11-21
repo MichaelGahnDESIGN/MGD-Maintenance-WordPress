@@ -1,18 +1,20 @@
 {
   "name": "Elegant Gold",
   "values": {
-    "background": "#f7f5ef",
-    "text": "#282925",
-    "accent": "#795c25",
-    "button": "#795c25",
-    "button_text": "#ffffff",
-    "card": "#ffffff",
-    "border_color": "#ccc8be",
+    "layout": "cinema",
+    "background": "#15120e",
+    "text": "#f6f0e4",
+    "accent": "#d4ae66",
+    "button": "#d4ae66",
+    "button_text": "#15120e",
+    "card": "#211c16",
+    "border_color": "#5a4c37",
     "font": "serif",
     "radius": 0,
     "shadow": false,
     "container": "plain",
     "align": "left",
-    "layout": "editorial"
+    "image_effect": "vivid",
+    "animation": true
   }
 }

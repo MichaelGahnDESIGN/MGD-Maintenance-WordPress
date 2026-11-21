@@ -47,6 +47,11 @@ final class Schema {
 					'centered'  => 'Zentriert – ruhig und fokussiert',
 					'split'     => 'Geteilt – Text und Informationen nebeneinander',
 					'poster'    => 'Poster – prägnante Botschaft',
+					'cinema'    => 'Kino – Vollbild mit großer Bühne',
+					'atelier'   => 'Atelier – Bildhälfte und ruhige Textseite',
+					'swiss'     => 'Raster – riesige Typo und gerahmtes Bild',
+					'glass'     => 'Glas – Leuchtflächen und Glaskarte',
+					'bloom'     => 'Bloom – schwebende Farben und runde Karte',
 				),
 			),
 			'tagline'          => array( 'Untertitel', 'text', 'Wartungsarbeiten', 'Design' ),
@@ -66,6 +71,18 @@ final class Schema {
 				),
 			),
 			'background_image' => array( 'Lokales Hintergrundbild', 'image', 0, 'Design' ),
+			// Bildwirkung - subtle bleibt Standard, sonst sehen alte Seiten nach dem Update anders aus
+			'image_effect'     => array(
+				'Bildwirkung',
+				'select',
+				'subtle',
+				'Design',
+				array(
+					'subtle'   => 'Dezent – Bild als zarte Textur',
+					'balanced' => 'Ausgewogen – Bild gut sichtbar',
+					'vivid'    => 'Kräftig – Bild in voller Stärke',
+				),
+			),
 			// Das Gimmick bleibt bewusst ein lokales Mediathek-Bild. So entstehen weder Tracking
 			// noch unerwartete Fremd-Inhalte auf einer Wartungsseite.
 			'gimmick_image'    => array( 'Optionales Gimmick-Bild aus der Mediathek', 'image', 0, 'Design' ),

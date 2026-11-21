@@ -59,11 +59,16 @@
       brand?.classList.remove("brand--text", "brand--logo", "brand--logo-and-text");
       brand?.classList.add(`brand--${values.brand_presentation}`);
     }
-    if (["editorial", "centered", "split", "poster"].includes(values.layout)) {
-      document.body.classList.remove(
-        "mgms-layout-editorial", "mgms-layout-centered", "mgms-layout-split", "mgms-layout-poster",
-      );
+    // Layouts inkl. Szenen 0.6.0
+    const layouts = ["editorial", "centered", "split", "poster", "cinema", "atelier", "swiss", "glass", "bloom"];
+    if (layouts.includes(values.layout)) {
+      document.body.classList.remove(...layouts.map((name) => `mgms-layout-${name}`));
       document.body.classList.add(`mgms-layout-${values.layout}`);
+    }
+    const effects = ["subtle", "balanced", "vivid"];
+    if (effects.includes(values.image_effect)) {
+      document.body.classList.remove(...effects.map((name) => `mgms-image-${name}`));
+      document.body.classList.add(`mgms-image-${values.image_effect}`);
     }
     document.body.style.setProperty(
       "--heading-font",
@@ -114,6 +119,8 @@
       }
       background.src = backgroundUrl;
     }
+    document.body.classList.toggle("has-image", Boolean(backgroundUrl));
+    document.body.classList.toggle("no-image", !backgroundUrl);
   });
   parent.postMessage({ type: "mgms-ready" }, location.origin);
 })();

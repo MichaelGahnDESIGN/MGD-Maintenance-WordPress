@@ -1,18 +1,20 @@
 {
   "name": "Minimalistisch Hell",
   "values": {
-    "background": "#ffffff",
-    "text": "#24262a",
-    "accent": "#4a535f",
-    "button": "#24262a",
+    "layout": "swiss",
+    "background": "#fbfbf9",
+    "text": "#111214",
+    "accent": "#c2361b",
+    "button": "#111214",
     "button_text": "#ffffff",
     "card": "#ffffff",
-    "border_color": "#d3d5d8",
+    "border_color": "#d9dad6",
     "font": "sans-serif",
     "radius": 0,
     "shadow": false,
     "container": "plain",
     "align": "left",
-    "layout": "centered"
+    "image_effect": "vivid",
+    "animation": true
   }
 }

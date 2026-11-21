@@ -24,8 +24,9 @@ if ( $preview ) :
 	?>
 	<script defer src="<?php echo esc_url( MGMS_URL . 'assets/preview.js?ver=' . MGMS_VERSION ); ?>"></script><?php endif; ?>
 </head>
-<body class="mgms mgms-layout-<?php echo esc_attr( in_array( $s['layout'], array( 'editorial', 'centered', 'split', 'poster' ), true ) ? $s['layout'] : 'editorial' ); ?> <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
+<body class="mgms mgms-layout-<?php echo esc_attr( array_key_exists( $s['layout'], Schema::fields()['layout'][4] ) ? $s['layout'] : 'editorial' ); ?> mgms-image-<?php echo esc_attr( array_key_exists( $s['image_effect'], Schema::fields()['image_effect'][4] ) ? $s['image_effect'] : 'subtle' ); ?> <?php echo $background ? 'has-image' : 'no-image'; ?> <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
 <a class="skip" href="#main">Zum Inhalt</a>
+<div class="mgms-decor" aria-hidden="true"><span></span><span></span><span></span></div>
 <?php
 if ( $background ) :
 	?>

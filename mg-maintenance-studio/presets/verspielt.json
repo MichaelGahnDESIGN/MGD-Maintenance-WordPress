@@ -1,19 +1,21 @@
 {
   "name": "Verspielter Moment",
   "values": {
-    "background": "#fff5f0",
-    "text": "#30272f",
-    "accent": "#b43a69",
-    "button": "#7b315d",
+    "layout": "bloom",
+    "background": "#fff6ef",
+    "text": "#2e2430",
+    "accent": "#d6336c",
+    "button": "#7c3aed",
     "button_text": "#ffffff",
     "card": "#ffffff",
-    "border_color": "#e8bfd0",
+    "border_color": "#fbbf24",
     "font": "sans-serif",
-    "radius": 28,
+    "radius": 40,
     "shadow": true,
     "container": "card",
     "align": "center",
-    "layout": "centered",
+    "image_effect": "subtle",
+    "animation": true,
     "gimmick_position": "bottom-right",
     "gimmick_motion": "float"
   }

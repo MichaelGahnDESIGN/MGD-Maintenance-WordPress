@@ -634,3 +634,7 @@ dialog .legal {
 .has-image:is(.mgms-layout-bloom) :is(.brand, .site-footer) { text-shadow: 0 1px 12px color-mix(in srgb, var(--background) 90%, transparent); }
 /* Raster: Bild über den Rasterlinien */
 .mgms-layout-swiss.has-image .background-image { z-index: -1; }
+
+/* Effekt-Canvas - über Bild und Deko, unter dem Inhalt */
+.mgms-effect { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.mgms-effect[hidden] { display: none; }

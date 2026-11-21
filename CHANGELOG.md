@@ -1,5 +1,13 @@
 # Änderungsprotokoll
 
+## 0.7.0 – 21.11.2026
+
+- Neue **Effekte** für die Wartungsseite: Regen, Schnee, Lichter (Glühwürmchen), Partikel (Sternenstaub), Lichtkugeln, Funken und Nebel.
+- Stärke einstellbar: leicht, mittel oder stark. Die Live-Vorschau zeigt den Effekt sofort.
+- Die Effekte laufen nur im Browser, ohne fremde Dateien. Sie pausieren, wenn der Tab nicht sichtbar ist, und sind bei „Bewegung reduzieren“ aus.
+- Drei Vorlagen bringen passende Effekte mit: Elegant Gold (Funken), Nachtstudio (Lichtkugeln), Verspielter Moment (Sternenstaub).
+- Standard bleibt „Kein Effekt“, bestehende Seiten ändern sich nicht.
+
 ## 0.6.0 – 21.11.2026
 
 - Fünf neue, klar unterschiedliche Szenen für die Vorlagen:

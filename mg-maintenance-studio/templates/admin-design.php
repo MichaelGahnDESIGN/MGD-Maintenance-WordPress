@@ -8,6 +8,7 @@ $groups = array(
 	'Farben' => array( 'background', 'text', 'accent', 'button', 'button_text', 'card', 'border_color' ),
 	'Markenbereich' => array( 'brand_presentation', 'brand', 'logo', 'logo_alt', 'logo_width', 'logo_link' ),
 	'Fläche, Hintergrund und Gimmick' => array( 'background_image', 'image_effect', 'gimmick_image', 'gimmick_position', 'gimmick_motion' ),
+	'Effekte' => array( 'effect', 'effect_intensity' ),
 	'Typografie und Texte' => array( 'tagline', 'font', 'font_file' ),
 	'Feinschliff' => array( 'animation', 'credit', 'credit_url' ),
 );

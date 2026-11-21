@@ -17,6 +17,8 @@
     "image_effect": "subtle",
     "animation": true,
     "gimmick_position": "bottom-right",
-    "gimmick_motion": "float"
+    "gimmick_motion": "float",
+    "effect": "sparkles",
+    "effect_intensity": "light"
   }
 }

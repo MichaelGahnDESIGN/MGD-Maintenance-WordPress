@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title><?php echo esc_html( $s['title'] ); ?></title>
 <link rel="stylesheet" href="<?php echo esc_url( MGMS_URL . 'assets/frontend.css?ver=' . MGMS_VERSION ); ?>">
+<?php foreach ( array_keys( Pro_Store::scenes() ) as $mgms_pro_key ) : ?>
+<link rel="stylesheet" href="<?php echo esc_url( Pro_Store::css_url( $mgms_pro_key ) . '?ver=' . rawurlencode( (string) ( Pro_Store::data()['version'] ?? '' ) ) ); ?>">
+<?php endforeach; ?>
 <?php
 if ( $font ) :
 	?>

@@ -48,6 +48,14 @@ final class Admin {
 		foreach ( array( 'elegant-gold', 'ruhiges-atelier', 'minimalistisch-hell', 'nachtstudio', 'verspielt' ) as $name ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Ausschließlich fest benannte lokale Preset-Dateien.
 			$out[ $name ] = json_decode( file_get_contents( MGMS_DIR . 'presets/' . $name . '.json' ), true ); }
+		// Pro-Szenen aus dem Paket dazu
+		foreach ( Pro_Store::scenes() as $key => $scene ) {
+			$out[ 'pro-' . $key ] = array(
+				'name'   => $scene['name'],
+				'pro'    => true,
+				'values' => $scene['values'],
+			);
+		}
 		return $out;
 	}
 	private static function guard(): void {

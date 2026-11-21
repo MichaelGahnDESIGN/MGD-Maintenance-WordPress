@@ -20,6 +20,8 @@ jobs:
         run: php tests/admin-tools.php
       - name: Neutrale Anmeldehinweise
         run: php tests/login-errors.php
+      - name: Pro-Szenen lokal (Speichern, Ablauf, Rückfall)
+        run: php tests/pro-store.php
       - name: Bildformate (SVG-Logo)
         run: php tests/media-types.php
       - name: Layout-Vorlagen und alter Standard

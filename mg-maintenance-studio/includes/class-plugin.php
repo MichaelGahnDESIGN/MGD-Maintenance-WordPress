@@ -22,6 +22,8 @@ final class Plugin {
 		// alter GitHub-Updater ist abgeschaltet, Updates kommen jetzt vom Baukasten
 		add_action( 'admin_init', array( self::class, 'drop_old_release_cache' ) );
 		Presentation::register();
+		// Pro-Paket nach exp weg
+		add_action( 'init', array( Pro_Store::class, 'expire' ), 5 );
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
 		add_filter( 'custom_menu_order', '__return_true', PHP_INT_MAX );
 		add_filter( 'menu_order', array( Admin::class, 'menu_last' ), PHP_INT_MAX );

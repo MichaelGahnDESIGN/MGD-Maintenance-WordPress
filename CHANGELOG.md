@@ -1,5 +1,13 @@
 # Änderungsprotokoll
 
+## 0.9.0 – 21.11.2026
+
+- **Pro-Szenen:** 8 zusätzliche Szenen (Märchenbuch, Nordlicht, Neon, Countdown-Bühne, Zeitung, Weltall, Zen, Collage) mit einer Pro-Lizenz von theme.michael-gahn.de.
+- Lizenzfeld auf der Seite **Info und Updates**.
+- Die Pro-Szenen kommen geschützt vom Server: digital unterschrieben, an die Domain gebunden, höchstens 7 Tage gültig. Danach holt das Plugin sie automatisch neu.
+- Ohne Lizenz erscheinen die Pro-Szenen als Karte mit Schloss.
+- Endet die Lizenz, werden die Pro-Dateien gelöscht und eine veröffentlichte Pro-Szene wechselt automatisch auf eine ähnliche Free-Szene. Die Wartungsseite bleibt immer erreichbar.
+
 ## 0.8.0 – 21.11.2026
 
 - **Brückenversion:** Updates kommen jetzt von theme.michael-gahn.de (geprüft mit Größe und SHA-256), nicht mehr direkt von GitHub.

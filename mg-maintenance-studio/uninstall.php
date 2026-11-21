@@ -26,6 +26,8 @@ $mgms_cleanup = static function (): void {
 		@rmdir( trailingslashit( $up['basedir'] ) . $pro['dir'] ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 	}
 	delete_option( 'mgms_pro' );
+	delete_option( 'mgms_pro_too_old' );
+	wp_clear_scheduled_hook( 'mgms_pro_sync' );
 	delete_transient( 'mgms_release' );
 	$draft = get_option( 'mgms_draft', array() );
 	if ( ! empty( $draft['delete_data'] ) ) {

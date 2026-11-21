@@ -47,4 +47,17 @@ check( ! Pro_Store::needs_refresh(), 'Kein Neuabruf bei 6 Tagen Rest' );
 $GLOBALS['opt']['mgms_pro']['exp'] = $now - 1;
 Pro_Store::expire();
 check( ! Pro_Store::valid() && ! is_dir( $dir ) && Pro_Store::resolve_layout( 'storybook', $free ) === 'atelier', 'Nach Ablauf gelöscht, Rückfall auf Free' );
+// Antworten vom Baukasten umsetzen
+define( 'MGMS_VERSION', '0.9.0' );
+function delete_transient( $k ) {}
+require dirname( __DIR__ ) . '/mg-maintenance-studio/includes/Kit/License/ProContentClient.php';
+require dirname( __DIR__ ) . '/mg-maintenance-studio/includes/class-pro-sync.php';
+use MGMS\Pro_Sync;
+$t = time();
+check( 'saved' === Pro_Sync::apply( array( 'status' => 'ok', 'contents' => array( 'zen.css' => '.mgms-layout-zen{}', 'zen.json' => json_encode( array( 'name' => 'Zen', 'values' => array( 'layout' => 'zen' ) ) ) ), 'iat' => $t, 'exp' => $t + 604800, 'version' => '0.1.0', 'watermark' => 'w1' ) ) && Pro_Store::has_scene( 'zen' ), 'ok > Paket gespeichert' );
+check( 'keep' === Pro_Sync::apply( array( 'status' => 'keep', 'reason' => 'http_503' ) ) && Pro_Store::has_scene( 'zen' ), 'keep > Paket bleibt' );
+check( 'too_old' === Pro_Sync::apply( array( 'status' => 'too_old', 'min_plugin_version' => '1.0.0' ) ) && Pro_Store::has_scene( 'zen' ) && get_option( 'mgms_pro_too_old' ) === '1.0.0', 'too_old > Hinweis gemerkt, Paket bleibt' );
+check( 'deleted' === Pro_Sync::apply( array( 'status' => 'delete', 'reason' => 'token_revoked' ) ) && ! Pro_Store::valid(), 'delete > Pro sofort weg' );
+check( 'invalid' === Pro_Sync::apply( array( 'status' => 'ok', 'contents' => array(), 'iat' => $t, 'exp' => $t + 60 ) ), 'ok ohne Szenen > nichts gespeichert' );
+check( Pro_Sync::KEYS === array( 'b0e52763fa05333a' => 'tKS+FLEtNAzlu8Me1bce5Q604j8e7APywmWPZF5tGRo=' ), 'Öffentlicher Schlüssel fest eingebaut (kid aus dem Vertrag)' );
 @rmdir( $GLOBALS['up'] );

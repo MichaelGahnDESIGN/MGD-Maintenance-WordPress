@@ -179,13 +179,13 @@ final class Admin {
 		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4 )[ $page_slug ] ?? 0;
 		require MGMS_DIR . 'templates/admin.php';
 	}
-	// Seite Info und Updates: Version, Updates, Weitere Plugins, Installation melden - Lizenz bleibt aus
+	// Seite Info und Updates: Version, Updates, Weitere Plugins, Installation melden + Lizenz (Pro-Szenen)
 	public static function info_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) );
 		}
 		$list = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::recommendations( 'mgd-maintenance-wordpress', 'wordpress', 'plugin-maintenance-wordpress', self::fallback_plugins(), 'MGD-Maintenance-WordPress' );
-		$dash = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::dashboard( 'mgd-maintenance-wordpress', 'wordpress', MGMS_VERSION, 'MGD Maintenance Studio', Plugin::$updater, $list, false, '' );
+		$dash = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::dashboard( 'mgd-maintenance-wordpress', 'wordpress', MGMS_VERSION, 'MGD Maintenance Studio', Plugin::$updater, $list, true, '' );
 		if ( null === $dash ) {
 			echo '<div class="wrap"><p>Die Seite konnte gerade nicht geladen werden.</p></div>';
 			return;

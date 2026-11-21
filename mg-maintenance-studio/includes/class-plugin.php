@@ -17,6 +17,7 @@ final class Plugin {
 	public static function deactivate(): void {
 		// Bewussten Wartungsstatus behalten. Reaktivierung setzt die bisherige Entscheidung fort.
 		delete_metadata( 'user', 0, 'mgms_preview', '', true );
+		Pro_Sync::unschedule();
 	}
 	public static function boot(): void {
 		// alter GitHub-Updater ist abgeschaltet, Updates kommen jetzt vom Baukasten
@@ -24,6 +25,8 @@ final class Plugin {
 		Presentation::register();
 		// Pro-Paket nach exp weg
 		add_action( 'init', array( Pro_Store::class, 'expire' ), 5 );
+		// Pro-Paket täglich + nach Lizenz-Eingabe holen
+		Pro_Sync::register();
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
 		add_filter( 'custom_menu_order', '__return_true', PHP_INT_MAX );
 		add_filter( 'menu_order', array( Admin::class, 'menu_last' ), PHP_INT_MAX );

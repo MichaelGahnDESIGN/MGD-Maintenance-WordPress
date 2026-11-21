@@ -26,7 +26,6 @@ if ( '503' !== $live['status'] ) :
 	<p class="studio-warning">Der veröffentlichte HTTP-Status ist nicht 503. Suchmaschinen können den Inhalt anders behandeln.</p><?php endif; ?>
 <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'mgms_state' ); ?><input type="hidden" name="action" value="mgms_state"><input type="hidden" name="return_page" value="<?php echo esc_attr( $page_slug ); ?>"><label><input type="checkbox" name="confirm_state" value="1" required> Ich bestätige: Die öffentliche Ausgabe wird jetzt <?php echo $enabled ? 'auf die normale Website umgestellt' : 'auf den veröffentlichten Wartungsstand umgestellt'; ?>.</label><p><button class="button button-primary" name="intent" value="<?php echo $enabled ? 'disable' : 'enable'; ?>"><?php echo $enabled ? 'Wartungsmodus ausdrücklich deaktivieren' : 'Wartungsmodus ausdrücklich aktivieren'; ?></button></p></form>
 </section>
-<?php require MGMS_DIR . 'templates/updates.php'; ?>
 <div class="editor-layout"><form id="mgms-editor" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 <?php wp_nonce_field( 'mgms_save' ); ?><input type="hidden" name="action" value="mgms_save"><input type="hidden" name="return_page" value="<?php echo esc_attr( $page_slug ); ?>"><input type="hidden" name="revision" value="<?php echo esc_attr( Admin::revision() ); ?>"><input type="hidden" id="mgms-preset" name="settings[preset]" value="<?php echo esc_attr( $s['preset'] ); ?>">
 <?php

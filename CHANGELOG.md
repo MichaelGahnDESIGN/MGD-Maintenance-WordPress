@@ -1,5 +1,13 @@
 # Änderungsprotokoll
 
+## 0.8.0 – 21.11.2026
+
+- **Brückenversion:** Updates kommen jetzt von theme.michael-gahn.de (geprüft mit Größe und SHA-256), nicht mehr direkt von GitHub.
+- Neue Seite **Info und Updates** mit Version, Update-Stand, „Weitere Plugins“ und dem Schalter „Installation melden“.
+- Der alte GitHub-Updater und die alte Plugin-Liste sind abgeschaltet. Alte Update-Zwischenspeicher werden einmal aufgeräumt.
+- Beim Löschen meldet sich das Plugin bei theme.michael-gahn.de ab.
+- Alle Einstellungen der Wartungsseite bleiben erhalten.
+
 ## 0.7.0 – 21.11.2026
 
 - Neue **Effekte** für die Wartungsseite: Regen, Schnee, Lichter (Glühwürmchen), Partikel (Sternenstaub), Lichtkugeln, Funken und Nebel.

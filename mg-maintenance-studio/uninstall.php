@@ -2,6 +2,19 @@
 /** Daten nur nach bewusst gesetzter Löschoption entfernen. Mediathek-Dateien bleiben erhalten. */
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit; }
+// Abmelden bei theme.michael-gahn.de (Baukasten), auch wenn der Server weg ist
+spl_autoload_register(
+	static function ( string $class ): void {
+		$prefix = 'Mgd\\Maintenance\\Kit\\';
+		if ( str_starts_with( $class, $prefix ) ) {
+			$file = __DIR__ . '/includes/Kit/' . str_replace( '\\', '/', substr( $class, strlen( $prefix ) ) ) . '.php';
+			if ( is_file( $file ) ) {
+				require $file;
+			}
+		}
+	}
+);
+\Mgd\Maintenance\Kit\Platform\WordPress\Setup::uninstall( 'mgd-maintenance-wordpress', 'wordpress' );
 $mgms_cleanup = static function (): void {
 	delete_transient( 'mgms_release' );
 	$draft = get_option( 'mgms_draft', array() );

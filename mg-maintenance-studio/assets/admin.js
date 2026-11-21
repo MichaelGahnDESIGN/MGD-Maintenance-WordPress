@@ -180,7 +180,7 @@
         title: "Lokale Datei auswählen",
         multiple: false,
         library: {
-          type: button.dataset.kind === "image" ? "image" : "font/woff2",
+          type: button.dataset.kind === "image" ? (window.mgmsMedia?.image || "image") : "font/woff2",
         },
       });
       picker.on("select", () => {

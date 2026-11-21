@@ -3,7 +3,7 @@
  * Plugin Name: MGD Maintenance Studio
  * Plugin URI: https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress
  * Description: Lokaler Design-Editor für einen bewussten, barrierearmen Wartungsmodus.
- * Version: 0.7.0
+ * Version: 0.8.0
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: Michael Gahn DESIGN
@@ -15,7 +15,7 @@ namespace MGMS;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
-define( 'MGMS_VERSION', '0.7.0' );
+define( 'MGMS_VERSION', '0.8.0' );
 define( 'MGMS_FILE', __FILE__ );
 define( 'MGMS_DIR', __DIR__ . '/' );
 define( 'MGMS_URL', plugin_dir_url( __FILE__ ) );
@@ -27,17 +27,20 @@ register_deactivation_hook( __FILE__, array( Plugin::class, 'deactivate' ) );
 Login_Errors::register();
 Plugin::boot();
 
-require_once __DIR__ . '/includes/class-mgd-plugin-admin-tools.php';
-\MGD_Plugin_Admin_Tools_20261023::register([
-    'file' => __FILE__,
-    'repo' => 'MGD-Maintenance-WordPress',
-    'slug' => 'mg-maintenance-studio',
-    'name' => 'MGD Maintenance Studio',
-    'description' => 'Lokaler Design-Editor für einen bewussten, barrierearmen Wartungsmodus.',
-    'version' => '0.7.0',
-    'settings' => 'admin.php?page=mgms-dashboard',
-    'requires' => '6.5',
-    'php' => '8.1',
-    'caches' => [],
-    'package' => '',
-]);
+// Baukasten aus MichaThemeV5-Pro > includes/Kit (bin/build-plugin-kit.php)
+spl_autoload_register(
+	static function ( string $class ): void {
+		$prefix = 'Mgd\\Maintenance\\Kit\\';
+		if ( str_starts_with( $class, $prefix ) ) {
+			$file = MGMS_DIR . 'includes/Kit/' . str_replace( '\\', '/', substr( $class, strlen( $prefix ) ) ) . '.php';
+			if ( is_file( $file ) ) {
+				require $file;
+			}
+		}
+	}
+);
+
+// Updater vom Baukasten, startet auch den Install-Melder - alter GitHub-Updater + Admin-Tools sind raus
+Plugin::$updater = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::updater( __FILE__, 'mgd-maintenance-wordpress', 'wordpress', MGMS_VERSION, 'MGD Maintenance Studio', admin_url( 'admin.php?page=mgms-updates' ) );
+// Reste vom alten Updater wegräumen, 1x pro Version
+\Mgd\Maintenance\Kit\Platform\WordPress\Setup::cleanupLegacy( 'mgd-maintenance-wordpress', MGMS_VERSION, array( 'mgd_admin_release_*' ) );

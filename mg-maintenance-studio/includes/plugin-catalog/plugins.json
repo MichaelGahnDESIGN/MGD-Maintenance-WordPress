@@ -10,9 +10,12 @@
       "Mehrere Bilder gleichzeitig bearbeiten",
       "Position und Darstellung wählen"
     ],
-    "basenames": ["mgd-ai-image-labels/mgd-ai-image-labels.php"],
+    "basenames": [
+      "mgd-ai-image-labels/mgd-ai-image-labels.php"
+    ],
     "repository": "MGD-AI-Kennzeichnung-WordPress",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-ki-kennzeichnung-wordpress"
   },
   "MGD-Maintenance-WordPress": {
     "name": "Maintenance Studio",
@@ -25,9 +28,12 @@
       "Logo, Farben und Hintergründe",
       "Eigene 404- und 403-Seiten"
     ],
-    "basenames": ["mg-maintenance-studio/mg-maintenance-studio.php"],
+    "basenames": [
+      "mg-maintenance-studio/mg-maintenance-studio.php"
+    ],
     "repository": "MGD-Maintenance-WordPress",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-maintenance-wordpress"
   },
   "MGD-Barrierefrei-WordPress": {
     "name": "Barrierefrei",
@@ -40,9 +46,12 @@
       "Anpassbares Bedienpanel",
       "Erklärung als Seitenentwurf"
     ],
-    "basenames": ["mgd-barrierefrei-wordpress/mgd-barrierefrei-wordpress.php"],
+    "basenames": [
+      "mgd-barrierefrei-wordpress/mgd-barrierefrei-wordpress.php"
+    ],
     "repository": "MGD-Barrierefrei-WordPress",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-barrierefrei-wordpress"
   },
   "MGD-Share-WordPress": {
     "name": "Share",
@@ -55,9 +64,12 @@
       "Link mit einem Klick kopieren",
       "Datensparsame Einbindung"
     ],
-    "basenames": ["mgd-share-wordpress/mgd-share-wordpress.php"],
+    "basenames": [
+      "mgd-share-wordpress/mgd-share-wordpress.php"
+    ],
     "repository": "MGD-Share-WordPress",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-share-wordpress"
   },
   "MGD-Notification-WordPress": {
     "name": "Notification Center",
@@ -70,9 +82,12 @@
       "Persönliche Benachrichtigungen",
       "Inhalte planen und verwalten"
     ],
-    "basenames": ["mgd-notification-center/mgd-notification-center.php"],
+    "basenames": [
+      "mgd-notification-center/mgd-notification-center.php"
+    ],
     "repository": "MGD-Notification-WordPress",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-notification-wordpress"
   },
   "MGD_Giveaway_WP-Plugin": {
     "name": "Giveaway",
@@ -85,9 +100,12 @@
       "Bestätigung per Double-Opt-in",
       "Geschützte Datei-Links"
     ],
-    "basenames": ["mgd-giveaway/mgd-giveaway.php"],
+    "basenames": [
+      "mgd-giveaway/mgd-giveaway.php"
+    ],
     "repository": "MGD_Giveaway_WP-Plugin",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-giveaway-wordpress"
   },
   "MGD_WordPress-MCP": {
     "name": "WordPress MCP",
@@ -100,8 +118,11 @@
       "Schreibzugriffe gezielt freigeben",
       "Nachvollziehbare Aktionen"
     ],
-    "basenames": ["mgd-wordpress-mcp/mgd-wordpress-mcp.php"],
+    "basenames": [
+      "mgd-wordpress-mcp/mgd-wordpress-mcp.php"
+    ],
     "repository": "MGD_WordPress-MCP",
-    "tier": "free"
+    "tier": "free",
+    "slug": "plugin-wordpress-mcp"
   }
 }

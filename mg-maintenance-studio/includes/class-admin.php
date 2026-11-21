@@ -13,7 +13,7 @@ final class Admin {
 		return $order;
 	}
 	private static array $hooks = array();
-	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-error-pages', 'mgms-updates' );
+	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-error-pages' );
 	public static function menu(): void {
 		// Die alte Einstellungs-URL bleibt für gespeicherte Links gültig.
 		self::$hooks['editor'] = array_filter( array(
@@ -27,7 +27,8 @@ final class Admin {
 			self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', $label, $label, 'manage_options', $slug, array( self::class, 'page' ) );
 		}
 		self::$hooks['errors'] = add_submenu_page( 'mgms-dashboard', 'Fehlerseiten', 'Fehlerseiten', 'manage_options', 'mgms-error-pages', array( Error_Pages_Admin::class, 'page' ) );
-		self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', 'Updates', 'Updates', 'manage_options', 'mgms-updates', array( self::class, 'page' ) );
+		// Info und Updates vom Baukasten (Slug bleibt, alte Links gehen weiter)
+		self::$hooks['info'] = add_submenu_page( 'mgms-dashboard', 'Info und Updates', 'Info und Updates', 'manage_options', 'mgms-updates', array( self::class, 'info_page' ) );
 	}
 	public static function assets( string $hook ): void {
 		if ( ! in_array( $hook, array_merge( self::$hooks['editor'] ?? array(), array( self::$hooks['dashboard'] ?? '', self::$hooks['errors'] ?? '' ) ), true ) ) {
@@ -160,15 +161,48 @@ final class Admin {
 		$s       = Settings::get( true );
 		$live    = Settings::get();
 		$enabled = (bool) get_option( Settings::STATE );
-		$tabs    = array( 'Übersicht', 'Wartungsmodus', 'Design', 'Rechtstexte', 'IP-Freigaben', 'Eingeloggte Benutzer', 'SEO und Crawler', 'Erweitert', 'Hilfe', 'Updates' );
+		$tabs    = array( 'Übersicht', 'Wartungsmodus', 'Design', 'Rechtstexte', 'IP-Freigaben', 'Eingeloggte Benutzer', 'SEO und Crawler', 'Erweitert', 'Hilfe' );
 		$notices = array(
 			'saved'     => 'Entwurf gespeichert. Der veröffentlichte Stand bleibt unverändert.',
 			'published' => 'Einstellungen ausdrücklich veröffentlicht. Der Wartungsstatus wurde nicht verändert.',
 			'changed'   => 'Bestätigte Aktion ausgeführt.',
 		);
 		$page_slug = sanitize_key( wp_unslash( $_GET['page'] ?? 'mg-maintenance-studio' ) );
-		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4, 'mgms-updates' => 9 )[ $page_slug ] ?? 0;
+		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4 )[ $page_slug ] ?? 0;
 		require MGMS_DIR . 'templates/admin.php';
+	}
+	// Seite Info und Updates: Version, Updates, Weitere Plugins, Installation melden - Lizenz bleibt aus
+	public static function info_page(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) );
+		}
+		$list = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::recommendations( 'mgd-maintenance-wordpress', 'wordpress', 'plugin-maintenance-wordpress', self::fallback_plugins(), 'MGD-Maintenance-WordPress' );
+		$dash = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::dashboard( 'mgd-maintenance-wordpress', 'wordpress', MGMS_VERSION, 'MGD Maintenance Studio', Plugin::$updater, $list, false, '' );
+		if ( null === $dash ) {
+			echo '<div class="wrap"><p>Die Seite konnte gerade nicht geladen werden.</p></div>';
+			return;
+		}
+		$dash->page();
+	}
+	// Ersatzliste aus plugin-catalog/plugins.json, falls theme.michael-gahn.de nicht antwortet
+	private static function fallback_plugins(): array {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- feste lokale Datei
+		$raw  = file_get_contents( MGMS_DIR . 'includes/plugin-catalog/plugins.json' );
+		$data = is_string( $raw ) ? json_decode( $raw, true ) : null;
+		$out  = array();
+		foreach ( is_array( $data ) ? $data : array() as $repo => $row ) {
+			if ( ! is_array( $row ) || 'MGD-Maintenance-WordPress' === $repo || empty( $row['slug'] ?? '' ) ) {
+				continue;
+			}
+			$out[] = array(
+				'slug'        => (string) $row['slug'],
+				'name'        => (string) ( $row['name'] ?? '' ),
+				'description' => (string) ( $row['description'] ?? '' ),
+				'version'     => '',
+				'repo'        => (string) $repo,
+			);
+		}
+		return $out;
 	}
 	/** Einheitlicher, bewusst sichtbarer Statusschalter für alle Pluginseiten. */
 	public static function status_switch( string $return_page, bool $enabled ): void {

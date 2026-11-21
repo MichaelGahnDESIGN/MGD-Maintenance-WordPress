@@ -4,6 +4,7 @@ namespace MGMS;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 final class Plugin {
+	public static ?\Mgd\Maintenance\Kit\Platform\WordPress\Updater $updater = null;
 	public static function activate( bool $network_wide = false ): void {
 		if ( $network_wide ) {
 			wp_die( 'Bitte MG Maintenance Studio je Website einzeln aktivieren.' ); }
@@ -18,10 +19,10 @@ final class Plugin {
 		delete_metadata( 'user', 0, 'mgms_preview', '', true );
 	}
 	public static function boot(): void {
-		Updates::register();
+		// alter GitHub-Updater ist abgeschaltet, Updates kommen jetzt vom Baukasten
+		add_action( 'admin_init', array( self::class, 'drop_old_release_cache' ) );
 		Presentation::register();
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
-		( new \MGD_WordPress_Plugin_Catalog_V4() )->register( 'mgms-dashboard' );
 		add_filter( 'custom_menu_order', '__return_true', PHP_INT_MAX );
 		add_filter( 'menu_order', array( Admin::class, 'menu_last' ), PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', array( Admin::class, 'assets' ) );
@@ -40,6 +41,12 @@ final class Plugin {
 		add_filter( 'rest_pre_dispatch', array( self::class, 'rest' ), 99, 1 );
 		add_action( 'wp_footer', array( self::class, 'badge' ) );
 		add_action( 'wp_ajax_mgms_frontend_state', array( self::class, 'frontend_state' ) );
+	}
+	// alter Update-Cache (heißt nicht mgd_*, deshalb nicht über cleanupLegacy)
+	public static function drop_old_release_cache(): void {
+		if ( false !== get_transient( 'mgms_release' ) ) {
+			delete_transient( 'mgms_release' );
+		}
 	}
 	public static function cache(): void {
 		if ( get_option( Settings::STATE ) && ! defined( 'DONOTCACHEPAGE' ) ) {

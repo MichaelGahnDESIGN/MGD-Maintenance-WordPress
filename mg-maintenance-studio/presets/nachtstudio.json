@@ -1,18 +1,20 @@
 {
   "name": "Nachtstudio",
   "values": {
-    "layout": "poster",
-    "background": "#17201d",
-    "text": "#f3f3eb",
-    "accent": "#dce3ad",
-    "button": "#dce3ad",
-    "button_text": "#17201d",
-    "card": "#26322c",
-    "border_color": "#607163",
+    "layout": "glass",
+    "background": "#0b0f1a",
+    "text": "#f2f4fb",
+    "accent": "#8fa8ff",
+    "button": "#c084fc",
+    "button_text": "#0b0f1a",
+    "card": "#1a2133",
+    "border_color": "#2dd4bf",
     "font": "sans-serif",
-    "radius": 8,
-    "shadow": false,
-    "container": "plain",
-    "align": "left"
+    "radius": 28,
+    "shadow": true,
+    "container": "card",
+    "align": "center",
+    "image_effect": "balanced",
+    "animation": true
   }
 }

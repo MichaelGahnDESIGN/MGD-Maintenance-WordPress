@@ -7,7 +7,7 @@ $groups = array(
 	'Layout und Raum' => array( 'layout', 'container', 'align', 'width', 'padding', 'padding_tablet', 'padding_mobile', 'radius', 'border', 'shadow' ),
 	'Farben' => array( 'background', 'text', 'accent', 'button', 'button_text', 'card', 'border_color' ),
 	'Markenbereich' => array( 'brand_presentation', 'brand', 'logo', 'logo_alt', 'logo_width', 'logo_link' ),
-	'Fläche, Hintergrund und Gimmick' => array( 'background_image', 'gimmick_image', 'gimmick_position', 'gimmick_motion' ),
+	'Fläche, Hintergrund und Gimmick' => array( 'background_image', 'image_effect', 'gimmick_image', 'gimmick_position', 'gimmick_motion' ),
 	'Typografie und Texte' => array( 'tagline', 'font', 'font_file' ),
 	'Feinschliff' => array( 'animation', 'credit', 'credit_url' ),
 );
@@ -17,7 +17,7 @@ $groups = array(
 <?php foreach ( Admin::presets() as $key => $preset ) : ?>
 <button type="button" class="mgms-preset-card" data-preset="<?php echo esc_attr( $key ); ?>" aria-pressed="<?php echo $s['preset'] === $key ? 'true' : 'false'; ?>">
 <span class="mgms-preset-art mgms-preset-art--<?php echo esc_attr( $key ); ?>" aria-hidden="true"><span></span><span></span><span></span></span>
-<strong><?php echo esc_html( $preset['name'] ); ?></strong><small><?php echo esc_html( $design_fields['layout'][4][ $preset['values']['layout'] ] ); ?></small><em><?php echo esc_html( array( 'editorial' => 'Redaktionell mit klarer Lesespalte', 'centered' => 'Zentrierte Fokusansicht', 'split' => 'Geteilte Inhalte mit Infokarte', 'poster' => 'Großes Statement als Poster' )[ $preset['values']['layout'] ] ); ?></em>
+<strong><?php echo esc_html( $preset['name'] ); ?></strong><small><?php echo esc_html( $design_fields['layout'][4][ $preset['values']['layout'] ] ); ?></small><em><?php echo esc_html( array( 'editorial' => 'Redaktionell mit klarer Lesespalte', 'centered' => 'Zentrierte Fokusansicht', 'split' => 'Geteilte Inhalte mit Infokarte', 'poster' => 'Großes Statement als Poster', 'cinema' => 'Bild als Bühne, Text wie ein Filmtitel', 'atelier' => 'Bildhälfte links, ruhige Textseite rechts', 'swiss' => 'Riesige Überschrift, klares Raster', 'glass' => 'Dunkle Glaskarte über Leuchtflächen', 'bloom' => 'Runde Karte, schwebende Farben' )[ $preset['values']['layout'] ] ); ?></em>
 </button>
 <?php endforeach; ?>
 </div>

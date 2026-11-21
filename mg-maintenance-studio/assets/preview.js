@@ -65,6 +65,19 @@
       document.body.classList.remove(...layouts.map((name) => `mgms-layout-${name}`));
       document.body.classList.add(`mgms-layout-${values.layout}`);
     }
+    // Effekt live tauschen
+    const effectCanvas = document.querySelector(".mgms-effect");
+    if (effectCanvas) {
+      const kinds = ["none", "rain", "snow", "fireflies", "sparkles", "bokeh", "embers", "fog"];
+      const strength = ["light", "medium", "strong"];
+      const kind = kinds.includes(values.effect) ? values.effect : "none";
+      const level = strength.includes(values.effect_intensity) ? values.effect_intensity : "medium";
+      if (effectCanvas.dataset.effect !== kind || effectCanvas.dataset.intensity !== level) {
+        effectCanvas.dataset.effect = kind;
+        effectCanvas.dataset.intensity = level;
+        document.dispatchEvent(new Event("mgms-effect-change"));
+      }
+    }
     const effects = ["subtle", "balanced", "vivid"];
     if (effects.includes(values.image_effect)) {
       document.body.classList.remove(...effects.map((name) => `mgms-image-${name}`));

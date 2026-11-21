@@ -19,6 +19,7 @@ if ( $font ) :
 	?>
 	<style>@font-face{font-family:MGMSLocal;src:url(<?php echo esc_url( $font ); ?>) format('woff2');font-display:swap}.mgms h1{font-family:MGMSLocal,system-ui,sans-serif}</style><?php endif; ?>
 <script defer src="<?php echo esc_url( MGMS_URL . 'assets/frontend.js?ver=' . MGMS_VERSION ); ?>"></script>
+<script defer src="<?php echo esc_url( MGMS_URL . 'assets/effects.js?ver=' . MGMS_VERSION ); ?>"></script>
 <?php
 if ( $preview ) :
 	?>
@@ -31,6 +32,7 @@ if ( $preview ) :
 if ( $background ) :
 	?>
 	<img class="background-image" src="<?php echo esc_url( $background ); ?>" alt=""><?php endif; ?>
+<canvas class="mgms-effect" aria-hidden="true" hidden data-effect="<?php echo esc_attr( array_key_exists( $s['effect'], Schema::fields()['effect'][4] ) ? $s['effect'] : 'none' ); ?>" data-intensity="<?php echo esc_attr( array_key_exists( $s['effect_intensity'], Schema::fields()['effect_intensity'][4] ) ? $s['effect_intensity'] : 'medium' ); ?>"></canvas>
 <?php
 if ( $gimmick ) :
 	$gimmick_position = in_array( $s['gimmick_position'], array( 'top-right', 'bottom-right', 'bottom-left' ), true ) ? $s['gimmick_position'] : 'bottom-right';

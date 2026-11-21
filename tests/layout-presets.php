@@ -39,6 +39,19 @@ foreach ( $expected as $layout ) {
 if ( count( array_unique( array_values( $expected ) ) ) !== 5 ) {
 	throw new RuntimeException( 'Jede Vorlage braucht eine eigene Szene.' );
 }
+// Effekte: Standard aus, jeder Effekt im Skript vorhanden
+if ( 'none' !== MGMS\Schema::defaults()['effect'] ) {
+	throw new RuntimeException( 'Effekte müssen standardmäßig aus sein.' );
+}
+$fx = file_get_contents( __DIR__ . '/../mg-maintenance-studio/assets/effects.js' );
+foreach ( array_keys( MGMS\Schema::fields()['effect'][4] ) as $effect ) {
+	if ( 'none' !== $effect && ( ! str_contains( $fx, $effect . ':' ) || ! str_contains( $js, '"' . $effect . '"' ) ) ) {
+		throw new RuntimeException( 'Effekt ohne Skript oder Live-Vorschau: ' . $effect );
+	}
+}
+if ( ! str_contains( $fx, 'prefers-reduced-motion' ) ) {
+	throw new RuntimeException( 'Effekte müssen Bewegung reduzieren beachten.' );
+}
 foreach ( $expected as $name => $layout ) {
 	$preset = json_decode( file_get_contents( __DIR__ . '/../mg-maintenance-studio/presets/' . $name . '.json' ), true, 512, JSON_THROW_ON_ERROR );
 	if ( ! in_array( $layout, $allowed, true ) || ( $preset['values']['layout'] ?? null ) !== $layout || empty( $preset['name'] ) ) {

@@ -61,8 +61,9 @@
     }
     // Layouts inkl. Szenen 0.6.0
     const layouts = ["editorial", "centered", "split", "poster", "cinema", "atelier", "swiss", "glass", "bloom"];
-    if (layouts.includes(values.layout)) {
-      document.body.classList.remove(...layouts.map((name) => `mgms-layout-${name}`));
+    // auch Pro-Szenen (nur Kleinbuchstaben)
+    if (layouts.includes(values.layout) || /^[a-z]{3,20}$/.test(values.layout || "")) {
+      [...document.body.classList].filter((c) => c.startsWith("mgms-layout-")).forEach((c) => document.body.classList.remove(c));
       document.body.classList.add(`mgms-layout-${values.layout}`);
     }
     // Effekt live tauschen

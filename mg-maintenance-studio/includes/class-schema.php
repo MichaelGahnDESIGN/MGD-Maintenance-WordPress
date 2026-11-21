@@ -5,7 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 /** Felddefinitionen werden für Editor und serverseitige Prüfung gemeinsam verwendet. */
 final class Schema {
-	public static function fields(): array {
+	// Felder inkl. Pro-Szenen (nur wenn ein gültiges Paket da ist)
+	public static function fields( bool $with_pro = true ): array {
+		$fields = self::base_fields();
+		if ( $with_pro && class_exists( Pro_Store::class ) && function_exists( 'get_option' ) ) {
+			foreach ( Pro_Store::scenes() as $key => $scene ) {
+				$fields['layout'][4][ $key ] = 'PRO – ' . $scene['name'];
+			}
+		}
+		return $fields;
+	}
+	private static function base_fields(): array {
 		return array(
 			'title'            => array( 'Wartungstitel', 'text', 'Wir sind bald wieder da.', 'Wartungsmodus' ),
 			'description'      => array( 'Beschreibung', 'textarea', 'Unsere Website wird gerade überarbeitet. Bitte schauen Sie etwas später noch einmal vorbei.', 'Wartungsmodus' ),
@@ -218,7 +228,7 @@ final class Schema {
 	}
 	public static function defaults(): array {
 		$data = array();
-		foreach ( self::fields() as $key => $field ) {
+		foreach ( self::fields( false ) as $key => $field ) {
 			$data[ $key ] = $field[2]; }
 		$data['preset'] = 'elegant-gold';
 		$data['legal']  = array();

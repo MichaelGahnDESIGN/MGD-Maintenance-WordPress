@@ -164,6 +164,29 @@ final class Setup
         }
     }
 
+    // Pro-Pakete vom Server (ProContentClient), nutzt den Schlüssel vom Lizenz-Baustein, Standard AUS
+    // $keys = fest eingebaute öffentliche Schlüssel kid => base64 (docs/PRO-CONTENT-API.md)
+    /** @param array<string,string> $keys */
+    public static function proContent(string $product, string $platform, array $keys, bool $enabled = false): \Mgd\Maintenance\Kit\License\ProContentClient
+    {
+        $off = static fn (): \Mgd\Maintenance\Kit\License\ProContentClient => new \Mgd\Maintenance\Kit\License\ProContentClient(null, new CallbackStore(static fn (): mixed => '', static function (string $v): void {
+        }), '', [], false);
+        try {
+            if (!$enabled || preg_match(self::PRODUCT_RE, $product) !== 1) {
+                return $off();
+            }
+            $opt = 'mgd_kit_lic_' . str_replace('-', '_', $product);
+            // nur lesen, schreiben macht der LicenseClient
+            $store = new CallbackStore(static fn (): mixed => \get_option($opt, ''), static function (string $v): void {
+            });
+            $domain = strtolower((string) \wp_parse_url(\home_url(), PHP_URL_HOST));
+
+            return new \Mgd\Maintenance\Kit\License\ProContentClient(new CurlPost('MGDKit/1.0 (' . $platform . ')', \Mgd\Maintenance\Kit\License\ProContentClient::MAX_BYTES, \Mgd\Maintenance\Kit\License\ProContentClient::TIMEOUT), $store, $domain, $keys, true);
+        } catch (\Throwable) {
+            return $off();
+        }
+    }
+
     /**
      * Admin-Seite mit allen Bereichen. $parent = options-general.php (Einstellungen) oder eigener Menü-Slug, '' = kein Menüpunkt
      * Speichern von "Installation melden" läuft über WordPress::boot(), das startet updater() bzw. boot() schon

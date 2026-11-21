@@ -16,6 +16,18 @@ spl_autoload_register(
 );
 \Mgd\Maintenance\Kit\Platform\WordPress\Setup::uninstall( 'mgd-maintenance-wordpress', 'wordpress' );
 $mgms_cleanup = static function (): void {
+	// Pro-Szenen sind nur Zwischenspeicher, immer löschen
+	$pro = get_option( 'mgms_pro', array() );
+	if ( is_array( $pro ) && ! empty( $pro['dir'] ) && preg_match( '/^mgms-pro-[a-f0-9]{16}$/D', $pro['dir'] ) ) {
+		$up = wp_upload_dir( null, false );
+		foreach ( glob( trailingslashit( $up['basedir'] ) . $pro['dir'] . '/*' ) ?: array() as $file ) {
+			wp_delete_file( $file );
+		}
+		@rmdir( trailingslashit( $up['basedir'] ) . $pro['dir'] ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+	}
+	delete_option( 'mgms_pro' );
+	delete_option( 'mgms_pro_too_old' );
+	wp_clear_scheduled_hook( 'mgms_pro_sync' );
 	delete_transient( 'mgms_release' );
 	$draft = get_option( 'mgms_draft', array() );
 	if ( ! empty( $draft['delete_data'] ) ) {

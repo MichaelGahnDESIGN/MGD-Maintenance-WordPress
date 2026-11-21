@@ -39,6 +39,8 @@ final class Admin {
 		}
 		wp_enqueue_media();
 		wp_localize_script( 'mgms-admin', 'mgmsPresets', self::presets() );
+		// Mediathek nur mit Formaten, die Speichern auch annimmt
+		wp_localize_script( 'mgms-admin', 'mgmsMedia', array( 'image' => Settings::image_mimes() ) );
 	}
 	public static function presets(): array {
 		$out = array();

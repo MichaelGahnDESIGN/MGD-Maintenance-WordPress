@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.5.9 – 21.11.2026
+
+- Fehler behoben: Ein SVG-Logo aus der Mediathek führte beim Speichern zur Fehlerseite „nur passende lokale Mediathek-Dateien sind erlaubt“. SVG ist jetzt für Logo, Hintergrund und Gimmick erlaubt. Die Datei wird nur als Bild eingebunden.
+- Die Mediathek zeigt bei der Bildauswahl nur noch Formate, die auch gespeichert werden können (JPG, PNG, WebP, GIF, AVIF, SVG).
+- Die Fehlermeldung nennt jetzt die erlaubten Formate.
+
 ## 0.5.8 – 27.10.2026
 
 - Icons und Hintergründe der Karten unter „Weitere Plugins“ kommen jetzt aus theme.michael-gahn.de. Der Server holt sie einmal und speichert sie lokal; der Browser lädt nichts extern. Ohne Bild bleibt das mitgelieferte Motiv.

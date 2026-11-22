@@ -1,5 +1,10 @@
 # Änderungsprotokoll
 
+## 0.9.2 – 23.11.2026
+
+- Baukasten aktualisiert: Der Knopf „Installieren“ unter „Weitere Plugins“ wird jetzt vom Baukasten selbst angemeldet. Dateinamen für Slider und MichaTheme-Plugin werden erkannt.
+- Keine sichtbaren Änderungen, Pro-Szenen unverändert.
+
 ## 0.9.1 – 22.11.2026
 
 - „Weitere Plugins“ im neuen Design der MGD Plugin-Kollektion: Bilder, Kategorien, Suche, Filter und Details-Fenster. Kostenlose Plugins lassen sich mit einem Klick installieren (nie automatisch aktiviert).

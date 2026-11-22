@@ -184,13 +184,21 @@ final class Admin {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) );
 		}
-		$list = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::recommendations( 'mgd-maintenance-wordpress', 'wordpress', 'plugin-maintenance-wordpress', self::fallback_plugins(), 'MGD-Maintenance-WordPress' );
+		$list = self::recommendations();
 		$dash = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::dashboard( 'mgd-maintenance-wordpress', 'wordpress', MGMS_VERSION, 'MGD Maintenance Studio', Plugin::$updater, $list, true, '' );
 		if ( null === $dash ) {
 			echo '<div class="wrap"><p>Die Seite konnte gerade nicht geladen werden.</p></div>';
 			return;
 		}
 		$dash->page();
+	}
+	// Weitere Plugins vom Baukasten (mit Ersatzliste)
+	public static function recommendations(): ?\Mgd\Maintenance\Kit\Catalog\Recommendations {
+		return \Mgd\Maintenance\Kit\Platform\WordPress\Setup::recommendations( 'mgd-maintenance-wordpress', 'wordpress', 'plugin-maintenance-wordpress', self::fallback_plugins(), 'MGD-Maintenance-WordPress' );
+	}
+	// Knopf Installieren: admin_post muss vor der Seite angemeldet sein (Dashboard läuft bei uns ohne eigenes Menü)
+	public static function catalog_actions(): void {
+		\Mgd\Maintenance\Kit\Platform\WordPress\Setup::catalogActions( 'mgd-maintenance-wordpress', self::recommendations(), admin_url( 'admin.php?page=mgms-updates' ) );
 	}
 	// Ersatzliste aus plugin-catalog/plugins.json, falls theme.michael-gahn.de nicht antwortet
 	private static function fallback_plugins(): array {

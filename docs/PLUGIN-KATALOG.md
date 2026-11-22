@@ -1,3 +1,9 @@
+# Weitere Plugins
+
+> **Stand 0.9.1:** Die alte Seite „MGD Plugin-Kollektion“ ist entfernt. „Weitere Plugins“ kommt jetzt aus dem gemeinsamen Baukasten von theme.michael-gahn.de und steht auf der Seite **MGD Maintenance Studio → Info und Updates**. Kostenlose Plugins lassen sich dort mit einem Klick installieren, sie werden nie automatisch aktiviert. Die Datei `includes/plugin-catalog/plugins.json` ist nur noch die Ersatzliste, wenn der Server nicht antwortet.
+>
+> Der Text darunter beschreibt die alte Seite und bleibt nur zur Nachverfolgung.
+
 # Plugin-Kollektion im WordPress-Backend
 
 Die GitHub-Ausgabe erhält einen gemeinsamen, lokal gerenderten Katalog. Die getrennten WordPress.org-Einreichungskandidaten bleiben unverändert und enthalten diesen externen Katalog nicht.
@@ -42,7 +48,7 @@ Nach einem echten Update kann WordPress noch ein altes Angebot im Update-Transie
 
 Jede der sieben bekannten Erweiterungen hat ein eigenes, zum Thema passendes Hintergrundbild. Die vorhandenen Icons bleiben unverändert. Motive: Fotografie, Designatelier, offene Wege, Verbindungen, Mitteilungen, Publikationen und Technik. Die Bildserie ist mit dem integrierten Imagegen-Werkzeug erzeugt; es werden keine fremden Stockbilder oder Marken verwendet. Die vollständigen Eingaben stehen in `KATALOG-BILDER-PROMPTS.json`. Die generierten Bilddateien werden als Teil des GPL-Plugin-Pakets mitgeliefert; dies ist keine Aussage über die urheberrechtliche Schutzfähigkeit rein generierter Bilder.
 
-Die sieben WebP-Dateien liegen lokal unter `assets/plugin-catalog/backgrounds/`, jeweils 1080×360 Pixel und höchstens 80 KB. Zusammen sind es rund 310 KB. Sie laden verzögert; es gibt keine externen Bildabrufe, eingebetteten Metadaten oder Animationen. Dekorative Bilder besitzen leere Alternativtexte. Kategorie und Versionsnummer stehen auf deckenden weißen Schildern. Bei erzwungenen Systemfarben werden die Hintergrundbilder ausgeblendet. Unbekannte Erweiterungen behalten eine farbige Ersatzfläche.
+Die sieben WebP-Dateien liegen lokal unter `assets/plugin-catalog/backgrounds/` (alt, entfernt), jeweils 1080×360 Pixel und höchstens 80 KB. Zusammen sind es rund 310 KB. Sie laden verzögert; es gibt keine externen Bildabrufe, eingebetteten Metadaten oder Animationen. Dekorative Bilder besitzen leere Alternativtexte. Kategorie und Versionsnummer stehen auf deckenden weißen Schildern. Bei erzwungenen Systemfarben werden die Hintergrundbilder ausgeblendet. Unbekannte Erweiterungen behalten eine farbige Ersatzfläche.
 
 Die Oberfläche verwendet die gemeinsame Klasse V4 und übersteuert alte V3-Ansichten samt deren Asset-Hook gezielt. Damit reicht bereits ein aktualisierter Katalog-Verbraucher für die neue Darstellung. Die Installations-, Update- und Berechtigungslogik bleibt erhalten. WordPress.org-Einreichungskandidaten enthalten weiterhin keinen externen Katalog.
 

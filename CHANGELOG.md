@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.9.1 – 22.11.2026
+
+- „Weitere Plugins“ im neuen Design der MGD Plugin-Kollektion: Bilder, Kategorien, Suche, Filter und Details-Fenster. Kostenlose Plugins lassen sich mit einem Klick installieren (nie automatisch aktiviert).
+- Die alte Seite „Weitere Plugins“ ist entfernt. Die Liste steht jetzt auf der Seite **Info und Updates**.
+- Pro-Szenen unverändert.
+
 ## 0.9.0 – 21.11.2026
 
 - **Pro-Szenen:** 8 zusätzliche Szenen (Märchenbuch, Nordlicht, Neon, Countdown-Bühne, Zeitung, Weltall, Zen, Collage) mit einer Pro-Lizenz von theme.michael-gahn.de.

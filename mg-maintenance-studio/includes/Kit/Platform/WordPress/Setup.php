@@ -214,10 +214,27 @@ final class Setup
             if ($parent !== '') {
                 $d->register($parent);
             }
+            self::catalogActions($product, $recommendations, $parent !== '' ? self::dashboardUrl($product, $parent) : '');
 
             return $d;
         } catch (\Throwable) {
             return null;
+        }
+    }
+
+    /**
+     * Knopf "Installieren" bei Weitere Plugins anmelden (admin-post.php). Setup::dashboard macht das schon
+     * nur nötig, wenn du RecommendationsView::render($liste, $product) auf einer eigenen Seite ausgibst
+     */
+    public static function catalogActions(string $product, ?Recommendations $recommendations, string $returnUrl = ''): void
+    {
+        try {
+            if ($recommendations === null || preg_match(self::PRODUCT_RE, $product) !== 1) {
+                return;
+            }
+            $i = new CatalogInstaller($product, $recommendations, $returnUrl);
+            \add_action('admin_post_' . CatalogInstaller::action($product), [$i, 'handle']);
+        } catch (\Throwable) {
         }
     }
 

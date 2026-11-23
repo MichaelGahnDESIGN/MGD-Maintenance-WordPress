@@ -1,18 +1,22 @@
 {
   "name": "Ruhiges Atelier",
   "values": {
-    "background": "#eeeae2",
-    "text": "#303c33",
-    "accent": "#52634c",
-    "button": "#354c3d",
-    "button_text": "#ffffff",
-    "card": "#f6f3ed",
-    "border_color": "#babeb3",
+    "layout": "atelier",
+    "background": "#f1ece3",
+    "text": "#28332b",
+    "accent": "#975030",
+    "button": "#3d5545",
+    "button_text": "#f6f1e8",
+    "card": "#fbf8f2",
+    "border_color": "#cfc6b6",
     "font": "serif",
-    "radius": 0,
+    "radius": 4,
     "shadow": false,
     "container": "plain",
     "align": "left",
-    "layout": "split"
+    "image_effect": "vivid",
+    "animation": true,
+    "effect": "none",
+    "effect_intensity": "medium"
   }
 }

@@ -59,11 +59,30 @@
       brand?.classList.remove("brand--text", "brand--logo", "brand--logo-and-text");
       brand?.classList.add(`brand--${values.brand_presentation}`);
     }
-    if (["editorial", "centered", "split", "poster"].includes(values.layout)) {
-      document.body.classList.remove(
-        "mgms-layout-editorial", "mgms-layout-centered", "mgms-layout-split", "mgms-layout-poster",
-      );
+    // Layouts inkl. Szenen 0.6.0
+    const layouts = ["editorial", "centered", "split", "poster", "cinema", "atelier", "swiss", "glass", "bloom"];
+    // auch Pro-Szenen (nur Kleinbuchstaben)
+    if (layouts.includes(values.layout) || /^[a-z]{3,20}$/.test(values.layout || "")) {
+      [...document.body.classList].filter((c) => c.startsWith("mgms-layout-")).forEach((c) => document.body.classList.remove(c));
       document.body.classList.add(`mgms-layout-${values.layout}`);
+    }
+    // Effekt live tauschen
+    const effectCanvas = document.querySelector(".mgms-effect");
+    if (effectCanvas) {
+      const kinds = ["none", "rain", "snow", "fireflies", "sparkles", "bokeh", "embers", "fog"];
+      const strength = ["light", "medium", "strong"];
+      const kind = kinds.includes(values.effect) ? values.effect : "none";
+      const level = strength.includes(values.effect_intensity) ? values.effect_intensity : "medium";
+      if (effectCanvas.dataset.effect !== kind || effectCanvas.dataset.intensity !== level) {
+        effectCanvas.dataset.effect = kind;
+        effectCanvas.dataset.intensity = level;
+        document.dispatchEvent(new Event("mgms-effect-change"));
+      }
+    }
+    const effects = ["subtle", "balanced", "vivid"];
+    if (effects.includes(values.image_effect)) {
+      document.body.classList.remove(...effects.map((name) => `mgms-image-${name}`));
+      document.body.classList.add(`mgms-image-${values.image_effect}`);
     }
     document.body.style.setProperty(
       "--heading-font",
@@ -114,6 +133,8 @@
       }
       background.src = backgroundUrl;
     }
+    document.body.classList.toggle("has-image", Boolean(backgroundUrl));
+    document.body.classList.toggle("no-image", !backgroundUrl);
   });
   parent.postMessage({ type: "mgms-ready" }, location.origin);
 })();

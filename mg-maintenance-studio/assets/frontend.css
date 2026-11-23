@@ -450,3 +450,191 @@ dialog .legal {
     font-size: clamp(2.75rem, 11vw, 4.6rem);
   }
 }
+
+/* ==== Szenen 0.6.0 - kino, atelier, raster, glas, bloom ==== */
+/* Bildwirkung allgemein */
+.background-image { z-index: -3; }
+.mgms-image-balanced .background-image { opacity: 0.45; }
+.mgms-image-vivid .background-image { opacity: 1; }
+.mgms-decor {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.mgms-decor span { display: none; position: absolute; }
+/* alte Layouts: Schleier damit Text lesbar bleibt */
+.has-image.mgms-image-balanced .mgms-decor { background: color-mix(in srgb, var(--background) 40%, transparent); }
+.has-image.mgms-image-vivid .mgms-decor { background: color-mix(in srgb, var(--background) 62%, transparent); }
+.mgms:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss, .mgms-layout-glass, .mgms-layout-bloom) .mgms-decor { background: none; }
+.mgms:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss, .mgms-layout-glass, .mgms-layout-bloom) .mgms-decor span { display: block; }
+.mgms:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss, .mgms-layout-glass, .mgms-layout-bloom) .message-grid { display: block; }
+.mgms:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss, .mgms-layout-glass, .mgms-layout-bloom) .message-details { margin-top: 40px; max-width: 520px; }
+/* Einblenden der Szenen */
+@keyframes mgms-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes mgms-pop { 0% { opacity: 0; transform: scale(0.92) rotate(-2deg); } 70% { transform: scale(1.02) rotate(0.5deg); } 100% { opacity: 1; transform: none; } }
+@keyframes mgms-drift { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(6vw, -4vh) scale(1.12); } 66% { transform: translate(-4vw, 5vh) scale(0.94); } }
+@keyframes mgms-bob { 50% { transform: translateY(-22px) rotate(6deg); } }
+.animate:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss) .content { animation: none; }
+.animate:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss) :is(.eyebrow, h1, .description, .message-details) { animation: mgms-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.animate:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss) h1 { animation-delay: 0.12s; }
+.animate:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss) .description { animation-delay: 0.26s; }
+.animate:is(.mgms-layout-cinema, .mgms-layout-atelier, .mgms-layout-swiss) .message-details { animation-delay: 0.4s; }
+
+/* Kino - Bild als Bühne, Titel wie im Abspann */
+.mgms-layout-cinema .page-shell { max-width: 1440px; }
+.mgms-layout-cinema .brand { border-bottom: 0; }
+.mgms-layout-cinema .site-footer { border-top-color: color-mix(in srgb, var(--text) 18%, transparent); }
+.mgms-layout-cinema .content { margin: auto 0 0; padding-bottom: clamp(32px, 6vh, 72px); }
+.mgms-layout-cinema .eyebrow { display: flex; align-items: center; gap: 16px; text-transform: uppercase; letter-spacing: 0.32em; font-size: 12px; }
+.mgms-layout-cinema .eyebrow::before { content: ""; width: 56px; height: 1px; background: var(--accent); }
+.mgms-layout-cinema h1 { font-size: clamp(3rem, 9vw, 8.75rem); line-height: 0.94; letter-spacing: -0.045em; max-width: 11ch; margin-bottom: 36px; }
+.mgms-layout-cinema .description { font-size: clamp(1.05rem, 1.6vw, 1.3rem); max-width: 46ch; color: color-mix(in srgb, var(--text) 86%, transparent); }
+.mgms-layout-cinema.has-image .background-image { opacity: 0.4; }
+.mgms-layout-cinema.has-image.mgms-image-balanced .background-image { opacity: 0.72; }
+.mgms-layout-cinema.has-image.mgms-image-vivid .background-image { opacity: 1; }
+.mgms-layout-cinema .mgms-decor {
+  background:
+    linear-gradient(to top, var(--background) 4%, color-mix(in srgb, var(--background) 78%, transparent) 38%, transparent 78%),
+    radial-gradient(ellipse at 50% 40%, transparent 40%, color-mix(in srgb, var(--background) 70%, transparent) 100%) !important;
+}
+.mgms-layout-cinema.no-image .mgms-decor {
+  background:
+    radial-gradient(ellipse 60% 50% at 78% 18%, color-mix(in srgb, var(--accent) 38%, transparent), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 8% 96%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+    var(--background) !important;
+}
+.mgms-layout-cinema .mgms-decor span:nth-child(1) { top: 0; bottom: 0; left: 64%; width: 1px; background: linear-gradient(transparent, color-mix(in srgb, var(--accent) 60%, transparent), transparent); }
+.mgms-layout-cinema .mgms-decor span:nth-child(2) { top: 0; bottom: 0; left: 82%; width: 1px; background: linear-gradient(transparent, color-mix(in srgb, var(--accent) 30%, transparent), transparent); }
+.mgms-layout-cinema .mgms-decor span:nth-child(3) { width: min(56vw, 720px); aspect-ratio: 1; right: -12vw; top: -14vw; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 50%; }
+.mgms-layout-cinema.has-image .mgms-decor span { display: none; }
+
+/* Atelier - Bildhälfte links, Textseite rechts */
+.mgms-layout-atelier .page-shell { max-width: none; width: 50%; margin: 0 0 0 50%; padding: clamp(28px, 4vw, 64px); }
+.mgms-layout-atelier .content { max-width: 560px; }
+.mgms-layout-atelier h1 { font-size: clamp(2.6rem, 4.6vw, 4.6rem); max-width: 12ch; }
+.mgms-layout-atelier .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 12px; }
+.mgms-layout-atelier .message-details { background: var(--card); border: 1px solid var(--border-color); border-top: 3px solid var(--accent); padding: 24px 28px; border-radius: var(--radius); }
+.mgms-layout-atelier.has-image .background-image { inset: 0 50% 0 0; width: 50%; opacity: 0.6; }
+.mgms-layout-atelier.has-image.mgms-image-balanced .background-image { opacity: 0.88; }
+.mgms-layout-atelier.has-image.mgms-image-vivid .background-image { opacity: 1; }
+.mgms-layout-atelier .mgms-decor span:nth-child(1) { top: 0; bottom: 0; left: 0; width: 50%; background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--button-text) 9%, transparent) 0 1px, transparent 1px 16px), var(--button); }
+.mgms-layout-atelier .mgms-decor span:nth-child(2) { width: 30vw; aspect-ratio: 1; left: 10vw; top: 50%; translate: 0 -50%; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--button-text) 45%, transparent); }
+.mgms-layout-atelier .mgms-decor span:nth-child(3) { width: 12vw; aspect-ratio: 1; left: 31vw; top: 22%; border-radius: 50%; background: var(--accent); opacity: 0.85; }
+.mgms-layout-atelier.has-image .mgms-decor span:nth-child(1) { left: 50%; width: 5px; background: var(--accent); }
+.mgms-layout-atelier.has-image .mgms-decor span:nth-child(n + 2) { display: none; }
+
+/* Raster - riesige Typo, Bild versetzt gerahmt */
+.mgms-layout-swiss .page-shell { max-width: 1440px; }
+.mgms-layout-swiss .brand, .mgms-layout-swiss .site-footer { border-width: 2px; border-color: var(--text); }
+.mgms-layout-swiss .content { max-width: min(62vw, var(--width)); }
+.mgms-layout-swiss .eyebrow { font-family: ui-monospace, "SF Mono", Menlo, monospace; text-transform: uppercase; letter-spacing: 0.08em; font-size: 13px; }
+.mgms-layout-swiss .eyebrow::before { content: "● "; color: var(--accent); }
+.mgms-layout-swiss h1 { font-size: clamp(3.4rem, 10vw, 9.5rem); font-weight: 700; line-height: 0.88; letter-spacing: -0.065em; max-width: 9ch; }
+.mgms-layout-swiss .description { font-size: clamp(1.05rem, 1.5vw, 1.25rem); max-width: 40ch; }
+.mgms-layout-swiss .message-details { border-top-width: 2px; border-top-color: var(--text); }
+.mgms-layout-swiss .mgms-decor span:nth-child(1) { inset: 0; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--border-color) 55%, transparent) 0 1px, transparent 1px calc(100% / 12)); }
+.mgms-layout-swiss.has-image .background-image { inset: auto; right: 6vw; top: 18vh; width: 27vw; height: 58vh; opacity: 0.75; }
+.mgms-layout-swiss.has-image.mgms-image-balanced .background-image { opacity: 0.95; }
+.mgms-layout-swiss.has-image.mgms-image-vivid .background-image { opacity: 1; }
+.mgms-layout-swiss.has-image .mgms-decor span:nth-child(2) { right: calc(6vw - 22px); top: calc(18vh + 22px); width: 27vw; height: 58vh; border: 2px solid var(--accent); z-index: 0; }
+.mgms-layout-swiss.no-image .mgms-decor span:nth-child(2) { width: 44vw; aspect-ratio: 1; right: -9vw; top: 16vh; border: 2px solid var(--accent); border-radius: 50%; }
+.mgms-layout-swiss .mgms-decor span:nth-child(3) { width: 72px; aspect-ratio: 1; right: 30vw; top: 22vh; border-radius: 50%; background: var(--accent); }
+.mgms-layout-swiss.has-image .mgms-decor span:nth-child(3) { right: calc(33vw + 24px); top: calc(76vh - 36px); }
+
+/* Glas - Leuchtflächen und Glaskarte */
+.mgms-layout-glass .page-shell { align-items: center; }
+.mgms-layout-glass .brand, .mgms-layout-glass .site-footer { width: 100%; border: 0; }
+.mgms-layout-glass .brand { justify-content: center; }
+.mgms-layout-glass .site-footer { justify-content: center; opacity: 0.8; }
+.mgms-layout-glass .content {
+  max-width: 760px;
+  margin: auto;
+  padding: clamp(32px, 5vw, 72px);
+  text-align: center;
+  background: color-mix(in srgb, var(--card) 52%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: max(var(--radius), 28px);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  box-shadow: 0 40px 100px rgb(0 0 0 / 35%), inset 0 1px 0 color-mix(in srgb, var(--text) 14%, transparent);
+}
+.mgms-layout-glass .eyebrow { text-transform: uppercase; letter-spacing: 0.24em; font-size: 12px; text-shadow: 0 0 18px var(--accent); }
+.mgms-layout-glass h1 { max-width: none; font-weight: 600; font-size: clamp(2.4rem, 5.2vw, 4.4rem); }
+.mgms-layout-glass .description { margin-inline: auto; }
+.mgms-layout-glass .message-details { margin-inline: auto; border-top-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+.mgms-layout-glass .contact-details { align-items: center; }
+.mgms-layout-glass .contact-button { border-radius: 999px; padding-inline: 24px; box-shadow: 0 0 28px color-mix(in srgb, var(--button) 45%, transparent); }
+.mgms-layout-glass.has-image .background-image { opacity: 0.35; filter: saturate(1.15); }
+.mgms-layout-glass.has-image.mgms-image-balanced .background-image { opacity: 0.6; }
+.mgms-layout-glass.has-image.mgms-image-vivid .background-image { opacity: 0.92; }
+.mgms-layout-glass .mgms-decor span { width: 46vw; aspect-ratio: 1; border-radius: 50%; filter: blur(70px); opacity: 0.55; animation: mgms-drift 22s ease-in-out infinite; }
+.mgms-layout-glass .mgms-decor span:nth-child(1) { background: var(--accent); left: -10vw; top: -12vh; }
+.mgms-layout-glass .mgms-decor span:nth-child(2) { background: var(--button); right: -12vw; bottom: -16vh; animation-delay: -7s; animation-duration: 26s; }
+.mgms-layout-glass .mgms-decor span:nth-child(3) { background: var(--border-color); left: 34vw; top: 30vh; width: 30vw; opacity: 0.35; animation-delay: -13s; }
+.mgms-layout-glass.has-image .mgms-decor span { opacity: 0.3; }
+
+/* Bloom - runde Karte, schwebende Farbkleckse */
+.mgms-layout-bloom .page-shell { align-items: center; }
+.mgms-layout-bloom .brand, .mgms-layout-bloom .site-footer { width: 100%; border: 0; justify-content: center; }
+.mgms-layout-bloom .content {
+  max-width: 720px;
+  margin: auto;
+  padding: clamp(32px, 5vw, 64px);
+  text-align: center;
+  background: var(--card);
+  border: var(--border) solid var(--border-color);
+  border-radius: max(var(--radius), 40px);
+  box-shadow: 0 28px 70px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.animate.mgms-layout-bloom .content { animation: mgms-pop 0.8s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+.mgms-layout-bloom .eyebrow { display: inline-block; padding: 6px 16px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.mgms-layout-bloom h1 { max-width: none; font-weight: 800; letter-spacing: -0.04em; font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.mgms-layout-bloom .description { margin-inline: auto; }
+.mgms-layout-bloom .message-details { margin-inline: auto; border-top: 2px dashed color-mix(in srgb, var(--accent) 50%, transparent); }
+.mgms-layout-bloom .contact-details { align-items: center; }
+.mgms-layout-bloom .contact-button { border-radius: 999px; padding-inline: 26px; }
+.mgms-layout-bloom.has-image .background-image { opacity: 0.25; }
+.mgms-layout-bloom.has-image.mgms-image-balanced .background-image { opacity: 0.55; }
+.mgms-layout-bloom.has-image.mgms-image-vivid .background-image { opacity: 0.9; }
+.mgms-layout-bloom .mgms-decor span { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; opacity: 0.38; animation: mgms-bob 9s ease-in-out infinite; }
+.mgms-layout-bloom .mgms-decor span:nth-child(1) { background: var(--accent); width: 30vw; aspect-ratio: 1; left: -6vw; top: 6vh; }
+.mgms-layout-bloom .mgms-decor span:nth-child(2) { background: var(--button); width: 22vw; aspect-ratio: 1.1; right: -4vw; bottom: 4vh; animation-delay: -3s; }
+.mgms-layout-bloom .mgms-decor span:nth-child(3) { background: var(--border-color); width: 14vw; aspect-ratio: 1; right: 16vw; top: 10vh; animation-delay: -6s; opacity: 0.6; }
+.mgms-layout-bloom.has-image .mgms-decor span { opacity: 0.22; }
+
+/* Szenen mobil */
+@media (max-width: 800px) {
+  .mgms-layout-atelier .page-shell { width: 100%; margin: 0; padding-top: calc(42svh + 24px); }
+  .mgms-layout-atelier.has-image .background-image { position: absolute; inset: 0 0 auto; width: 100%; height: 42svh; }
+  .mgms-layout-atelier .mgms-decor { position: absolute; height: 42svh; }
+  .mgms-layout-atelier .mgms-decor span:nth-child(1) { width: 100%; }
+  .mgms-layout-atelier.has-image .mgms-decor span:nth-child(1) { left: 0; top: auto; bottom: 0; width: 100%; height: 5px; }
+  .mgms-layout-atelier .mgms-decor span:nth-child(2) { width: 60vw; left: 20vw; }
+  .mgms-layout-atelier .mgms-decor span:nth-child(3) { width: 22vw; left: 64vw; top: 14%; }
+  .mgms-layout-swiss .content { max-width: 100%; }
+  .mgms-layout-swiss.has-image .page-shell { padding-top: calc(32svh + 24px); }
+  .mgms-layout-swiss.has-image .background-image { position: absolute; inset: 0 0 auto; width: 100%; height: 32svh; }
+  .mgms-layout-swiss.has-image .mgms-decor span:nth-child(n + 2) { display: none; }
+  .mgms-layout-swiss.no-image .mgms-decor span:nth-child(2) { width: 80vw; right: -30vw; top: 6vh; }
+  .mgms-layout-swiss .mgms-decor span:nth-child(3) { right: 12vw; top: 10vh; width: 40px; }
+  .mgms-layout-cinema h1 { font-size: clamp(2.6rem, 13vw, 4.2rem); }
+  .mgms-layout-glass .mgms-decor span, .mgms-layout-bloom .mgms-decor span:nth-child(1) { width: 70vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mgms .mgms-decor span,
+  .animate.mgms .content,
+  .animate.mgms :is(.eyebrow, h1, .description, .message-details) { animation: none !important; }
+}
+/* Kino: Schatten unter Schrift, falls Bild hell ist */
+.mgms-layout-cinema.has-image .content { text-shadow: 0 2px 28px rgb(0 0 0 / 45%); }
+/* Glas + Bloom: Kopf und Fuß lesbar auf hellen Bildern */
+.has-image:is(.mgms-layout-glass) :is(.brand, .site-footer) { text-shadow: 0 1px 14px rgb(0 0 0 / 60%); }
+.has-image:is(.mgms-layout-bloom) :is(.brand, .site-footer) { text-shadow: 0 1px 12px color-mix(in srgb, var(--background) 90%, transparent); }
+/* Raster: Bild über den Rasterlinien */
+.mgms-layout-swiss.has-image .background-image { z-index: -1; }
+
+/* Effekt-Canvas - über Bild und Deko, unter dem Inhalt */
+.mgms-effect { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.mgms-effect[hidden] { display: none; }

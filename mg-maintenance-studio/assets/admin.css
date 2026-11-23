@@ -827,3 +827,11 @@
     transition: none;
   }
 }
+
+/* PRO Schloss-Karten */
+.mgms-preset-card--locked { position: relative; text-decoration: none; color: inherit; opacity: 0.82; }
+.mgms-preset-card--locked:hover, .mgms-preset-card--locked:focus-visible { opacity: 1; }
+.mgms-preset-card--locked .mgms-preset-art { filter: grayscale(0.4); background: repeating-linear-gradient(135deg, #2b2a33 0 10px, #34333d 10px 20px); }
+.mgms-preset-card--locked .mgms-preset-art::after { content: "🔒"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; }
+.mgms-preset-card--locked .mgms-preset-art { position: relative; }
+.mgms-pro-badge { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #1d2327; color: #f0c33c; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; vertical-align: middle; }

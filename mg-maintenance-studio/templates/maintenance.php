@@ -14,22 +14,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title><?php echo esc_html( $s['title'] ); ?></title>
 <link rel="stylesheet" href="<?php echo esc_url( MGMS_URL . 'assets/frontend.css?ver=' . MGMS_VERSION ); ?>">
+<?php foreach ( array_keys( Pro_Store::scenes() ) as $mgms_pro_key ) : ?>
+<link rel="stylesheet" href="<?php echo esc_url( Pro_Store::css_url( $mgms_pro_key ) . '?ver=' . rawurlencode( (string) ( Pro_Store::data()['version'] ?? '' ) ) ); ?>">
+<?php endforeach; ?>
 <?php
 if ( $font ) :
 	?>
 	<style>@font-face{font-family:MGMSLocal;src:url(<?php echo esc_url( $font ); ?>) format('woff2');font-display:swap}.mgms h1{font-family:MGMSLocal,system-ui,sans-serif}</style><?php endif; ?>
 <script defer src="<?php echo esc_url( MGMS_URL . 'assets/frontend.js?ver=' . MGMS_VERSION ); ?>"></script>
+<script defer src="<?php echo esc_url( MGMS_URL . 'assets/effects.js?ver=' . MGMS_VERSION ); ?>"></script>
 <?php
 if ( $preview ) :
 	?>
 	<script defer src="<?php echo esc_url( MGMS_URL . 'assets/preview.js?ver=' . MGMS_VERSION ); ?>"></script><?php endif; ?>
 </head>
-<body class="mgms mgms-layout-<?php echo esc_attr( in_array( $s['layout'], array( 'editorial', 'centered', 'split', 'poster' ), true ) ? $s['layout'] : 'editorial' ); ?> <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
+<body class="mgms mgms-layout-<?php echo esc_attr( array_key_exists( $s['layout'], Schema::fields()['layout'][4] ) ? $s['layout'] : 'editorial' ); ?> mgms-image-<?php echo esc_attr( array_key_exists( $s['image_effect'], Schema::fields()['image_effect'][4] ) ? $s['image_effect'] : 'subtle' ); ?> <?php echo $background ? 'has-image' : 'no-image'; ?> <?php echo $s['animation'] ? 'animate' : ''; ?>" style="<?php echo esc_attr( Renderer::variables( $s ) ); ?>" data-backdrop="<?php echo $s['modal_backdrop'] ? '1' : '0'; ?>">
 <a class="skip" href="#main">Zum Inhalt</a>
+<div class="mgms-decor" aria-hidden="true"><span></span><span></span><span></span></div>
 <?php
 if ( $background ) :
 	?>
 	<img class="background-image" src="<?php echo esc_url( $background ); ?>" alt=""><?php endif; ?>
+<canvas class="mgms-effect" aria-hidden="true" hidden data-effect="<?php echo esc_attr( array_key_exists( $s['effect'], Schema::fields()['effect'][4] ) ? $s['effect'] : 'none' ); ?>" data-intensity="<?php echo esc_attr( array_key_exists( $s['effect_intensity'], Schema::fields()['effect_intensity'][4] ) ? $s['effect_intensity'] : 'medium' ); ?>"></canvas>
 <?php
 if ( $gimmick ) :
 	$gimmick_position = in_array( $s['gimmick_position'], array( 'top-right', 'bottom-right', 'bottom-left' ), true ) ? $s['gimmick_position'] : 'bottom-right';

@@ -5,7 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 /** Felddefinitionen werden für Editor und serverseitige Prüfung gemeinsam verwendet. */
 final class Schema {
-	public static function fields(): array {
+	// Felder inkl. Pro-Szenen (nur wenn ein gültiges Paket da ist)
+	public static function fields( bool $with_pro = true ): array {
+		$fields = self::base_fields();
+		if ( $with_pro && class_exists( Pro_Store::class ) && function_exists( 'get_option' ) ) {
+			foreach ( Pro_Store::scenes() as $key => $scene ) {
+				$fields['layout'][4][ $key ] = 'PRO – ' . $scene['name'];
+			}
+		}
+		return $fields;
+	}
+	private static function base_fields(): array {
 		return array(
 			'title'            => array( 'Wartungstitel', 'text', 'Wir sind bald wieder da.', 'Wartungsmodus' ),
 			'description'      => array( 'Beschreibung', 'textarea', 'Unsere Website wird gerade überarbeitet. Bitte schauen Sie etwas später noch einmal vorbei.', 'Wartungsmodus' ),
@@ -47,6 +57,11 @@ final class Schema {
 					'centered'  => 'Zentriert – ruhig und fokussiert',
 					'split'     => 'Geteilt – Text und Informationen nebeneinander',
 					'poster'    => 'Poster – prägnante Botschaft',
+					'cinema'    => 'Kino – Vollbild mit großer Bühne',
+					'atelier'   => 'Atelier – Bildhälfte und ruhige Textseite',
+					'swiss'     => 'Raster – riesige Typo und gerahmtes Bild',
+					'glass'     => 'Glas – Leuchtflächen und Glaskarte',
+					'bloom'     => 'Bloom – schwebende Farben und runde Karte',
 				),
 			),
 			'tagline'          => array( 'Untertitel', 'text', 'Wartungsarbeiten', 'Design' ),
@@ -66,6 +81,18 @@ final class Schema {
 				),
 			),
 			'background_image' => array( 'Lokales Hintergrundbild', 'image', 0, 'Design' ),
+			// Bildwirkung - subtle bleibt Standard, sonst sehen alte Seiten nach dem Update anders aus
+			'image_effect'     => array(
+				'Bildwirkung',
+				'select',
+				'subtle',
+				'Design',
+				array(
+					'subtle'   => 'Dezent – Bild als zarte Textur',
+					'balanced' => 'Ausgewogen – Bild gut sichtbar',
+					'vivid'    => 'Kräftig – Bild in voller Stärke',
+				),
+			),
 			// Das Gimmick bleibt bewusst ein lokales Mediathek-Bild. So entstehen weder Tracking
 			// noch unerwartete Fremd-Inhalte auf einer Wartungsseite.
 			'gimmick_image'    => array( 'Optionales Gimmick-Bild aus der Mediathek', 'image', 0, 'Design' ),
@@ -89,6 +116,34 @@ final class Schema {
 					'none'   => 'Keine Bewegung',
 					'float'  => 'Sanft schweben',
 					'wobble' => 'Sanft wippen',
+				),
+			),
+			// Atmo-Effekte - laufen nur im Browser, keine Fremdquellen
+			'effect'           => array(
+				'Effekt',
+				'select',
+				'none',
+				'Design',
+				array(
+					'none'      => 'Kein Effekt',
+					'rain'      => 'Regen',
+					'snow'      => 'Schnee',
+					'fireflies' => 'Lichter – schwebende Glühwürmchen',
+					'sparkles'  => 'Partikel – funkelnder Sternenstaub',
+					'bokeh'     => 'Lichtkugeln – weiches Bokeh',
+					'embers'    => 'Funken – aufsteigende Glut',
+					'fog'       => 'Nebel – ziehende Schwaden',
+				),
+			),
+			'effect_intensity' => array(
+				'Stärke des Effekts',
+				'select',
+				'medium',
+				'Design',
+				array(
+					'light'  => 'Leicht',
+					'medium' => 'Mittel',
+					'strong' => 'Stark',
 				),
 			),
 			'background'       => array( 'Hintergrund', 'color', '#f7f5ef', 'Design' ),
@@ -173,7 +228,7 @@ final class Schema {
 	}
 	public static function defaults(): array {
 		$data = array();
-		foreach ( self::fields() as $key => $field ) {
+		foreach ( self::fields( false ) as $key => $field ) {
 			$data[ $key ] = $field[2]; }
 		$data['preset'] = 'elegant-gold';
 		$data['legal']  = array();

@@ -10,12 +10,16 @@ final class Settings {
 	public static function get( bool $draft = false ): array {
 		return array_replace( Schema::defaults(), (array) get_option( $draft ? self::DRAFT : self::LIVE, array() ) );
 	}
+	// Bildformate für Logo, Hintergrund, Gimmick - SVG ok, wird nur als <img>/CSS-Bild eingebunden
+	public static function image_mimes(): array {
+		return array( 'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif', 'image/svg+xml' );
+	}
 	/** Nur Mediathek-Dateien vom selben Ursprung, keine CDN- oder Fremd-URLs. */
 	public static function media_url( int $id, string $type = 'image' ): string {
 		if ( ! $id || get_post_type( $id ) !== 'attachment' ) {
 			return ''; }
 		$mime    = get_post_mime_type( $id );
-		$allowed = 'font' === $type ? array( 'font/woff2', 'application/font-woff2' ) : array( 'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif' );
+		$allowed = 'font' === $type ? array( 'font/woff2', 'application/font-woff2' ) : self::image_mimes();
 		$url     = wp_get_attachment_url( $id );
 		$origin  = wp_parse_url( home_url() );
 		$asset   = wp_parse_url( (string) $url );
@@ -56,7 +60,7 @@ final class Settings {
 				case 'font':
 						$result[ $key ] = absint( $value );
 					if ( $result[ $key ] && ! self::media_url( $result[ $key ], $field[1] ) ) {
-						$errors->add( $key, $field[0] . ': nur passende lokale Mediathek-Dateien sind erlaubt.' );
+						$errors->add( $key, $field[0] . ': nur passende lokale Mediathek-Dateien sind erlaubt' . ( 'font' === $field[1] ? ' (WOFF2).' : ' (JPG, PNG, WebP, GIF, AVIF oder SVG).' ) );
 					} break;
 				case 'email':
 					$result[ $key ] = sanitize_email( $value );

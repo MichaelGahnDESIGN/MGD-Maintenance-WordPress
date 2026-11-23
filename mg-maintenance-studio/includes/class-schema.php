@@ -81,6 +81,37 @@ final class Schema {
 				),
 			),
 			'background_image' => array( 'Lokales Hintergrundbild', 'image', 0, 'Design' ),
+			// Darstellung + Ausrichtung vom Hintergrundbild - cover/center bleibt Standard wie vorher
+			'background_fit'      => array(
+				'Hintergrundbild Darstellung',
+				'select',
+				'cover',
+				'Design',
+				array(
+					'cover'    => 'Ausschnitt – füllt alles, Rand wird abgeschnitten',
+					'fill'     => 'Gestreckt – ganze Fläche, Bild wird verzerrt',
+					'contain'  => 'Ganz sichtbar – nichts abgeschnitten',
+					'repeat'   => 'Wiederholen – Bild als Kachel',
+					'original' => 'Originalgröße',
+				),
+			),
+			'background_position' => array(
+				'Hintergrundbild Ausrichtung',
+				'select',
+				'center',
+				'Design',
+				array(
+					'center'       => 'Mitte',
+					'top'          => 'Oben',
+					'bottom'       => 'Unten',
+					'left'         => 'Links',
+					'right'        => 'Rechts',
+					'top-left'     => 'Oben links',
+					'top-right'    => 'Oben rechts',
+					'bottom-left'  => 'Unten links',
+					'bottom-right' => 'Unten rechts',
+				),
+			),
 			// Bildwirkung - subtle bleibt Standard, sonst sehen alte Seiten nach dem Update anders aus
 			'image_effect'     => array(
 				'Bildwirkung',
@@ -225,6 +256,31 @@ final class Schema {
 			'preview_enabled'  => array( 'Geschützte Vorschau erlauben', 'checkbox', true, 'Erweitert' ),
 			'delete_data'      => array( 'Bei Deinstallation Plugin-Einstellungen löschen', 'checkbox', false, 'Erweitert' ),
 		);
+	}
+	/** CSS-Werte fürs Hintergrundbild, unbekannte Werte fallen auf den Standard zurück */
+	public static function background_css( string $fit, string $position ): array {
+		$fits      = array(
+			'cover'    => 'cover',
+			'fill'     => 'fill',
+			'contain'  => 'contain',
+			'repeat'   => 'cover',
+			'original' => 'none',
+		);
+		$positions = array( 'center', 'top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right' );
+		$fit       = isset( $fits[ $fit ] ) ? $fit : 'cover';
+		$position  = in_array( $position, $positions, true ) ? $position : 'center';
+		return array(
+			'fit'  => $fits[ $fit ],
+			'pos'  => str_replace( '-', ' ', $position ),
+			'tile' => 'repeat' === $fit,
+		);
+	}
+	/** Rechtstext: Link mit Modal ist Standard, "text" zeigt den Inhalt unter dem Hauptinhalt */
+	public static function legal_mode( array $row ): string {
+		if ( isset( $row['display'] ) ) {
+			return 'text' === $row['display'] ? 'text' : 'modal';
+		}
+		return array_key_exists( 'modal', $row ) && empty( $row['modal'] ) ? 'text' : 'modal';
 	}
 	public static function defaults(): array {
 		$data = array();

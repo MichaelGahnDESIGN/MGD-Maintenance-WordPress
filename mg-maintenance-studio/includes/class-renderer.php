@@ -22,13 +22,15 @@ final class Renderer {
 			$css .= '--' . str_replace( '_', '-', $key ) . ':' . sanitize_hex_color( $s[ $key ] ) . ';'; }
 		foreach ( array( 'width', 'padding', 'padding_tablet', 'padding_mobile', 'radius', 'border', 'logo_width' ) as $key ) {
 			$css .= '--' . str_replace( '_', '-', $key ) . ':' . absint( $s[ $key ] ) . 'px;'; }
+		$bg   = Schema::background_css( (string) ( $s['background_fit'] ?? 'cover' ), (string) ( $s['background_position'] ?? 'center' ) );
+		$css .= '--bg-fit:' . $bg['fit'] . ';--bg-pos:' . $bg['pos'] . ';';
 		return $css . '--align:' . ( in_array( $s['align'], array( 'left', 'right', 'center' ), true ) ? $s['align'] : 'center' ) . ';--heading-font:' . ( 'serif' === $s['font'] ? 'Georgia,serif' : 'system-ui,sans-serif' ) . ';';
 	}
 	public static function render( array $s, bool $preview = false ): void {
 		self::headers( $s, $preview );
 		// Pro-Szene ohne gültiges Paket > passende Free-Szene, Text bleibt lesbar
 		$s = Pro_Store::fallback( $s, array_keys( Schema::fields( false )['layout'][4] ) );
-		$legal = array_filter( $s['legal'], static fn( $row ) => $row['enabled'] && $row['title'] );
+		$legal = array_filter( $s['legal'], static fn( $row ) => $row['enabled'] && $row['title'] && ( $row['content'] || $row['page'] ) );
 		uasort( $legal, static fn( $a, $b ) => $a['order'] <=> $b['order'] );
 		$logo       = Settings::media_url( (int) $s['logo'] );
 		$background = Settings::media_url( (int) $s['background_image'] );

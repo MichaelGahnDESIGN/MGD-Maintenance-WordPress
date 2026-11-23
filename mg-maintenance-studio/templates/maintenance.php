@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( $font ) :
 	?>
 	<style>@font-face{font-family:MGMSLocal;src:url(<?php echo esc_url( $font ); ?>) format('woff2');font-display:swap}.mgms h1{font-family:MGMSLocal,system-ui,sans-serif}</style><?php endif; ?>
+<noscript><style>.legal--modal{display:block}</style></noscript>
 <script defer src="<?php echo esc_url( MGMS_URL . 'assets/frontend.js?ver=' . MGMS_VERSION ); ?>"></script>
 <script defer src="<?php echo esc_url( MGMS_URL . 'assets/effects.js?ver=' . MGMS_VERSION ); ?>"></script>
 <?php
@@ -33,8 +34,16 @@ if ( $preview ) :
 <div class="mgms-decor" aria-hidden="true"><span></span><span></span><span></span></div>
 <?php
 if ( $background ) :
-	?>
-	<img class="background-image" src="<?php echo esc_url( $background ); ?>" alt=""><?php endif; ?>
+	$mgms_bg = Schema::background_css( (string) ( $s['background_fit'] ?? 'cover' ), (string) ( $s['background_position'] ?? 'center' ) );
+	if ( $mgms_bg['tile'] ) :
+		?>
+	<div class="background-image background-image--tile" style="<?php echo esc_attr( 'background-image:url("' . str_replace( array( '(', ')' ), array( '%28', '%29' ), esc_url_raw( $background ) ) . '")' ); ?>" aria-hidden="true"></div>
+	<?php else : ?>
+	<img class="background-image" src="<?php echo esc_url( $background ); ?>" alt="">
+		<?php
+	endif;
+endif;
+?>
 <canvas class="mgms-effect" aria-hidden="true" hidden data-effect="<?php echo esc_attr( array_key_exists( $s['effect'], Schema::fields()['effect'][4] ) ? $s['effect'] : 'none' ); ?>" data-intensity="<?php echo esc_attr( array_key_exists( $s['effect_intensity'], Schema::fields()['effect_intensity'][4] ) ? $s['effect_intensity'] : 'medium' ); ?>"></canvas>
 <?php
 if ( $gimmick ) :
@@ -80,18 +89,31 @@ if ( $s['phone'] ) :
 <p data-live="newsletter"><?php echo esc_html( $s['newsletter'] ); ?></p>
 </div></div>
 </main>
+<?php
+$mgms_text_rows = array_filter( $legal, static fn( $row ) => ! $row['page'] && 'text' === Schema::legal_mode( $row ) );
+if ( $mgms_text_rows ) :
+	?>
+<div class="legal-sections legal-sections--text">
+	<?php foreach ( $mgms_text_rows as $index => $row ) : ?>
+	<section class="legal" id="legal-<?php echo (int) $index; ?>" aria-labelledby="legal-title-<?php echo (int) $index; ?>"><h2 id="legal-title-<?php echo (int) $index; ?>"><?php echo esc_html( $row['title'] ); ?></h2><div class="legal-content"><?php echo wp_kses_post( wpautop( $row['content'] ) ); ?></div></section>
+	<?php endforeach; ?>
+</div>
+<?php endif; ?>
 <footer class="site-footer"><nav aria-label="Rechtliche Hinweise">
 <?php
 foreach ( $legal as $index => $row ) :
+	$mgms_mode = Schema::legal_mode( $row );
+	// Text-Modus: Inhalt steht schon unter dem Hauptinhalt, nur Seiten-Links bleiben im Footer
+	if ( 'text' === $mgms_mode && ! $row['page'] ) {
+		continue;
+	}
 	?>
-	<?php
-	if ( $row['footer'] ) :
-		?>
 	<a href="<?php echo esc_url( $row['page'] ? get_permalink( $row['page'] ) : '#legal-' . $index ); ?>"
 		<?php
-		if ( $row['modal'] && ! $row['page'] ) :
+		if ( 'modal' === $mgms_mode && ! $row['page'] ) :
 			?>
-	data-modal="legal-<?php echo (int) $index; ?>"<?php endif; ?>><?php echo esc_html( $row['title'] ); ?></a><?php endif; ?><?php endforeach; ?>
+	data-modal="legal-<?php echo (int) $index; ?>"<?php endif; ?>><?php echo esc_html( $row['title'] ); ?></a>
+<?php endforeach; ?>
 </nav>
 <?php
 if ( $s['credit'] ) :
@@ -106,14 +128,15 @@ if ( $s['credit'] ) :
 		?>
 	</a><?php endif; ?></p><?php endif; ?>
 </footer>
-<div class="legal-sections">
+<div class="legal-sections legal-sections--modal">
 <?php
 foreach ( $legal as $index => $row ) :
+	if ( $row['page'] || 'modal' !== Schema::legal_mode( $row ) ) {
+		continue;
+	}
 	?>
-	<?php
-	if ( ! $row['page'] ) :
-		?>
-	<section class="legal" id="legal-<?php echo (int) $index; ?>" aria-labelledby="legal-title-<?php echo (int) $index; ?>"><h2 id="legal-title-<?php echo (int) $index; ?>"><?php echo esc_html( $row['title'] ); ?></h2><div class="legal-content"><?php echo wp_kses_post( wpautop( $row['content'] ) ); ?></div><a class="legal-back" href="#main">Zurück zum Inhalt</a></section><?php endif; ?><?php endforeach; ?>
+	<section class="legal legal--modal" id="legal-<?php echo (int) $index; ?>" aria-labelledby="legal-title-<?php echo (int) $index; ?>"><h2 id="legal-title-<?php echo (int) $index; ?>"><?php echo esc_html( $row['title'] ); ?></h2><div class="legal-content"><?php echo wp_kses_post( wpautop( $row['content'] ) ); ?></div><a class="legal-back" href="#main">Zurück zum Inhalt</a></section>
+<?php endforeach; ?>
 </div>
 </div>
 </body></html>

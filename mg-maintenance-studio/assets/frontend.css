@@ -22,9 +22,16 @@ body.mgms {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: var(--bg-fit, cover);
+  object-position: var(--bg-pos, center);
   opacity: 0.12;
   z-index: -1;
+}
+/* Hintergrundbild als Kachel (Wiederholen) */
+.background-image--tile {
+  background-repeat: repeat;
+  background-position: var(--bg-pos, center);
+  background-size: auto;
 }
 .mgms-gimmick {
   position: fixed;
@@ -204,6 +211,12 @@ button:focus-visible {
 .legal-content a {
   text-decoration: underline;
 }
+/* Rechtstexte - Modal-Texte bleiben versteckt bis der Link geklickt wird */
+.legal--modal { display: none; }
+dialog .legal--modal, .legal--modal.legal--shown { display: block; }
+/* Rechtstexte als Text - zentriert unter dem Inhalt */
+.legal-sections--text { margin: 0 auto; text-align: center; }
+.legal-sections--text .legal { border-top-color: color-mix(in srgb, var(--text) 18%, transparent); }
 .skip {
   position: absolute;
   left: 20px;

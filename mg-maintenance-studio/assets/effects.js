@@ -24,6 +24,8 @@
   };
   const rnd = (a, b) => a + Math.random() * (b - a);
   const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+  // Wert im Bereich min..max umlaufen lassen
+  const wrap = (v, min, max) => ((((v - min) % (max - min)) + (max - min)) % (max - min)) + min;
 
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -122,8 +124,9 @@
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       } else if (type === "bokeh") {
-        p.x = (p.x + p.vx * dt + width + 180) % (width + 180) - 90;
-        p.y = (p.y + p.vy * dt + height + 180) % (height + 180) - 90;
+        // Bokeh sprang vorher 90 px pro Bild (Flackern bei Nachtstudio)
+        p.x = wrap(p.x + p.vx * dt, -90, width + 90);
+        p.y = wrap(p.y + p.vy * dt, -90, height + 90);
         const g = ctx.createRadialGradient(p.x, p.y, p.r * 0.2, p.x, p.y, p.r);
         g.addColorStop(0, rgba(accent, p.a));
         g.addColorStop(0.8, rgba(accent, p.a * 0.7));

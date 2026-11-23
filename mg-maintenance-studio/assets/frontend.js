@@ -65,6 +65,9 @@
         }
       });
     });
+  } else {
+    // ohne Dialog zeigen wir die Texte direkt, Ankerlinks funktionieren
+    document.querySelectorAll(".legal--modal").forEach((node) => node.classList.add("legal--shown"));
   }
   const countdown = document.querySelector("[data-until]");
   if (countdown) {

@@ -81,14 +81,8 @@ foreach ( $tabs as $i => $panel_label ) :
 <fieldset class="legal-editor"><legend><?php echo esc_html( $legal_title ); ?></legend>
 <label>Titel <input type="text" name="<?php echo esc_attr( $prefix . '[title]' ); ?>" value="<?php echo esc_attr( $row['title'] ); ?>"></label>
 <label>Eigener Inhalt (einfaches HTML möglich)<textarea rows="6" name="<?php echo esc_attr( $prefix . '[content]' ); ?>"><?php echo esc_textarea( $row['content'] ); ?></textarea></label>
-			<?php
-			foreach ( array(
-				'enabled' => 'Aktiv',
-				'footer'  => 'Im Footer',
-				'modal'   => 'Als Modal',
-			) as $key => $label ) :
-				?>
-																			<label><input type="checkbox" name="<?php echo esc_attr( $prefix . '[' . $key . ']' ); ?>" value="1" <?php checked( $row[ $key ] ); ?>><?php echo esc_html( $label ); ?></label><?php endforeach; ?>
+<label><input type="checkbox" name="<?php echo esc_attr( $prefix . '[enabled]' ); ?>" value="1" <?php checked( $row['enabled'] ); ?>>Aktiv</label>
+<label>Anzeige <select name="<?php echo esc_attr( $prefix . '[display]' ); ?>"><option value="modal" <?php selected( Schema::legal_mode( $row ), 'modal' ); ?>>Link im Footer, öffnet im Modal (Standard)</option><option value="text" <?php selected( Schema::legal_mode( $row ), 'text' ); ?>>Als Text zeigen, zentriert unter dem Inhalt</option></select></label>
 <label>Sortierung <input type="number" min="0" max="99" name="<?php echo esc_attr( $prefix . '[order]' ); ?>" value="<?php echo (int) $row['order']; ?>"></label>
 <label>ID einer regulären WordPress-Seite (0 = eigener Text) <input type="number" min="0" name="<?php echo esc_attr( $prefix . '[page]' ); ?>" value="<?php echo (int) $row['page']; ?>"></label>
 </fieldset><?php endforeach; ?><?php endif; ?>

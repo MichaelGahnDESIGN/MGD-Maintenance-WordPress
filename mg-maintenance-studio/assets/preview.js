@@ -121,17 +121,31 @@
         image.alt = typeof values.logo_alt === "string" ? values.logo_alt : "";
       }
     }
+    // Bild: Darstellung + Ausrichtung live
+    const fits = { cover: "cover", fill: "fill", contain: "contain", repeat: "cover", original: "none" };
+    const positions = ["center", "top", "bottom", "left", "right", "top-left", "top-right", "bottom-left", "bottom-right"];
+    const fit = Object.hasOwn(fits, values.background_fit) ? values.background_fit : "cover";
+    const position = positions.includes(values.background_position) ? values.background_position : "center";
+    document.body.style.setProperty("--bg-fit", fits[fit]);
+    document.body.style.setProperty("--bg-pos", position.replace("-", " "));
     const backgroundUrl = localImage(event.data.assets?.background);
+    const tile = fit === "repeat";
     let background = document.querySelector(".background-image");
-    if (!backgroundUrl && background) background.remove();
-    else if (backgroundUrl) {
+    // Kachel ist ein div, sonst ein img - bei Wechsel neu anlegen
+    if (background && (!backgroundUrl || background.classList.contains("background-image--tile") !== tile)) {
+      background.remove();
+      background = null;
+    }
+    if (backgroundUrl) {
       if (!background) {
-        background = document.createElement("img");
-        background.className = "background-image";
-        background.alt = "";
+        background = document.createElement(tile ? "div" : "img");
+        background.className = tile ? "background-image background-image--tile" : "background-image";
+        if (tile) background.setAttribute("aria-hidden", "true");
+        else background.alt = "";
         document.body.prepend(background);
       }
-      background.src = backgroundUrl;
+      if (tile) background.style.backgroundImage = `url("${backgroundUrl.replace(/[()"']/g, encodeURIComponent)}")`;
+      else background.src = backgroundUrl;
     }
     document.body.classList.toggle("has-image", Boolean(backgroundUrl));
     document.body.classList.toggle("no-image", !backgroundUrl);

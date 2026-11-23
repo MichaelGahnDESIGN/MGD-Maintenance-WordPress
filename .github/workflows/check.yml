@@ -28,6 +28,10 @@ jobs:
         run: php tests/media-types.php
       - name: Layout-Vorlagen und alter Standard
         run: php tests/layout-presets.php
+      - name: Hintergrundbild-Darstellung und Rechtstexte
+        run: php tests/background-legal.php
+      - name: Effekte ruhig, kein Flackern
+        run: node tests/effects-bewegung.cjs
       - name: JavaScript-Syntax
         run: |
           node --check mg-maintenance-studio/assets/admin.js

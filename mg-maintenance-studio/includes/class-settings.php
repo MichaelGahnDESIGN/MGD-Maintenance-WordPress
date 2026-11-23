@@ -137,8 +137,9 @@ final class Settings {
 				'title'   => sanitize_text_field( self::text( $row['title'] ?? '' ) ),
 				'content' => wp_kses( self::text( $row['content'] ?? '' ), $allowed ),
 				'enabled' => ! empty( $row['enabled'] ),
-				'footer'  => ! empty( $row['footer'] ),
-				'modal'   => ! empty( $row['modal'] ),
+				'footer'  => true,
+				'modal'   => 'modal' === Schema::legal_mode( $row ),
+				'display' => Schema::legal_mode( $row ),
 				'order'   => min( 99, absint( $row['order'] ?? $index ) ),
 				'page'    => $page,
 			);

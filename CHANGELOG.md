@@ -1,5 +1,11 @@
 # Änderungsprotokoll
 
+## 0.10.0 – 24.11.2026
+
+- Nachtstudio flackerte: Die Lichtkreise („Bokeh“) sprangen mit jedem Bild ein Stück weiter. Jetzt schweben sie ruhig.
+- Rechtstexte: Standard ist jetzt ein Link im Footer, der den Text in einem Fenster (Modal) öffnet. Alternativ „Als Text zeigen“: Der Text steht zentriert unter dem Inhalt. Die Haken „Im Footer“ und „Als Modal“ sind durch die Auswahl „Anzeige“ ersetzt. Alte Einstellungen werden übernommen. Aktive Rechtstexte ohne Inhalt werden nicht mehr angezeigt.
+- Hintergrundbild: Darstellung einstellbar (Ausschnitt, gestreckt, ganz sichtbar, wiederholen, Originalgröße) und Ausrichtung (Mitte, oben, unten, links, rechts und die Ecken). Gilt für alle Designs. Standard bleibt Ausschnitt in der Mitte, bestehende Seiten sehen gleich aus. Die Pro-Szene „Collage“ zeigt das Bild bewusst als Polaroid und behält ihre eigene Darstellung.
+
 ## 0.9.3 – 23.11.2026
 
 - Wenn eine Pro-Szene ohne gültige Lizenz auf eine Free-Szene zurückfällt, bleibt der Text jetzt lesbar. Passt die Textfarbe der Pro-Szene nicht zum Hintergrund, wird automatisch eine helle oder dunkle Schrift verwendet.

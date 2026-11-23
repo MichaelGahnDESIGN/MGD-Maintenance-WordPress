@@ -26,8 +26,8 @@ final class Renderer {
 	}
 	public static function render( array $s, bool $preview = false ): void {
 		self::headers( $s, $preview );
-		// Pro-Szene ohne gültiges Paket > passende Free-Szene
-		$s['layout'] = Pro_Store::resolve_layout( (string) $s['layout'], array_keys( Schema::fields( false )['layout'][4] ) );
+		// Pro-Szene ohne gültiges Paket > passende Free-Szene, Text bleibt lesbar
+		$s = Pro_Store::fallback( $s, array_keys( Schema::fields( false )['layout'][4] ) );
 		$legal = array_filter( $s['legal'], static fn( $row ) => $row['enabled'] && $row['title'] );
 		uasort( $legal, static fn( $a, $b ) => $a['order'] <=> $b['order'] );
 		$logo       = Settings::media_url( (int) $s['logo'] );

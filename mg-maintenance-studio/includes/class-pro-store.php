@@ -57,6 +57,44 @@ final class Pro_Store {
 		}
 		return self::FALLBACK[ $layout ] ?? 'editorial';
 	}
+	/** Einstellungen für die Ausgabe: Rückfall + lesbarer Text, wenn die Pro-Farben nicht zur Free-Szene passen */
+	public static function fallback( array $s, array $free ): array {
+		$layout      = (string) ( $s['layout'] ?? '' );
+		$s['layout'] = self::resolve_layout( $layout, $free );
+		if ( $s['layout'] === $layout || ! sanitize_hex_color( $s['background'] ?? '' ) || ! sanitize_hex_color( $s['text'] ?? '' ) ) {
+			return $s;
+		}
+		// nur beim Rückfall, eigene Free-Farben fassen wir nie an
+		if ( self::contrast( $s['background'], $s['text'] ) < 4.5 ) {
+			$s['text'] = self::contrast( $s['background'], '#f7f3ec' ) >= self::contrast( $s['background'], '#1c1a17' ) ? '#f7f3ec' : '#1c1a17';
+		}
+		// Kasten passt nicht mehr zum Text > Kasten leicht aus dem Hintergrund ableiten
+		if ( sanitize_hex_color( $s['card'] ?? '' ) && self::contrast( $s['card'], $s['text'] ) < 4.5 ) {
+			$s['card'] = self::mix( $s['background'], $s['text'], 0.08 );
+		}
+		return $s;
+	}
+	private static function mix( string $a, string $b, float $share ): string {
+		$out = '#';
+		foreach ( array( 1, 3, 5 ) as $offset ) {
+			$out .= sprintf( '%02x', (int) round( hexdec( substr( $a, $offset, 2 ) ) * ( 1 - $share ) + hexdec( substr( $b, $offset, 2 ) ) * $share ) );
+		}
+		return $out;
+	}
+	/** Kontrast nach WCAG zwischen zwei Hex-Farben */
+	public static function contrast( string $a, string $b ): float {
+		$lum    = static function ( string $hex ): float {
+			$parts = array();
+			foreach ( array( 1, 3, 5 ) as $offset ) {
+				$channel = hexdec( substr( $hex, $offset, 2 ) ) / 255;
+				$parts[] = $channel <= 0.04045 ? $channel / 12.92 : ( ( $channel + 0.055 ) / 1.055 ) ** 2.4;
+			}
+			return 0.2126 * $parts[0] + 0.7152 * $parts[1] + 0.0722 * $parts[2];
+		};
+		$first  = $lum( $a );
+		$second = $lum( $b );
+		return ( max( $first, $second ) + 0.05 ) / ( min( $first, $second ) + 0.05 );
+	}
 	public static function css_url( string $key ): string {
 		$d = self::data();
 		if ( ! self::has_scene( $key ) || empty( $d['dir'] ) ) {

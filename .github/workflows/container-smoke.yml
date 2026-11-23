@@ -1,0 +1,17 @@
+name: WordPress-Testimage prüfen
+on:
+  pull_request:
+    paths: ['tests/compose.yaml', 'tests/container-smoke.sh', 'tests/install-local.php', 'tests/integration.php', 'mg-maintenance-studio/**', '.github/workflows/container-smoke.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - name: Frische Installation und Sicherheitsgrenzen testen
+        run: bash tests/container-smoke.sh

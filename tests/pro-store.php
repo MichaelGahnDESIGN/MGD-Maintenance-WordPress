@@ -60,4 +60,13 @@ check( 'too_old' === Pro_Sync::apply( array( 'status' => 'too_old', 'min_plugin_
 check( 'deleted' === Pro_Sync::apply( array( 'status' => 'delete', 'reason' => 'token_revoked' ) ) && ! Pro_Store::valid(), 'delete > Pro sofort weg' );
 check( 'invalid' === Pro_Sync::apply( array( 'status' => 'ok', 'contents' => array(), 'iat' => $t, 'exp' => $t + 60 ) ), 'ok ohne Szenen > nichts gespeichert' );
 check( Pro_Sync::KEYS === array( 'b0e52763fa05333a' => 'tKS+FLEtNAzlu8Me1bce5Q604j8e7APywmWPZF5tGRo=' ), 'Öffentlicher Schlüssel fest eingebaut (kid aus dem Vertrag)' );
+// Rückfall-Lesbarkeit - Märchenbuch hat dunklen Text fürs Papier, Atelier dunklen Grund
+Pro_Store::clear();
+$story = Pro_Store::fallback( array( 'layout' => 'storybook', 'background' => '#2a1d14', 'text' => '#3a2a1c', 'card' => '#f4ead5' ), $free );
+check( 'atelier' === $story['layout'] && Pro_Store::contrast( $story['background'], $story['text'] ) >= 4.5, 'Rückfall Märchenbuch > Atelier mit lesbarem Text' );
+check( Pro_Store::contrast( $story['card'], $story['text'] ) >= 4.5, 'Rückfall: Text auch im Kasten lesbar' );
+$paper = Pro_Store::fallback( array( 'layout' => 'newspaper', 'background' => '#efe9dc', 'text' => '#1c1a17' ), $free );
+check( 'swiss' === $paper['layout'] && '#1c1a17' === $paper['text'], 'Rückfall mit gutem Kontrast > Farben bleiben' );
+$own = Pro_Store::fallback( array( 'layout' => 'atelier', 'background' => '#2a1d14', 'text' => '#3a2a1c' ), $free );
+check( '#3a2a1c' === $own['text'], 'Free-Szene: eigene Farben werden nie geändert' );
 @rmdir( $GLOBALS['up'] );

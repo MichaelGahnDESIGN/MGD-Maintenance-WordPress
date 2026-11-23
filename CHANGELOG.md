@@ -1,5 +1,10 @@
 # Änderungsprotokoll
 
+## 0.9.3 – 23.11.2026
+
+- Wenn eine Pro-Szene ohne gültige Lizenz auf eine Free-Szene zurückfällt, bleibt der Text jetzt lesbar. Passt die Textfarbe der Pro-Szene nicht zum Hintergrund, wird automatisch eine helle oder dunkle Schrift verwendet.
+- Betrifft vor allem „Märchenbuch“, das auf „Atelier“ zurückfällt. Eigene Farben in Free-Szenen bleiben unverändert.
+
 ## 0.9.2 – 23.11.2026
 
 - Baukasten aktualisiert: Der Knopf „Installieren“ unter „Weitere Plugins“ wird jetzt vom Baukasten selbst angemeldet. Dateinamen für Slider und MichaTheme-Plugin werden erkannt.

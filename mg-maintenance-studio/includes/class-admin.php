@@ -196,10 +196,6 @@ final class Admin {
 	public static function recommendations(): ?\Mgd\Maintenance\Kit\Catalog\Recommendations {
 		return \Mgd\Maintenance\Kit\Platform\WordPress\Setup::recommendations( 'mgd-maintenance-wordpress', 'wordpress', 'plugin-maintenance-wordpress', self::fallback_plugins(), 'MGD-Maintenance-WordPress' );
 	}
-	// Knopf Installieren: admin_post muss vor der Seite angemeldet sein (Dashboard läuft bei uns ohne eigenes Menü)
-	public static function catalog_actions(): void {
-		\Mgd\Maintenance\Kit\Platform\WordPress\Setup::catalogActions( 'mgd-maintenance-wordpress', self::recommendations(), admin_url( 'admin.php?page=mgms-updates' ) );
-	}
 	// Ersatzliste aus plugin-catalog/plugins.json, falls theme.michael-gahn.de nicht antwortet
 	private static function fallback_plugins(): array {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- feste lokale Datei

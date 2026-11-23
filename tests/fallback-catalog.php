@@ -10,5 +10,7 @@ foreach ( $list as $repo => $row ) {
 $code = '';
 foreach ( array_merge( array( $root . 'mg-maintenance-studio.php' ), glob( $root . 'includes/*.php' ) ) as $f ) { $code .= file_get_contents( $f ); }
 check( ! file_exists( $root . 'includes/class-mgd-wordpress-plugin-catalog.php' ) && ! str_contains( $code, 'MGD_WordPress_Plugin_Catalog' ), 'Alte Katalogseite entfernt' );
-check( str_contains( $code, 'Setup::catalogActions(' ) && str_contains( $code, "'admin_init', array( Admin::class, 'catalog_actions' )" ), 'Installieren-Knopf früh angemeldet' );
+// Installieren meldet der Baukasten selbst über Setup::updater an (ab Kit 6a64577)
+$kit = file_get_contents( $root . 'includes/Kit/Platform/WordPress/Setup.php' );
+check( ! str_contains( $code, 'Setup::catalogActions(' ) && preg_match( '/function updater.*?catalog/s', $kit ) === 1, 'Installieren-Knopf kommt vom Baukasten' );
 check( ! str_contains( $code, 'Updates::register()' ) && ! str_contains( $code, 'MGD_Plugin_Admin_Tools_20261023::register' ), 'Alter Updater abgeschaltet' );

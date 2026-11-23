@@ -28,7 +28,6 @@ final class Plugin {
 		// Pro-Paket täglich + nach Lizenz-Eingabe holen
 		Pro_Sync::register();
 		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
-		add_action( 'admin_init', array( Admin::class, 'catalog_actions' ) );
 		add_filter( 'custom_menu_order', '__return_true', PHP_INT_MAX );
 		add_filter( 'menu_order', array( Admin::class, 'menu_last' ), PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', array( Admin::class, 'assets' ) );

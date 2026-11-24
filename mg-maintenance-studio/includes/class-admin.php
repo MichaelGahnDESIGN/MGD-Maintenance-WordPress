@@ -4,38 +4,78 @@ namespace MGMS;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; }
 final class Admin {
-	public static function menu_last( $order ) {
-		if ( ! is_array( $order ) || ! in_array( 'mgms-dashboard', $order, true ) ) {
-			return $order;
-		}
-		$order = array_values( array_diff( $order, array( 'mgms-dashboard' ) ) );
-		$order[] = 'mgms-dashboard';
-		return $order;
+	// Einstellungsseite hängt unter MGD Tools (Baukasten), Seiten-Kennung bleibt mgms-dashboard
+	public const PAGE = 'mgms-dashboard';
+	private const VIEWS = array(
+		'overview' => 'Übersicht',
+		'editor'   => 'Wartungsseite',
+		'design'   => 'Layouts & Design',
+		'access'   => 'Zugriffe',
+		'errors'   => 'Fehlerseiten',
+	);
+	// alte Seiten-Kennungen > Ansicht, alte Links leiten um
+	private const LEGACY = array(
+		'mg-maintenance-studio' => 'editor',
+		'mgms-dashboard'        => 'overview',
+		'mgms-editor'           => 'editor',
+		'mgms-design'           => 'design',
+		'mgms-access'           => 'access',
+		'mgms-error-pages'      => 'errors',
+	);
+	public static function url( string $view = 'overview', array $args = array() ): string {
+		$args = array_merge( array( 'page' => self::PAGE ), 'overview' === $view ? array() : array( 'view' => $view ), $args );
+		return add_query_arg( $args, admin_url( 'admin.php' ) );
 	}
-	private static array $hooks = array();
-	private const EDITOR_PAGES = array( 'mg-maintenance-studio', 'mgms-dashboard', 'mgms-editor', 'mgms-design', 'mgms-access', 'mgms-error-pages' );
-	public static function menu(): void {
-		// Die alte Einstellungs-URL bleibt für gespeicherte Links gültig.
-		self::$hooks['editor'] = array_filter( array(
-			add_options_page( 'MGD Maintenance Studio', 'MGD Maintenance Studio', 'manage_options', 'mg-maintenance-studio', array( self::class, 'page' ) ),
-		) );
-		remove_submenu_page( 'options-general.php', 'mg-maintenance-studio' );
-		// Die endgültige Reihenfolge wird nach allen registrierten Menüs gesetzt.
-		self::$hooks['dashboard'] = add_menu_page( 'MGD Maintenance Studio', 'MGD Maintenance Studio', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ), MGMS_URL . 'assets/icon.svg', 99 );
-		add_submenu_page( 'mgms-dashboard', 'Übersicht', 'Übersicht', 'manage_options', 'mgms-dashboard', array( Dashboard::class, 'page' ) );
-		foreach ( array( 'mgms-editor' => 'Wartungsseite', 'mgms-design' => 'Layouts & Design', 'mgms-access' => 'Zugriffe' ) as $slug => $label ) {
-			self::$hooks['editor'][] = add_submenu_page( 'mgms-dashboard', $label, $label, 'manage_options', $slug, array( self::class, 'page' ) );
+	public static function view(): string {
+		$view = sanitize_key( wp_unslash( $_GET['view'] ?? 'overview' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nur Anzeige
+		return isset( self::VIEWS[ $view ] ) ? $view : 'overview';
+	}
+	// alte Menü-Adressen auf die neue Seite umleiten
+	public static function legacy_redirect(): void {
+		$page = sanitize_key( wp_unslash( $_GET['page'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nur Weiterleitung
+		if ( '' === $page || ! current_user_can( 'manage_options' ) ) {
+			return;
 		}
-		self::$hooks['errors'] = add_submenu_page( 'mgms-dashboard', 'Fehlerseiten', 'Fehlerseiten', 'manage_options', 'mgms-error-pages', array( Error_Pages_Admin::class, 'page' ) );
-		// Info und Updates vom Baukasten (Slug bleibt, alte Links gehen weiter)
-		self::$hooks['info'] = add_submenu_page( 'mgms-dashboard', 'Info und Updates', 'Info und Updates', 'manage_options', 'mgms-updates', array( self::class, 'info_page' ) );
+		$args = array_filter( array_map( 'sanitize_text_field', array_map( 'wp_unslash', array_filter( $_GET, 'is_string' ) ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		unset( $args['page'], $args['view'] );
+		if ( 'mgms-updates' === $page ) {
+			wp_safe_redirect( \Mgd\Maintenance\Kit\Platform\WordPress\Tools::url() );
+			exit;
+		}
+		if ( self::PAGE === $page || ! isset( self::LEGACY[ $page ] ) ) {
+			return;
+		}
+		wp_safe_redirect( self::url( self::LEGACY[ $page ], $args ) );
+		exit;
+	}
+	// Reiter für die fünf Bereiche, darunter die jeweilige Ansicht
+	public static function tools_page(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) );
+		}
+		$view = self::view();
+		echo '<div class="wrap mgms-tools-tabs"><nav class="nav-tab-wrapper" aria-label="Bereiche von Maintenance">';
+		foreach ( self::VIEWS as $key => $label ) {
+			echo '<a class="nav-tab' . ( $key === $view ? ' nav-tab-active' : '' ) . '" href="' . esc_url( self::url( $key ) ) . '"' . ( $key === $view ? ' aria-current="page"' : '' ) . '>' . esc_html( $label ) . '</a>';
+		}
+		echo '</nav></div>';
+		if ( 'overview' === $view ) {
+			Dashboard::page();
+		} elseif ( 'errors' === $view ) {
+			Error_Pages_Admin::page();
+		} else {
+			self::page();
+		}
+	}
+	private static function is_tools_hook( string $hook ): bool {
+		return str_ends_with( $hook, '_page_' . self::PAGE );
 	}
 	public static function assets( string $hook ): void {
-		if ( ! in_array( $hook, array_merge( self::$hooks['editor'] ?? array(), array( self::$hooks['dashboard'] ?? '', self::$hooks['errors'] ?? '' ) ), true ) ) {
+		if ( ! self::is_tools_hook( $hook ) ) {
 			return; }
 		wp_enqueue_style( 'mgms-admin', MGMS_URL . 'assets/admin.css', array(), MGMS_VERSION );
 		wp_enqueue_script( 'mgms-admin', MGMS_URL . 'assets/admin.js', array(), MGMS_VERSION, true );
-		if ( ! in_array( $hook, self::$hooks['editor'] ?? array(), true ) ) {
+		if ( ! in_array( self::view(), array( 'editor', 'design', 'access' ), true ) ) {
 			return;
 		}
 		wp_enqueue_media();
@@ -64,18 +104,7 @@ final class Admin {
 	}
 	private static function redirect( string $notice ): void {
 		$return_page = sanitize_key( wp_unslash( $_POST['return_page'] ?? 'mg-maintenance-studio' ) );
-		if ( ! in_array( $return_page, self::EDITOR_PAGES, true ) ) {
-			$return_page = 'mg-maintenance-studio';
-		}
-		wp_safe_redirect(
-			add_query_arg(
-				array(
-					'page'        => $return_page,
-					'mgms_notice' => $notice,
-				),
-				admin_url( 'mg-maintenance-studio' === $return_page ? 'options-general.php' : 'admin.php' )
-			)
-		);
+		wp_safe_redirect( self::url( self::LEGACY[ $return_page ] ?? 'editor', array( 'mgms_notice' => $notice ) ) );
 		exit;
 	}
 	public static function save(): void {
@@ -175,46 +204,10 @@ final class Admin {
 			'published' => 'Einstellungen ausdrücklich veröffentlicht. Der Wartungsstatus wurde nicht verändert.',
 			'changed'   => 'Bestätigte Aktion ausgeführt.',
 		);
-		$page_slug = sanitize_key( wp_unslash( $_GET['page'] ?? 'mg-maintenance-studio' ) );
-		$initial_panel = array( 'mgms-editor' => 1, 'mgms-design' => 2, 'mgms-access' => 4 )[ $page_slug ] ?? 0;
+		$view          = self::view();
+		$page_slug     = array_search( $view, self::LEGACY, true ) ?: 'mgms-editor';
+		$initial_panel = array( 'editor' => 1, 'design' => 2, 'access' => 4 )[ $view ] ?? 0;
 		require MGMS_DIR . 'templates/admin.php';
-	}
-	// Seite Info und Updates: Version, Updates, Weitere Plugins, Installation melden + Lizenz (Pro-Szenen)
-	public static function info_page(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( 'Keine Berechtigung.', '', array( 'response' => 403 ) );
-		}
-		$list = self::recommendations();
-		$dash = \Mgd\Maintenance\Kit\Platform\WordPress\Setup::dashboard( 'mgd-maintenance-wordpress', 'wordpress', MGMS_VERSION, 'MGD Maintenance Studio', Plugin::$updater, $list, true, '' );
-		if ( null === $dash ) {
-			echo '<div class="wrap"><p>Die Seite konnte gerade nicht geladen werden.</p></div>';
-			return;
-		}
-		$dash->page();
-	}
-	// Weitere Plugins vom Baukasten (mit Ersatzliste)
-	public static function recommendations(): ?\Mgd\Maintenance\Kit\Catalog\Recommendations {
-		return \Mgd\Maintenance\Kit\Platform\WordPress\Setup::recommendations( 'mgd-maintenance-wordpress', 'wordpress', 'plugin-maintenance-wordpress', self::fallback_plugins(), 'MGD-Maintenance-WordPress' );
-	}
-	// Ersatzliste aus plugin-catalog/plugins.json, falls theme.michael-gahn.de nicht antwortet
-	private static function fallback_plugins(): array {
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- feste lokale Datei
-		$raw  = file_get_contents( MGMS_DIR . 'includes/plugin-catalog/plugins.json' );
-		$data = is_string( $raw ) ? json_decode( $raw, true ) : null;
-		$out  = array();
-		foreach ( is_array( $data ) ? $data : array() as $repo => $row ) {
-			if ( ! is_array( $row ) || 'MGD-Maintenance-WordPress' === $repo || empty( $row['slug'] ?? '' ) ) {
-				continue;
-			}
-			$out[] = array(
-				'slug'        => (string) $row['slug'],
-				'name'        => (string) ( $row['name'] ?? '' ),
-				'description' => (string) ( $row['description'] ?? '' ),
-				'version'     => '',
-				'repo'        => (string) $repo,
-			);
-		}
-		return $out;
 	}
 	/** Einheitlicher, bewusst sichtbarer Statusschalter für alle Pluginseiten. */
 	public static function status_switch( string $return_page, bool $enabled ): void {
@@ -247,7 +240,11 @@ final class Admin {
 				echo '<option value="' . esc_attr( $id ) . '" ' . selected( in_array( (string) $id, array_map( 'strval', (array) $value ), true ), true, false ) . '>' . esc_html( $label ) . '</option>'; }
 			echo '</select>';
 		} else {
-			$type = in_array( $field[1], array( 'color', 'number', 'email' ), true ) ? $field[1] : 'text';
+			$type = in_array( $field[1], array( 'number', 'email' ), true ) ? $field[1] : 'text';
+			// Farbwähler vom Baukasten
+			if ( 'color' === $field[1] ) {
+				$attrs .= ' data-mgd-color';
+			}
 			if ( 'image' === $field[1] ) {
 				$type = 'hidden';
 			}

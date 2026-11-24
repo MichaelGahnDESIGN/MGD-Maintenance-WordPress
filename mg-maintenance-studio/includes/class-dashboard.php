@@ -13,7 +13,6 @@ final class Dashboard {
 		$draft = Settings::get( true );
 		$enabled = (bool) get_option( Settings::STATE );
 		$errors = Error_Pages::get();
-		$updates = Updates::config();
 		$layouts = Schema::fields()['layout'][4];
 		require MGMS_DIR . 'templates/dashboard.php';
 	}

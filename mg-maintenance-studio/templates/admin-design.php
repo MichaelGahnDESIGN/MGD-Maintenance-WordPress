@@ -28,7 +28,7 @@ foreach ( Pro_Store::CATALOG as $mgms_key => $mgms_info ) :
 		continue;
 	}
 	?>
-<a class="mgms-preset-card mgms-preset-card--locked" href="<?php echo esc_url( admin_url( 'admin.php?page=mgms-updates' ) ); ?>">
+<a class="mgms-preset-card mgms-preset-card--locked" href="<?php echo esc_url( \Mgd\Maintenance\Kit\Platform\WordPress\Tools::url( \Mgd\Maintenance\Kit\Platform\WordPress\Tools::PAGE_LICENSE ) ); ?>">
 <span class="mgms-preset-art mgms-preset-art--pro-<?php echo esc_attr( $mgms_key ); ?>" aria-hidden="true"><span></span><span></span><span></span></span>
 <strong><?php echo esc_html( $mgms_info[0] ); ?> <span class="mgms-pro-badge">PRO</span></strong><small><?php echo esc_html( $mgms_info[1] ); ?></small><em>Mit Pro-Lizenz freischalten</em>
 </a>

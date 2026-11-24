@@ -40,10 +40,9 @@ Eine konservative Namensprüfung meldet bekannte Wartungsplugin-Muster in aktive
 
 ## Version 0.3.0
 
-`class-updates.php` enthält Releasevalidierung, Cache, WordPress-Updatefilter und den
-separaten POST-Endpunkt. `templates/updates.php` rendert die Verwaltung ohne eigene
-Netzwerkanfrage. `class-presentation.php` ergänzt Einstellungen-Link, Details und
-lokales Pluginlisten-Icon. `assets/icon.svg` ist eine eigenständige Vektorgrafik.
+Updates, Plugin-Liste (Einstellungen-Link, Icon) und das Menü kommen mit MGD Tools (ab 2.1.1) vom
+Baukasten unter „MGD Tools“. Der alte GitHub-Updater und `class-presentation.php` sind
+entfernt. `assets/icon.svg` ist eine eigenständige Vektorgrafik.
 Updatekonfiguration bleibt getrennt von Entwurf, veröffentlichtem Design und Wartungsstatus.
 
 ## Anmeldehinweise 0.5.2

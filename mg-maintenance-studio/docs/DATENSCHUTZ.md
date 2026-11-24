@@ -31,7 +31,7 @@ Nutzerkonten oder Zugangsdaten werden übertragen. Paketdownloads verwenden GitH
 und dessen Asset-Infrastruktur. Es kann eine Verarbeitung außerhalb der EU stattfinden.
 Die Wartungsseite selbst lädt weiterhin ausschließlich lokale Ressourcen.
 
-`mgms_updates` speichert Repository und Zustimmung. `mgms_release` speichert nur
+Alt (bis 0.10): `mgms_updates` speicherte Repository und Zustimmung, `mgms_release` speicherte nur
 Version, Paketadresse, Prüfzeit und eine allgemeine Ergebnismeldung; zwölf Stunden
 bei Erfolg, fünfzehn Minuten bei Fehlern. Der Cache wird bei Änderung oder Deinstallation
 entfernt. Die Updateeinstellung folgt bei Deinstallation der vorhandenen Löschoption.

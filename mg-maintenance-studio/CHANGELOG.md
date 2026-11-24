@@ -1,5 +1,13 @@
 # Änderungsprotokoll
 
+## In Arbeit für 2.1.1
+
+- Neu unter „MGD Tools“: Das eigene Hauptmenü ist weg, die Einstellungen stehen jetzt unter MGD Tools › Maintenance (Reiter: Übersicht, Wartungsseite, Layouts & Design, Zugriffe, Fehlerseiten). Alte Adressen leiten automatisch um.
+- Die Lizenz für die Pro-Szenen wird zentral unter MGD Tools › Lizenz eingetragen. Die Seite „Info und Updates“ gibt es nicht mehr, Updates und „Weitere Plugins“ stehen in MGD Tools.
+- Einheitlicher Farbwähler (MGD Farbwähler) in allen Farbfeldern.
+- Plugin-Kopf nach Norm, Icons 128 und 256, Baukasten 1.12.1.
+- Aufgeräumt: alter GitHub-Updater, alter Admin-Tools-Baustein und eigene Plugin-Listen-Links entfernt.
+
 ## 0.10.0 – 24.11.2026
 
 - Nachtstudio flackerte: Die Lichtkreise („Bokeh“) sprangen mit jedem Bild ein Stück weiter. Jetzt schweben sie ruhig.

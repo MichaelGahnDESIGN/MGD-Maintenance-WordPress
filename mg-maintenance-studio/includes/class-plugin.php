@@ -22,14 +22,12 @@ final class Plugin {
 	public static function boot(): void {
 		// alter GitHub-Updater ist abgeschaltet, Updates kommen jetzt vom Baukasten
 		add_action( 'admin_init', array( self::class, 'drop_old_release_cache' ) );
-		Presentation::register();
 		// Pro-Paket nach exp weg
 		add_action( 'init', array( Pro_Store::class, 'expire' ), 5 );
 		// Pro-Paket täglich + nach Lizenz-Eingabe holen
 		Pro_Sync::register();
-		add_action( 'admin_menu', array( Admin::class, 'menu' ) );
-		add_filter( 'custom_menu_order', '__return_true', PHP_INT_MAX );
-		add_filter( 'menu_order', array( Admin::class, 'menu_last' ), PHP_INT_MAX );
+		// alte Menü-Adressen leiten auf MGD Tools um
+		add_action( 'admin_init', array( Admin::class, 'legacy_redirect' ), 2 );
 		add_action( 'admin_enqueue_scripts', array( Admin::class, 'assets' ) );
 		add_action( 'admin_post_mgms_save', array( Admin::class, 'save' ) );
 		add_action( 'admin_post_mgms_state', array( Admin::class, 'state' ) );

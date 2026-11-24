@@ -40,7 +40,7 @@ final class Error_Pages_Admin {
 		if ( $publish ) {
 			update_option( Error_Pages::LIVE, $settings, false );
 		}
-		wp_safe_redirect( add_query_arg( array( 'page' => 'mgms-error-pages', 'mgms_notice' => $publish ? 'published' : 'saved' ), admin_url( 'admin.php' ) ) );
+		wp_safe_redirect( Admin::url( 'errors', array( 'mgms_notice' => $publish ? 'published' : 'saved' ) ) );
 		exit;
 	}
 

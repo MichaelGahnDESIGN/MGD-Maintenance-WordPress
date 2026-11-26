@@ -2,16 +2,14 @@
 
 [Zur Übersicht](Home.md) · [Betrieb und Wiederherstellung](Betrieb-und-Wiederherstellung.md)
 
-## Updates einschalten
+## Updates ansehen und installieren
 
-1. **Maintenance Studio → Updates** öffnen.
-2. Die vorbelegte Quelle `MichaelGahnDESIGN/MGD-Maintenance-WordPress` prüfen.
-3. Die GitHub-Prüfung einschalten und **Speichern und jetzt prüfen** wählen.
-4. Neuere Versionen anschließend unter **Plugins** oder **Dashboard → Aktualisierungen** installieren.
+1. **MGD Tools** im WordPress-Menü öffnen.
+2. Dort zeigt die Liste, welche Version Du hast und ob eine neuere da ist.
+3. Neue Versionen installierst Du unter **Plugins** oder **Dashboard → Aktualisierungen** mit **Jetzt aktualisieren**.
+4. Plugins an- oder abschalten geht in **MGD Tools** mit **Aktivieren** / **Deaktivieren**. Die Lizenz-Anzeige steht im Reiter **Lizenz**.
 
-Die Einstellung ist zunächst aus. Ein GitHub-Konto oder Zugriffstoken ist auf der Website nicht erforderlich. Private Repositories werden nicht unterstützt. Automatische Installationen werden separat über WordPress gesteuert.
-
-Erfolgreiche Prüfungen werden zwölf Stunden zwischengespeichert, Fehler fünfzehn Minuten. „Speichern und jetzt prüfen“ leert diesen Cache. Ein API-Ausfall erzeugt kein neues Paketangebot; die vorhandene Installation bleibt nutzbar.
+Ein GitHub-Konto oder Zugriffstoken ist auf der Website nicht erforderlich. Automatische Installationen werden separat über WordPress gesteuert. Die alte Seite „Maintenance Studio → Updates“ gibt es nicht mehr, ihre Adresse leitet nach MGD Tools um.
 
 ## Was als Update akzeptiert wird
 

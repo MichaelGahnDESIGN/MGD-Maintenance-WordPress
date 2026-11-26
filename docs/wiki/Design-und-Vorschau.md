@@ -25,7 +25,7 @@ Systemschriften funktionieren ohne Download. Für eine eigene Schrift kann ein b
 
 ## Die Vorschau verwenden
 
-Unter **Maintenance Studio → Layouts & Design** öffnet sich die geschützte Vorschau automatisch. Zuerst einen Entwurf speichern, wenn die Änderungen dauerhaft bleiben sollen. Die Freigabe benötigt eine Administrator-Sitzung, eine WordPress-Nonce und einen zusätzlichen Einmal-Token. Dieser muss innerhalb von zwei Minuten eingelöst werden. Ein neuer Editoraufruf ersetzt die bisherige Freigabe desselben Kontos.
+Unter **MGD Tools → Maintenance → Layouts & Design** öffnet sich die geschützte Vorschau automatisch. Zuerst einen Entwurf speichern, wenn die Änderungen dauerhaft bleiben sollen. Die Freigabe benötigt eine Administrator-Sitzung, eine WordPress-Nonce und einen zusätzlichen Einmal-Token. Dieser muss innerhalb von zwei Minuten eingelöst werden. Ein neuer Editoraufruf ersetzt die bisherige Freigabe desselben Kontos.
 
 | Änderung | In der geöffneten Vorschau |
 |---|---|

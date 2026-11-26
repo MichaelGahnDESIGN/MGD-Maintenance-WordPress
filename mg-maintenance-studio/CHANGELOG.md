@@ -1,5 +1,9 @@
 # Änderungsprotokoll
 
+## [2.1.3] - 2026-11-26
+
+- MGD Tools: Plugins an- und abschalten, Lizenz je Plugin.
+
 ## In Arbeit für 2.1.1
 
 - Neu unter „MGD Tools“: Das eigene Hauptmenü ist weg, die Einstellungen stehen jetzt unter MGD Tools › Maintenance (Reiter: Übersicht, Wartungsseite, Layouts & Design, Zugriffe, Fehlerseiten). Alte Adressen leiten automatisch um.

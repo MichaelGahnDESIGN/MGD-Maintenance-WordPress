@@ -5,7 +5,7 @@
 
 ![Plugin prüfen](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/actions/workflows/check.yml/badge.svg)
 
-**WordPress ab 6.5 · PHP ab 8.1 · Version 2.1.1 · Deutsch · GPL-2.0-or-later**
+**WordPress ab 6.5 · PHP ab 8.1 · Version 2.1.3 · Deutsch · GPL-2.0-or-later**
 
 MG Maintenance Studio ersetzt die öffentliche Ansicht während Wartungsarbeiten durch eine eigene, anpassbare Seite. Besucher erhalten eine verständliche Mitteilung; berechtigte Personen können weiter an der Website arbeiten. Farben, Typografie, Logo, Kontaktmöglichkeiten und Rechtstexte werden im WordPress-Backend gepflegt.
 
@@ -16,9 +16,9 @@ Das Plugin kommt ohne Konto bei einem Drittanbieter, Lizenzschlüssel oder exter
 
 ## Schnellstart
 
-1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-0.10.0.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
+1. Unter [Releases](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/releases/latest) die Datei **mg-maintenance-studio-2.1.3.zip** herunterladen. Für spätere Versionen das entsprechend benannte Plugin-ZIP verwenden, nicht „Source code“.
 2. In WordPress **Plugins → Installieren → Plugin hochladen** öffnen, ZIP auswählen und das Plugin aktivieren. Die erste Aktivierung schaltet den Wartungsmodus noch **nicht** ein.
-3. Unter **Maintenance Studio** Texte, Design und Zugangsregeln einrichten.
+3. Unter **MGD Tools → Maintenance** Texte, Design und Zugangsregeln einrichten.
 4. **Entwurf speichern**, dann die geschützte Vorschau öffnen und die Darstellung prüfen.
 5. **Einstellungen veröffentlichen** ausdrücklich bestätigen. Anschließend den **Wartungsmodus aktivieren** separat bestätigen.
 6. Die Website ausgeloggt oder in einem privaten Browserfenster aufrufen. Bei vorgeschaltetem Cache/CDN auch dort die neue Ausgabe prüfen.
@@ -59,11 +59,16 @@ Vorlagen ändern Designwerte im Formular. Eigene Texte und Freigaben bleiben erh
 
 Viele Texte, Farben und Abstände werden direkt in der geöffneten Vorschau aktualisiert. Ein neu ausgewähltes Logo oder Hintergrundbild wird ebenfalls direkt angezeigt. Kontaktlinks, Countdown und Rechtstexte benötigen Speichern und erneutes Öffnen. [Mehr zur Gestaltung →](docs/wiki/Design-und-Vorschau.md)
 
-## Updates über GitHub
+## MGD Tools: Updates, An/Aus und Lizenz
 
-Unter **Maintenance Studio → Updates** ist `MichaelGahnDESIGN/MGD-Maintenance-WordPress` vorbelegt. **GitHub-Prüfung einschalten** und **Speichern und jetzt prüfen** wählen. Danach meldet WordPress passende neuere Releases unter **Plugins** bzw. **Dashboard → Aktualisierungen**.
+Alle MGD-Plugins haben **einen gemeinsamen Platz** in WordPress: das Menü **MGD Tools**.
 
-Es ist kein GitHub-Token nötig. Private Repositories werden nicht unterstützt. Automatische Installationen werden, falls gewünscht, separat in WordPress eingeschaltet. Die Prüfung verwendet einen Cache; ein erneutes Speichern prüft die Quelle sofort. [Updateablauf und Rückfall →](docs/wiki/Updates-und-Releases.md)
+1. **MGD Tools** im WordPress-Menü öffnen.
+2. Dort steht jedes MGD-Plugin in einer Liste. Mit **Aktivieren** oder **Deaktivieren** schaltest Du es an oder aus, ohne extra zur Plugin-Seite zu gehen.
+3. Unter **Lizenz** siehst Du für jedes Plugin, ob es eine Lizenz hat. Dieses Plugin läuft kostenlos. Nur **Maintenance Pro** (zusätzliche Szenen) braucht einen Schlüssel.
+4. Neue Versionen meldet WordPress wie gewohnt unter **Plugins** oder **Dashboard → Aktualisierungen**. Ein Klick auf **Jetzt aktualisieren** reicht.
+
+Die Maintenance-Einstellungen findest Du unter **MGD Tools → Maintenance**. Alte Adressen (zum Beispiel „Maintenance Studio → Updates“) leiten automatisch dorthin um. [Updateablauf und Rückfall →](docs/wiki/Updates-und-Releases.md)
 
 ## Datenschutz und Sicherheitsgrenzen
 
@@ -121,7 +126,7 @@ python3 scripts/build-package.py
 
 ## Aktueller Stand
 
-Version 2.1.1 ergänzt neutrale Anmeldefehler. Version 2.1.1 ergänzt den Markenmodus, Medienkarten, einen kopfseitigen Wartungsschalter und präziser beschriebene Layoutvorlagen. Die automatischen Prüfungen bestätigen Syntax, abgesicherte Speicherung, Preset-Kompatibilität und Paketstruktur. Die frühere lokale WordPress-Sichtprüfung deckt Dashboard, Designeditor und Medienvorschau ab; die neuen Bedienelemente benötigen noch eine erneute Prüfung in einer isolierten WordPress-Installation. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
+Version 2.1.3 bringt MGD Tools mit An-/Aus-Schalter und Lizenz-Anzeige je Plugin. Frühere Versionen ergänzten den Markenmodus, Medienkarten, einen kopfseitigen Wartungsschalter und präziser beschriebene Layoutvorlagen. Die automatischen Prüfungen bestätigen Syntax, abgesicherte Speicherung, Preset-Kompatibilität und Paketstruktur. Die frühere lokale WordPress-Sichtprüfung deckt Dashboard, Designeditor und Medienvorschau ab; die neuen Bedienelemente benötigen noch eine erneute Prüfung in einer isolierten WordPress-Installation. Ein Kunden-Theme-/Divi-/Shield-/CDN-Test, ein vollständiges Screenreader-Audit und eine reale Multisite-Abnahme sind damit nicht belegt. Das Plugin enthält keine fertigen Rechtstexte und gibt kein pauschales Rechts- oder Barrierefreiheitsversprechen.
 
 Fehler ohne sensible Daten können über [GitHub Issues](https://github.com/MichaelGahnDESIGN/MGD-Maintenance-WordPress/issues) gemeldet werden. Für Sicherheitsprobleme gilt die [Security Policy](SECURITY.md).
 

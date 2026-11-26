@@ -1,5 +1,9 @@
 # Änderungsprotokoll
 
+## [2.1.4] - 2026-11-26
+
+- MGD Tools: inaktive MGD-Plugins in der Übersicht, alle Karten in Weitere Plugins (Baukasten 1.16.1).
+
 ## [2.1.1] - 2026-11-25
 
 - Gemeinsame Verwaltung unter MGD Tools, einheitliche Darstellung, Icons.
